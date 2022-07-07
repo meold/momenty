@@ -8,6 +8,13 @@
       Agent version: <span id="ipfs-info-agent">{{ agentVersion }}</span>
     </h3>
   </div>
+  <div>
+
+    <input type="file" @change="uploadFile($event)">
+
+    <img v-if="fileUrl" :src="fileUrl" alt="">
+
+  </div>
 </template>
 
 <script>
@@ -17,12 +24,21 @@ export default {
       status: "Connecting to IPFS...",
       id: "",
       agentVersion: "",
-      online: false
+      online: false,
+      file: null
     };
   },
+
+  computed: {
+    fileUrl() {
+      return this.file ? `https://ipfs.io/ipfs/${this.file.cid}` : null;
+    }
+  },
+
   mounted() {
     this.getIpfsNodeInfo();
   },
+
   methods: {
     async getIpfsNodeInfo() {
       try {
@@ -40,6 +56,21 @@ export default {
         // Set error status text.
         this.status = `Error: ${err}`;
       }
+    },
+
+    async uploadFile(e) {
+      const file = e.target.files[0];
+      const ipfs = await this.$ipfs;
+      try {
+        this.status = "Uploading to IPFS..."
+        this.file = await ipfs.add(file);
+      } catch (err) {
+        console.log(err);
+      }
+
+      console.log(this.file.cid.toString());
+
+      // FIXME: make fileUrl works
     }
   }
 };
