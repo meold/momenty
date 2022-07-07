@@ -1,0 +1,16 @@
+{
+  "compilerOptions": {
+      "target": "es2020",
+      "module": "commonjs",
+      "jsx": "preserve"
+  },
+  "exclude": [
+      "node_modules-production",
+      "node_modules",
+      "frontend-dist"
+  ],
+  "lib": [
+    "es2020"
+  ]
+}
+
