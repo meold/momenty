@@ -3,21 +3,22 @@
     <div class="container">
       <nav class="relative z-50 flex items-center justify-between">
         <div class="flex grow-1 items-center md:gap-x-12">
-          <a href="/" aria-label="Home" class="shrink-0">
+          <router-link to="/" aria-label="Home" class="shrink-0">
             LOGO
-          </a>
+          </router-link>
           <div class="grow-1 hidden md:flex md:gap-x-6 justify-center">
             <input type="search" class="border-2 rounded-xl border-gray-300 focus:border-primary focus:ring-0">
           </div>
         </div>
         <div class="flex shrink-0 items-center gap-x-5 md:gap-x-8">
-          <button-secondary class="hidden md:block">
-            Create
-            <span class="ml-2">+</span>
-          </button-secondary>
-          <button-primary @click="onClick">
-            connect wallet
-          </button-primary>
+          <router-link v-slot="{ navigate }" to="/new" custom>
+            <button-secondary class="hidden md:block" @click="navigate" @keypress.enter="navigate">
+              Create
+              <span class="ml-2">+</span>
+            </button-secondary>
+          </router-link>
+
+          <button-wallet />
 
           <div class="-mr-1">
             <popover v-slot="{ open }">
@@ -109,14 +110,14 @@
 </template>
 
 <script>
-import ButtonPrimary from '@/components/ButtonPrimary.vue';
+import ButtonWallet from '@/components/ButtonWallet.vue';
 import ButtonSecondary from '@/components/ButtonSecondary.vue';
 import MenuSocials from '@/components/MenuSocials.vue';
 import { Popover, PopoverButton, PopoverOverlay, PopoverPanel, TransitionRoot, TransitionChild } from '@headlessui/vue';
 
 export default {
   components: {
-    ButtonPrimary,
+    ButtonWallet,
     ButtonSecondary,
     Popover,
     PopoverButton,
@@ -139,9 +140,7 @@ export default {
 
   },
   methods: {
-    onClick() {
-      console.log('click');
-    }
+
   }
 };
 </script>

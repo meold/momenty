@@ -42,7 +42,7 @@
       You love
     </a>
 
-    <button-primary class="my-10 px-5 w-full"> connect wallet </button-primary>
+    <button-wallet class="my-10 px-5 w-full" />
 
     <h3 class="text-xl mb-6">Topics</h3>
 
@@ -130,12 +130,12 @@
 </template>
 
 <script>
-import ButtonPrimary from '@/components/ButtonPrimary.vue';
+import ButtonWallet from '@/components/ButtonWallet.vue';
 import MenuSocials from '@/components/MenuSocials.vue';
 
 export default {
   components: {
-    ButtonPrimary,
+    ButtonWallet,
     MenuSocials
   },
   props: [],
