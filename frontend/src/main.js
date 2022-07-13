@@ -1,8 +1,12 @@
 import { createApp } from 'vue';
 import App from './App.vue';
-import ipfs from './ipfs';
+import router from './router';
+// import ipfs from './ipfs';
 
-import 'bootstrap';
 import '@/assets/styles/main.scss';
 
-createApp(App).use(ipfs).mount('#app');
+createApp(App)
+  .use(router)
+  // .use(ipfs, { host: 'ipfs.infura.io', port: 5001 })
+  .mount('#app')
+;

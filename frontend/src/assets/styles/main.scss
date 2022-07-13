@@ -1,2 +1,28 @@
-@import 'variables';
-@import 'bootstrap/scss/bootstrap.scss';
+@import '../fonts/GTWalsheimPro.css';
+@import '../fonts/DrukWide.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+#app {
+  width: 100vw;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+@layer base {
+  .container {
+    @apply mx-auto max-w-7xl px-4 sm:px-6 lg:px-8;
+  }
+}
+
+@layer components {
+  .disabled {
+    @apply pointer-events-none opacity-50;
+  }
+  .menu-link {
+    @apply flex items-center gap-x-3 w-full p-2 text-base hover:text-primary;
+  }
+}

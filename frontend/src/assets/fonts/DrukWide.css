@@ -1,0 +1,8 @@
+@font-face {font-family: "Druk Wide";
+  src: url("@/assets/fonts/DrukWide.eot");
+  src: url("@/assets/fonts/DrukWide.eot?#iefix") format("embedded-opentype"),
+  url("@/assets/fonts/DrukWide.woff2") format("woff2"),
+  url("@/assets/fonts/DrukWide.woff") format("woff"),
+  url("@/assets/fonts/DrukWide.ttf") format("truetype"),
+  url("@/assets/fonts/DrukWide.svg#Druk Wide") format("svg");
+}
