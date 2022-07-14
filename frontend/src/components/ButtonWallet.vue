@@ -1,6 +1,6 @@
 <template>
   <button-primary>
-    connect wallet
+    Connect Wallet
   </button-primary>
 </template>
 

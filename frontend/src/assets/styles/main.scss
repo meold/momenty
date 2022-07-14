@@ -27,6 +27,10 @@
   }
 }
 
+@layer utilities {
+
+}
+
 .fade-enter-active,
 .fade-leave-active {
   transition-duration: 0.3s;
@@ -37,4 +41,54 @@
 .fade-enter,
 .fade-leave-active {
   opacity: 0;
+}
+
+[type='checkbox']:focus,
+[type='radio']:focus,
+[type='text']:focus,
+[type='email']:focus,
+[type='url']:focus,
+[type='password']:focus,
+[type='number']:focus,
+[type='color']:focus,
+[type='date']:focus,
+[type='datetime-local']:focus,
+[type='month']:focus,
+[type='search']:focus,
+[type='tel']:focus,
+[type='time']:focus,
+[type='week']:focus,
+[multiple]:focus,
+button:focus,
+textarea:focus,
+select:focus {
+  --tw-ring-color: transparent;
+  border-color: #a73f06;
+  outline: none;
+}
+
+[type='checkbox']:focus-visible,
+[type='radio']:focus-visible,
+[type='text']:focus-visible,
+[type='email']:focus-visible,
+[type='url']:focus-visible,
+[type='password']:focus-visible,
+[type='number']:focus-visible,
+[type='color']:focus-visible,
+[type='date']:focus-visible,
+[type='datetime-local']:focus-visible,
+[type='month']:focus-visible,
+[type='search']:focus-visible,
+[type='tel']:focus-visible,
+[type='time']:focus-visible,
+[type='week']:focus-visible,
+[type='range']:focus-visible,
+[multiple]:focus-visible,
+textarea:focus-visible,
+select:focus-visible,
+a:focus-visible,
+button:focus-visible {
+  --tw-ring-color: transparent;
+  border-color: #a73f06;
+  outline: 2px solid #ff640f59;
 }

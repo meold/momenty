@@ -1,13 +1,27 @@
 <template>
   <header class="py-7">
     <div class="container">
-      <nav class="relative z-50 flex items-center justify-between">
-        <div class="flex grow-1 items-center md:gap-x-12">
+      <nav class="relative z-50 flex items-center justify-between gap-x-5 md:gap-x-8">
+        <div class="flex grow items-center md:gap-x-12">
           <router-link to="/" aria-label="Home" class="shrink-0">
             LOGO
           </router-link>
-          <div class="grow-1 hidden md:flex md:gap-x-6 justify-center">
-            <input type="search" class="border-2 rounded-xl border-gray-300 focus:border-primary focus:ring-0">
+          <div class="grow hidden md:flex justify-center">
+            <div v-if="true" class="relative w-full">
+              <div class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
+                <svg aria-hidden="true" class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd"></path></svg>
+              </div>
+              <input type="search" placeholder="Search by collection, NFT, username" class="w-full p-[13px] pl-10 border-2 rounded-xl border-gray-300 text-sm">
+            </div>
+            <form-kit
+              v-else
+              v-model="search"
+              type="search"
+              name="search"
+              placeholder="Search by collection, NFT, username"
+              outer-class="w-full mb-0"
+              inner-class="p-[3px] outline-none"
+            />
           </div>
         </div>
         <div class="flex shrink-0 items-center gap-x-5 md:gap-x-8">
@@ -130,7 +144,7 @@ export default {
   props: [],
   data() {
     return {
-
+      search: null
     };
   },
   computed: {
