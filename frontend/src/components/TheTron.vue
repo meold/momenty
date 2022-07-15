@@ -84,6 +84,7 @@ export default {
 
       this.nonce++;
       this.previous = rand;
+      this.images[rand] = `https://picsum.photos/200/300?${this.nonce}`;
       this.keys[rand] = this.nonce;
     }, 6000);
   },
@@ -96,6 +97,7 @@ export default {
 <style>
 .slowfade-enter-active,
 .slowfade-leave-active {
+  opacity: 1;
   transition-property: opacity;
   transition-timing-function: ease;
 }
