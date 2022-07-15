@@ -43,8 +43,8 @@
 
 <script setup>
 import NftCard from '@/components/NftCard.vue';
-import ButtonSecondary from '@/components/ButtonSecondary.vue';
 import ButtonPrimary from '@/components/ButtonPrimary.vue';
+import ButtonSecondary from '@/components/ButtonSecondary.vue';
 import DropArea from '@/components/DropArea.vue';
 import { ref } from 'vue';
 

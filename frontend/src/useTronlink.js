@@ -27,6 +27,6 @@ export const useTronlink = defineStore('tronlink', {
         connected = window.tronLink.ready;
       }
       return connected;
-    },
+    }
   }
 });

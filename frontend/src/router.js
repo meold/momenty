@@ -2,6 +2,8 @@ import { createWebHistory, createRouter } from 'vue-router';
 
 import MainPage from '@/views/MainPage.vue';
 import CreatePage from '@/views/CreatePage.vue';
+import ProfilePage from '@/views/ProfilePage.vue';
+import ViewPage from '@/views/ViewPage.vue';
 import FormkitPage from '@/views/FormkitPage.vue';
 
 const routes = [
@@ -18,6 +20,18 @@ const routes = [
   },
 
   {
+    path: '/profile',
+    name: 'ProfilePage',
+    component: ProfilePage
+  },
+
+  {
+    path: '/view',
+    name: 'ViewPage',
+    component: ViewPage
+  },
+
+  { // FIXME: remove this
     path: '/formkit',
     name: 'FormkitPage',
     component: FormkitPage
