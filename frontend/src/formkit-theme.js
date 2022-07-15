@@ -4,7 +4,6 @@
 const textClassification = {
   label: 'block mb-1 font-bold text-sm formkit-invalid:text-red-500',
   inner: `
-    max-w-md
     border-2
     border-gray-300
     formkit-invalid:border-red-500
@@ -16,7 +15,7 @@ const textClassification = {
     'w-full h-10 px-3 border-none text-base text-gray-700 placeholder-gray-400'
 };
 const boxClassification = {
-  fieldset: 'max-w-md border-2 border-gray-300 rounded-md px-2 pb-1',
+  fieldset: 'border-2 border-gray-300 rounded-md px-2 pb-1',
   legend: 'font-bold text-sm',
   wrapper: 'flex items-center mb-1 cursor-pointer',
   help: 'mb-2',
@@ -53,7 +52,7 @@ export default {
   email: textClassification,
   file: {
     label: 'block mb-1 font-bold text-sm',
-    inner: 'max-w-md cursor-pointer',
+    inner: 'cursor-pointer',
     input:
       'text-gray-600 text-sm mb-1 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:bg-primary file:text-white hover:file:opacity-80 hover:file:shadow-inner hover:file:cursor-pointer',
     noFiles: 'block text-gray-800 text-sm mb-1',
@@ -71,7 +70,7 @@ export default {
     input: boxClassification.input.replace('rounded-sm', 'rounded-full')
   },
   range: {
-    inner: 'max-w-md',
+    inner: '',
     input:
       'form-range appearance-none w-full h-2 p-0 bg-gray-200 rounded-full'
   },

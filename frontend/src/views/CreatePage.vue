@@ -58,7 +58,7 @@ const schema = [
     label: 'Title',
     classes: {
       label: 'text-xl font-bold mb-2',
-      input: 'placeholder:text-sm placeholder:opacity-30 placeholder:text-black',
+      input: 'placeholder:text-sm placeholder:opacity-30 placeholder:text-black w-full',
       outer: 'relative',
       messages: 'absolute right-0'
     },
@@ -85,7 +85,7 @@ const schema = [
     $formkit: 'textarea',
     name: 'description',
     classes: {
-      input: 'placeholder:text-sm placeholder:opacity-30 placeholder:text-black',
+      input: 'placeholder:text-sm placeholder:opacity-30 placeholder:text-black w-full',
       outer: 'relative',
       messages: 'absolute right-0'
     },
