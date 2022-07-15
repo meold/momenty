@@ -1,7 +1,9 @@
 <template>
   <the-header />
 
-  <the-banner />
+  <transition name="fade" mode="out-in">
+    <the-banner />
+  </transition>
 
   <router-view v-slot="{ Component }">
     <div class="container grow">
@@ -13,12 +15,6 @@
     </div>
   </router-view>
 
-  <div class="py-10 container">
-    <hr class="my-4">
-    <tron-link-helper />
-    <hr class="my-4">
-  </div>
-
   <the-footer />
 </template>
 
@@ -26,10 +22,4 @@
 import TheHeader from '@/components/TheHeader.vue';
 import TheFooter from '@/components/TheFooter.vue';
 import TheBanner from '@/components/TheBanner.vue';
-import TronLinkHelper from './components/TronLinkHelper.vue';
-
-// FIXME:
-window.addEventListener('message', e => {
-  console.log(JSON.stringify(e), e.data?.message)
-})
 </script>

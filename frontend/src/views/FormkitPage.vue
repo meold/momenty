@@ -1,5 +1,12 @@
 <template>
   <div class="m-10">
+
+    <div class="py-10 container">
+      <hr class="my-4">
+      <tron-link-helper />
+      <hr class="my-4">
+    </div>
+
     <FormKit
       v-for="type in inputTypes"
       :key="type"
@@ -17,47 +24,47 @@
   </div>
 </template>
 
-<script>
+<script setup>
 import { ref } from 'vue';
+import TronLinkHelper from '@/components/TronLinkHelper.vue';
 
-export default {
-  setup() {
-    const inputTypes = ref([
-      'button',
-      'checkbox',
-      'color',
-      'date',
-      'datetime-local',
-      'email',
-      'file',
-      'month',
-      'number',
-      'password',
-      'radio',
-      'range',
-      'search',
-      'select',
-      'submit',
-      'tel',
-      'text',
-      'textarea',
-      'time',
-      'url',
-      'week'
-    ]);
-    const inputOptions = ref({
-      checkbox: [
-        'I like Tailwind',
-        'I also like FormKit',
-        'I like other things too'
-      ],
-      radio: ['I like Tailwind', 'I like FormKit', 'I like everything'],
-      select: ['I like Tailwind', 'I like FormKit', 'I like everything']
-    });
-    return {
-      inputTypes,
-      inputOptions
-    };
-  }
-};
+// FIXME:
+window.addEventListener('message', e => {
+  console.log(JSON.stringify(e), e.data?.message)
+})
+
+const inputTypes = ref([
+  'button',
+  'checkbox',
+  'color',
+  'date',
+  'datetime-local',
+  'email',
+  'file',
+  'month',
+  'number',
+  'password',
+  'radio',
+  'range',
+  'search',
+  'select',
+  'submit',
+  'tel',
+  'text',
+  'textarea',
+  'time',
+  'url',
+  'week'
+]);
+
+const inputOptions = ref({
+  checkbox: [
+    'I like Tailwind',
+    'I also like FormKit',
+    'I like other things too'
+  ],
+  radio: ['I like Tailwind', 'I like FormKit', 'I like everything'],
+  select: ['I like Tailwind', 'I like FormKit', 'I like everything']
+});
+
 </script>
