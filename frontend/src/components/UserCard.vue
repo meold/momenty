@@ -1,7 +1,7 @@
 <template>
   <div class="group flex items-center">
     <div>
-      <img class="inline-block h-10 w-10 rounded-full border-2 border-primary group-hover:border-primary/80" :src="user.avatarUrl" alt="">
+      <user-avatar class="h-10 w-10" :src="user.avatarUrl" />
     </div>
     <div class="ml-3">
       <p class="text-sm font-medium">
@@ -13,7 +13,8 @@
 </template>
 
 <script setup>
-// FIXME: add anonymous avatar
+import UserAvatar from '@/components/UserAvatar.vue';
+
 defineProps({
   user: {
     type: Object,

@@ -6,7 +6,7 @@
     <div class="grow">
 
       <router-link class="inline-block mb-8" to="/profile">
-        <avatar />
+        <user-card />
       </router-link>
 
       <h1 class="font-display text-2xl leading-tight mb-4">
@@ -46,7 +46,7 @@
 
 <script setup>
 import NftCard from '@/components/NftCard.vue';
-import Avatar from '@/components/Avatar.vue';
+import UserCard from '@/components/UserCard.vue';
 import ButtonPrimary from '@/components/ButtonPrimary.vue';
 import ButtonSecondary from '@/components/ButtonSecondary.vue';
 

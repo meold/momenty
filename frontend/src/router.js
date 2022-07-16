@@ -4,6 +4,9 @@ import MainPage from '@/views/MainPage.vue';
 import CreatePage from '@/views/CreatePage.vue';
 import ProfilePage from '@/views/ProfilePage.vue';
 import ViewPage from '@/views/ViewPage.vue';
+import ComingSoonPage from '@/views/ComingSoonPage.vue';
+import ErrorPage from '@/views/ErrorPage.vue';
+
 import FormkitPage from '@/views/FormkitPage.vue';
 
 const routes = [
@@ -35,6 +38,18 @@ const routes = [
     path: '/formkit',
     name: 'FormkitPage',
     component: FormkitPage
+  },
+
+  {
+    path: '/soon',
+    name: 'ComingSoonPage',
+    component: ComingSoonPage
+  },
+
+  {
+    path: '/:pathMatch(.*)*',
+    name: 'ErrorPage',
+    component: ErrorPage
   }
 ];
 
