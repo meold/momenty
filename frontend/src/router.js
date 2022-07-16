@@ -4,6 +4,7 @@ import MainPage from '@/views/MainPage.vue';
 import CreatePage from '@/views/CreatePage.vue';
 import ProfilePage from '@/views/ProfilePage.vue';
 import ViewPage from '@/views/ViewPage.vue';
+import SettingsPage from '@/views/SettingsPage.vue';
 import ComingSoonPage from '@/views/ComingSoonPage.vue';
 import ErrorPage from '@/views/ErrorPage.vue';
 
@@ -32,6 +33,12 @@ const routes = [
     path: '/view',
     name: 'ViewPage',
     component: ViewPage
+  },
+
+  {
+    path: '/settings',
+    name: 'SettingsPage',
+    component: SettingsPage
   },
 
   { // FIXME: remove this

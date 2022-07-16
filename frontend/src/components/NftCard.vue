@@ -5,7 +5,7 @@
         <div class="flipper">
           <div class="front w-full h-full">
             <nft-card-container class="!shadow-sm object-cover">
-              <img :src="`/killme/image${nft % 3 + 1}.png`" alt="">
+              <img :src="`/killme/image${nft % 3 + 1}.png`" class="min-w-full min-h-full" alt="">
             </nft-card-container>
           </div>
           <div class="back w-full h-full">
@@ -29,7 +29,7 @@ const isFlipped = ref(false);
 defineProps({
   nft: {
     type: Number,
-    default: 0
+    default: 1
   }
 })
 
