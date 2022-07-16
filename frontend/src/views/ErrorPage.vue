@@ -5,7 +5,7 @@
     </div>
     <div class="grow-1 flex flex-col items-center mx-auto">
       <h1 class="font-display text-5xl leading-tight my-20 text-primary">
-        Not found
+        Page not found
       </h1>
       <the-tron />
     </div>
