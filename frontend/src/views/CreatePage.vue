@@ -7,15 +7,15 @@
       <div class="flex flex-row gap-x-10">
         <div class="shrink-0 basis-2/12">
           <h2 class="text-xl text-center font-bold mb-2">Add video</h2>
-          <nft-card>
+          <nft-card-container>
             <drop-area />
-          </nft-card>
+          </nft-card-container>
         </div>
         <div class="shrink-0 basis-2/12">
           <h2 class="text-xl text-center font-bold mb-2">Add video</h2>
-          <nft-card>
+          <nft-card-container>
             <drop-area />
-          </nft-card>
+          </nft-card-container>
         </div>
         <div class="grow">
           <form-kit-schema :schema="schema" />
@@ -42,7 +42,7 @@
 </template>
 
 <script setup>
-import NftCard from '@/components/NftCard.vue';
+import NftCardContainer from '@/components/NftCardContainer.vue';
 import ButtonPrimary from '@/components/ButtonPrimary.vue';
 import ButtonSecondary from '@/components/ButtonSecondary.vue';
 import DropArea from '@/components/DropArea.vue';
