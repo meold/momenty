@@ -1,16 +1,18 @@
 <template>
-  <nft-card-container class="rounded-none shadow-none overflow-visible" @click="onClick">
-    <div class="flip-container w-full h-full" :class="{ hover: isFlipped }" @touchstart="onTouchstart">
-      <div class="flipper">
-        <div class="front w-full h-full">
-          <nft-card-container class="!shadow-sm bg-primary/20" />
-        </div>
-        <div class="back w-full h-full">
-          <nft-card-container class="!shadow-sm bg-lime-300" />
+  <router-link v-slot="{ navigate }" to="/view" custom>
+    <nft-card-container class="rounded-none shadow-none overflow-visible cursor-pointer" @click="navigate">
+      <div class="flip-container w-full h-full" :class="{ hover: isFlipped }" @touchstart="onTouchstart">
+        <div class="flipper">
+          <div class="front w-full h-full">
+            <nft-card-container class="!shadow-sm bg-primary/20" />
+          </div>
+          <div class="back w-full h-full">
+            <nft-card-container class="!shadow-sm bg-lime-300" />
+          </div>
         </div>
       </div>
-    </div>
-  </nft-card-container>
+    </nft-card-container>
+  </router-link>
 </template>
 
 <script setup>
@@ -30,9 +32,10 @@ function onTouchstart() {
   isFlipped.value = !isFlipped.value;
 }
 
-function onClick() {
-  isFlipped.value = !isFlipped.value;
-}
+// FIXME:
+// function onClick() {
+//   isFlipped.value = !isFlipped.value;
+// }
 </script>
 
 <style scoped>
