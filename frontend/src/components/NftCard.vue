@@ -1,7 +1,7 @@
 <template>
   <router-link v-slot="{ navigate }" to="/view" custom>
     <nft-card-container class="!rounded-none !shadow-none overflow-visible cursor-pointer" @click="navigate">
-      <div class="flip-container w-full h-full" :class="{ hover: isFlipped }" @touchstart="isFlipped = !isFlipped">
+      <div class="flip-container w-full h-full" :class="{ hover: isFlipped }" @touchstart="isFlipped = !isFlipped" @mouseenter="onMouseenter" @mouseleave="onMouseleave">
         <div class="flipper">
           <div class="front w-full h-full">
             <nft-card-container class="!shadow-sm object-cover">
@@ -10,7 +10,7 @@
           </div>
           <div class="back w-full h-full">
             <nft-card-container class="!shadow-sm">
-              <video-player class="w-full h-full" />
+              <video-player class="w-full h-full" :play="isFlipped" />
             </nft-card-container>
           </div>
         </div>
@@ -33,13 +33,22 @@ defineProps({
   }
 })
 
+function onMouseenter() {
+  isFlipped.value = true;
+}
+
+function onMouseleave() {
+  isFlipped.value = false;
+}
+
 </script>
 
 <style scoped>
 .flip-container {
   perspective: 1000px;
 }
-.flip-container:hover .flipper, .flip-container.hover .flipper {
+/* .flip-container:hover .flipper, */
+.flip-container.hover .flipper {
   transform: rotateY(180deg);
 }
 .flipper {
