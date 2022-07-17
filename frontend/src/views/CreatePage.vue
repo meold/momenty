@@ -65,6 +65,7 @@
 import NftCardContainer from '@/components/NftCardContainer.vue';
 import DropArea from '@/components/DropArea.vue';
 import { ref, computed } from 'vue';
+import { post } from 'axios';
 
 const form = ref(null);
 const nft = ref({});
@@ -156,25 +157,16 @@ function onImageChange(event) {
   nft.value.image = event;
 }
 
-async function submit(context) {
-  const url = 'http://127.0.0.1:3090/nft/';
-  const method = 'POST';
-
-  const response = await fetch(url, {
+async function submit(data) {
+  const url = 'http://127.0.0.1:3090/api/nft/';
+  const config = {
     headers: {
-      'Accept': 'application/json',
-      'Content-Type': 'application/json'
-    },
-    method,
-    body: JSON.stringify(context)
-  });
-
-  if (response.ok) {
-    const { success } = await response.json();
-    if (success) {
-      // FIXME: 
+      'content-type': 'multipart/form-data'
     }
-  }
+  };
+
+  const result = await post(url, data, config);
+  console.log(result);
 }
 </script>
 

@@ -3,6 +3,7 @@ import path from 'path';
 import Fastify from 'fastify';
 import fastifyAutoload from '@fastify/autoload';
 import FastifyCors from '@fastify/cors';
+import fastifyMultipart from '@fastify/multipart';
 import { sequelize } from './models/index.mjs';
 
 const isProduction = process.env.NODE_ENV === 'production';
@@ -22,6 +23,9 @@ const fastify = Fastify({
 });
 
 fastify.register(FastifyCors);
+fastify.register(fastifyMultipart, {
+  addToBody: true
+});
 
 fastify.decorate('sequelize', sequelize);
 
