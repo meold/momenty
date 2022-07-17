@@ -8,8 +8,7 @@ export default defineConfig({
     port: 3000
   },
   build: {
-    target: 'es2020',
-    minify: false
+    target: 'es2020'
   },
   plugins: [vue()],
   resolve: {

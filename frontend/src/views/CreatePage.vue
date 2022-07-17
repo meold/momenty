@@ -3,37 +3,57 @@
     <h1 class="font-display text-2xl leading-tight mb-10">
       Create or sell your NFT
     </h1>
-    <form-kit ref="form" v-model="nft" :actions="false" type="form" autocomplete="off" @submit="submit">
+    <form-kit ref="form" v-model="nft" :actions="false" type="form" autocomplete="off" message-class="text-right" @submit="submit">
       <div class="flex flex-row gap-x-10">
+
         <div class="shrink-0 basis-2/12">
           <h2 class="text-xl text-center font-bold mb-2">Add video</h2>
-          <nft-card-container>
-            <drop-area />
+          <nft-card-container :class="{ 'border-2 border-red-500': isVideoInvalid }">
+            <div v-if="nft.video?.length" class="w-full h-full flex justify-center items-center">
+              <div class="w-full text-center">
+                <div class="mx-3 font-semibold">Video:</div>
+                <div class="m-3 text-xs truncate ...">
+                  {{ nft.video[0].name }}
+                </div>
+                <button class="text-primary underline hover:opacity:80" @click="nft.video = []">Remove</button>
+              </div>
+            </div>
+            <drop-area v-else accept="video/*" @change="onVideoChange" />
           </nft-card-container>
+          <div v-if="isVideoInvalid" class="text-red-500 mb-1 text-xs text-right mt-2">Video is required</div>
         </div>
+
         <div class="shrink-0 basis-2/12">
-          <h2 class="text-xl text-center font-bold mb-2">Add video</h2>
-          <nft-card-container>
-            <drop-area />
+          <h2 class="text-xl text-center font-bold mb-2">Add image</h2>
+          <nft-card-container :class="{ 'border-2 border-red-500': isImageInvalid }">
+            <div v-if="nft.image?.length" class="w-full h-full flex justify-center items-center">
+              <div class="w-full text-center">
+                <div class="mx-3 font-semibold">Image:</div>
+                <div class="m-3 text-xs truncate ...">
+                  {{ nft.image[0].name }}
+                </div>
+                <button class="text-primary underline hover:opacity:80" @click="nft.image = []">Remove</button>
+              </div>
+            </div>
+            <drop-area v-else accept="image/*" @change="onImageChange" />
           </nft-card-container>
+          <div v-if="isImageInvalid" class="text-red-500 mb-1 text-xs text-right mt-2">Image is required</div>
         </div>
+
         <div class="grow">
           <form-kit-schema :schema="schema" />
         </div>
+
         <div class="shrink-0 basis-2/12">
           <p class="opacity-50 text-sm mb-10">
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea rem velit voluptatem, voluptas rerum illo saepe eos? Soluta quia numquam velit neque ducimus, fuga magni fugiat repellendus architecto possimus voluptates.
           </p>
           <div>
-            <button-secondary class="w-full py-3 mb-2">
-              Create
-              <span class="ml-2">+</span>
-            </button-secondary>
-          </div>
-          <div>
-            <button-primary class="w-full py-3">
-              Sell
-            </button-primary>
+            <FormKit
+              type="submit"
+              label="Create"
+              input-class="w-full !py-3"
+            />
           </div>
         </div>
       </div>
@@ -43,15 +63,40 @@
 
 <script setup>
 import NftCardContainer from '@/components/NftCardContainer.vue';
-import ButtonPrimary from '@/components/ButtonPrimary.vue';
-import ButtonSecondary from '@/components/ButtonSecondary.vue';
 import DropArea from '@/components/DropArea.vue';
-import { ref } from 'vue';
+import { ref, computed } from 'vue';
 
 const form = ref(null);
 const nft = ref({});
 
+const isImageInvalid = computed(() => (
+  form.value?.node?.children[0]?.context?.state?.dirty &&
+  !form.value?.node?.children[0]?.context?.state?.valid
+));
+
+const isVideoInvalid = computed(() => (
+  form.value?.node?.children[1]?.context?.state?.dirty &&
+  !form.value?.node?.children[1]?.context?.state?.valid
+));
+
 const schema = [
+  // NOTE: image and video must be in this order becuase of computed
+  {
+    $formkit: 'file',
+    name: 'image',
+    accept: 'image/*',
+    outerClass: 'h-0 opacity-0 overflow-hidden absolute',
+    validation: 'required',
+    validationVisibility: 'dirty'
+  },
+  {
+    $formkit: 'file',
+    name: 'video',
+    accept: 'video/*',
+    outerClass: 'h-0 opacity-0 overflow-hidden absolute',
+    validation: 'required',
+    validationVisibility: 'dirty'
+  },
   {
     $formkit: 'text',
     name: 'title',
@@ -65,7 +110,7 @@ const schema = [
     // labelClass: 'text-xl font-bold mb-2',
     placeholder: 'Enter title (maximum 120 symbols)',
     validation: 'required|length:1,120',
-    validationVisibility: 'blur'
+    validationVisibility: 'dirty'
   },
   {
     $el: 'h2',
@@ -91,12 +136,45 @@ const schema = [
     },
     placeholder: 'Enter description (maximum 400 symbols)',
     validation: 'required|length:1,400',
-    validationVisibility: 'blur'
+    validationVisibility: 'dirty'
   }
 ];
 
-function submit() {
+function onVideoChange(event) {
+  if (event[0]?.type?.split('/')[0] !== 'video') {
+    nft.value.video = [];
+    return;
+  }
+  nft.value.video = event;
+}
 
+function onImageChange(event) {
+  if (event[0]?.type?.split('/')[0] !== 'image') {
+    nft.value.image = [];
+    return;
+  }
+  nft.value.image = event;
+}
+
+async function submit(context) {
+  const url = 'http://127.0.0.1:3090/nft/';
+  const method = 'POST';
+
+  const response = await fetch(url, {
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    },
+    method,
+    body: JSON.stringify(context)
+  });
+
+  if (response.ok) {
+    const { success } = await response.json();
+    if (success) {
+      // FIXME: 
+    }
+  }
 }
 </script>
 

@@ -15,7 +15,7 @@
     "autoprefixer": "^10.4.7",
     "cluster": "^0.7.7",
     "cssnano": "^5.1.12",
-    "eslint": "^8.19.0",
+    "eslint": "^8.20.0",
     "eslint-plugin-vue": "^9.2.0",
     "ipfs-core": "^0.15.4",
     "pinia": "^2.0.16",

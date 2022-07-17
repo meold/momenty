@@ -1,34 +1,20 @@
 <template>
-  <div class="drop-zone p-4" @dragover="dragover" @dragleave="dragleave" @drop="drop">
+  <label @dragover="dragover" @dragleave="dragleave" @drop="drop">
     <slot />
     <input
-      :id="$id('assetsFieldHandle')"
       ref="file"
       type="file"
-      class="h-0 opacity-0 overflow-hidden position-absolute"
+      class="h-0 opacity-0 overflow-hidden absolute"
       :multiple="multiple"
       :accept="accept"
       @change="onChange"
     >
-    <label class="d-block" :for="$id('assetsFieldHandle')">
-      <div v-if="text" class="text-center">{{ text }}</div>
-      <div v-if="text" class="row spacer my-3 mx-4">
-        <div class="col"><hr></div>
-        <div class="col-auto px-0 align-self-center text-muted">OR</div>
-        <div class="col"><hr></div>
-      </div>
-      <div class="text-center"><div class="btn btn-outline-primary">Browse</div></div>
-    </label>
-  </div>
+  </label>
 </template>
 
 <script>
 export default {
   props: {
-    text: {
-      type: String,
-      default: null
-    },
     accept: {
       type: String,
       default: 'audio/*,video/*,image/*'
