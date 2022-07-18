@@ -3,8 +3,8 @@
     <div class="container">
       <nav class="relative z-50 flex items-center justify-between gap-x-5 md:gap-x-8">
         <div class="flex grow items-center md:gap-x-12">
-          <router-link to="/" aria-label="Home" class="shrink-0">
-            LOGO
+          <router-link to="/" aria-label="Home" class="shrink-0 text-primary hover:opacity-80">
+            <the-logo class="h-5" />
           </router-link>
           <div class="grow hidden md:flex justify-center">
             <div v-if="true" class="relative w-full max-w-md">
@@ -123,38 +123,11 @@
   </header>
 </template>
 
-<script>
+<script setup>
+import TheLogo from '@/components/TheLogo.vue';
+import MenuSocials from '@/components/MenuSocials.vue';
 import ButtonWallet from '@/components/ButtonWallet.vue';
 import ButtonSecondary from '@/components/ButtonSecondary.vue';
-import MenuSocials from '@/components/MenuSocials.vue';
 import { Popover, PopoverButton, PopoverOverlay, PopoverPanel, TransitionRoot, TransitionChild } from '@headlessui/vue';
 
-export default {
-  components: {
-    ButtonWallet,
-    ButtonSecondary,
-    Popover,
-    PopoverButton,
-    PopoverOverlay,
-    PopoverPanel,
-    TransitionRoot,
-    TransitionChild,
-    MenuSocials
-  },
-  props: [],
-  data() {
-    return {
-      search: null
-    };
-  },
-  computed: {
-
-  },
-  watch: {
-
-  },
-  methods: {
-
-  }
-};
 </script>
