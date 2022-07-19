@@ -11,7 +11,6 @@ RUN npm install
 
 COPY backend ./
 
-COPY frontend/dist /usr/src/frontend/dist
-COPY frontend/public /usr/src/frontend/public
+COPY frontend-dist /usr/src/frontend-dist
 
 CMD ["node", "index.mjs"]
