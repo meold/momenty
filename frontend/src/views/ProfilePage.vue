@@ -1,7 +1,11 @@
 <template>
   <div class="flex w-full">
     <div class="srink-0 grow-0 mr-14 hidden md:block">
-      <menu-profile />
+      <menu-profile>
+        <button-primary class="!py-3 mt-3 mb-8">
+          Follow
+        </button-primary>
+      </menu-profile>
     </div>
     <div class="grow">
       <h1 class="text-xl font-bold mb-2">
@@ -19,5 +23,6 @@
 <script setup>
 import MenuProfile from '@/components/MenuProfile.vue';
 import NftCard from '@/components/NftCard.vue';
+import ButtonPrimary from '../components/ButtonPrimary.vue';
 
 </script>

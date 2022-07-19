@@ -1,8 +1,11 @@
 <template>
-  <drop-zone class="drop-zone w-full h-full flex justify-center items-center cursor-pointer" v-bind="$attrs">
+  <drop-zone class="drop-zone relative w-full h-full flex justify-center items-center cursor-pointer" v-bind="$attrs">
     <div class="bg-gradient-to-r from-primary to-orange-100 relative w-1/2 rounded-[10%] overflow-hidden before:block before:content-[''] before:w-full before:pt-[100%]">
       <div class="drop-zone-target absolute inset-0 m-[3%] rounded-[8%] bg-white" />
       <div class="absolute inset-0 flex justify-center items-center">+</div>
+    </div>
+    <div class="absolute inset-x-0 bottom-0 flex justify-center items-center p-4 text-sm text-black/25">
+      <slot />
     </div>
   </drop-zone>
 </template>

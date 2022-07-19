@@ -6,9 +6,12 @@
       </div>
       <div class="grow">
 
-        <router-link class="inline-block mb-8" to="/profile">
-          <user-card />
-        </router-link>
+        <div class="mb-8 flex justify-between items-center">
+          <router-link class="inline-block" to="/profile">
+            <user-card />
+          </router-link>
+          <button-primary class="!py-3">Folow</button-primary>
+        </div>
 
         <h1 class="font-display text-2xl leading-tight mb-4">
           Silent Ocean NFT with dark purple color background

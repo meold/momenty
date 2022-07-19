@@ -7,23 +7,6 @@
       <div class="flex flex-row gap-x-10">
 
         <div class="shrink-0 basis-2/12">
-          <h2 class="text-xl text-center font-bold mb-2">Add video</h2>
-          <nft-card-container :class="{ 'border-2 border-red-500': isVideoInvalid }">
-            <div v-if="nft.video?.length" class="w-full h-full flex justify-center items-center">
-              <div class="w-full text-center">
-                <div class="mx-3 font-semibold">Video:</div>
-                <div class="m-3 text-xs truncate ...">
-                  {{ nft.video[0].name }}
-                </div>
-                <button class="text-primary underline hover:opacity:80" @click="nft.video = []">Remove</button>
-              </div>
-            </div>
-            <drop-area v-else accept="video/*" @change="onVideoChange" />
-          </nft-card-container>
-          <div v-if="isVideoInvalid" class="text-red-500 mb-1 text-xs text-right mt-2">Video is required</div>
-        </div>
-
-        <div class="shrink-0 basis-2/12">
           <h2 class="text-xl text-center font-bold mb-2">Add image</h2>
           <nft-card-container :class="{ 'border-2 border-red-500': isImageInvalid }">
             <div v-if="nft.image?.length" class="w-full h-full flex justify-center items-center">
@@ -35,9 +18,52 @@
                 <button class="text-primary underline hover:opacity:80" @click="nft.image = []">Remove</button>
               </div>
             </div>
-            <drop-area v-else accept="image/*" @change="onImageChange" />
+            <drop-area v-else accept="image/*" @change="onImageChange">
+              <div class="hidden lg:block xl:hidden">
+                <div>5 mb, JPG, PNG</div>
+                <div>1080px x 1920px</div>
+                <div>9:16</div>
+                <div>&nbsp;</div>
+              </div>
+              <div class="hidden xl:block">
+                <div>Max size 5 mb, JPG, PNG</div>
+                <div>Dimensions 1080px x 1920px</div>
+                <div>Aspect ratio 9:16</div>
+                <div>&nbsp;</div>
+              </div>
+            </drop-area>
           </nft-card-container>
           <div v-if="isImageInvalid" class="text-red-500 mb-1 text-xs text-right mt-2">Image is required</div>
+        </div>
+
+        <div class="shrink-0 basis-2/12">
+          <h2 class="text-xl text-center font-bold mb-2">Add video</h2>
+          <nft-card-container :class="{ 'border-2 border-red-500': isVideoInvalid }">
+            <div v-if="nft.video?.length" class="w-full h-full flex justify-center items-center">
+              <div class="w-full text-center">
+                <div class="mx-3 font-semibold">Video:</div>
+                <div class="m-3 text-xs truncate ...">
+                  {{ nft.video[0].name }}
+                </div>
+                <button class="text-primary underline hover:opacity:80" @click="nft.video = []">Remove</button>
+              </div>
+            </div>
+            <drop-area v-else accept="video/*" @change="onVideoChange">
+              <div class="hidden lg:block xl:hidden">
+                <div>15 sec</div>
+                <div>25 mb, MOV, MP4</div>
+                <div>1080px x 1920px</div>
+                <div>9:16</div>
+              </div>
+              <div class="hidden xl:block">
+                <div>Max duration 15 sec</div>
+                <div>Max size 25 mb, MOV, MP4</div>
+                <div>Dimensions 1080px x 1920px</div>
+                <div>Aspect ratio 9:16</div>
+              </div>
+            </drop-area>
+          </nft-card-container>
+          <div v-if="isVideoInvalid" class="text-red-500 mb-1 text-xs text-right mt-2">Video is required</div>
         </div>
 
         <div class="grow">
@@ -46,7 +72,7 @@
 
         <div class="shrink-0 basis-2/12">
           <p class="opacity-50 text-sm mb-10">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea rem velit voluptatem, voluptas rerum illo saepe eos? Soluta quia numquam velit neque ducimus, fuga magni fugiat repellendus architecto possimus voluptates.
+            Once you're done customizing your image, video and description, click Create button. Congrats, you've just create your NFT moment!
           </p>
           <div>
             <FormKit
@@ -125,7 +151,7 @@ const schema = [
     attrs: {
       class: 'text-xs opacity-50 leading-normal mb-3'
     },
-    children: 'OpenSea will include a link to this URL on this item\'s detail page, so that users can click to learn more about it. You are welcome to link to your own webpage with more details.'
+    children: 'The description will be included on the NFT moment\'s detail page underneath its image and video'
   },
   {
     $formkit: 'textarea',
