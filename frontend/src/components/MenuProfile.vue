@@ -12,6 +12,8 @@
       </div>
     </div>
 
+    <slot />
+
     <p class="text-black/50 text-center text-sm font-light mb-8">
       Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum lectus ipsum convallis vitae congue.
     </p>
