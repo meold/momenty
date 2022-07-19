@@ -5,7 +5,6 @@ import fastifyAutoload from '@fastify/autoload';
 import fastifyStatic from '@fastify/static';
 import FastifyCors from '@fastify/cors';
 import fastifyMultipart from '@fastify/multipart';
-import fastifyFavicon from 'fastify-favicon';
 import FastifyHttpProxy from '@fastify/http-proxy';
 import url from 'url';
 import { v4 as uuidv4 } from 'uuid';
@@ -87,12 +86,8 @@ fastify.get(
   }
 );
 
-fastify.register(fastifyFavicon, { path: path.join(__dirname, 'favicon') });
-
 if (isProduction) {
   // We're in production, so all frontend assets are built, just serve them static.
-  // Note: we only bind static to /assets/. Perhaps a better way would be to serve
-  // static assets with fronting nginx.
   fastify.register(fastifyStatic, {
     root: path.join(__dirname, '..', 'frontend-dist'), // must be the same as in vite.config.js
     prefix: '/'
