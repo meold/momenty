@@ -1,40 +1,44 @@
 import { Sequelize, Model } from 'sequelize';
 
-export class Nft extends Model {
-  static structure = {
-    title: {
-      type: Sequelize.DataTypes.STRING(120),
-      allowNull: false
-    },
+export default class Nft extends Model {
+  static modelAttributes() {
+    return {
+      title: {
+        type: Sequelize.DataTypes.STRING(120),
+        allowNull: false
+      },
 
-    description: {
-      type: Sequelize.DataTypes.STRING(400),
-      allowNull: false,
-      unique: true
-    },
+      description: {
+        type: Sequelize.DataTypes.STRING(400),
+        allowNull: false,
+        unique: true
+      },
 
-    imageData: {
-      type: Sequelize.DataTypes.BLOB('medium')
-    },
+      imageData: {
+        type: Sequelize.DataTypes.BLOB('medium')
+      },
 
-    imageMimeType: {
-      type: Sequelize.DataTypes.STRING(100),
-      allowNull: false
-    },
+     imageMimeType: {
+        type: Sequelize.DataTypes.STRING(100),
+        allowNull: false
+      },
 
-    videoData: {
-      type: Sequelize.DataTypes.BLOB('long')
-    },
+      videoData: {
+        type: Sequelize.DataTypes.BLOB('long')
+      },
 
-    videoMimeType: {
-      type: Sequelize.DataTypes.STRING(100),
-      allowNull: false
-    },
-
+      videoMimeType: {
+        type: Sequelize.DataTypes.STRING(100),
+        allowNull: false
+      },
+    }
   }
 
-  static options = {
-
+  static modelOptions(sequelize) {
+    return {
+      sequelize,
+      freezeTableName: true
+    };
   }
 }
 
