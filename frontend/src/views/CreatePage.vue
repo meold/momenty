@@ -158,7 +158,7 @@ function onImageChange(event) {
 }
 
 async function submit(data) {
-  const url = 'http://127.0.0.1:3090/api/nft/';
+  const url = '/api/nft/';
   const config = {
     headers: {
       'content-type': 'multipart/form-data'
