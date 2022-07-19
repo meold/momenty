@@ -1,1 +1,22 @@
 frontend-dist/*
+# For Terraform
+# Local .terraform directories
+**/.terraform.lock.hcl
+**/.terraform/*
+**/.terragrunt/*
+**/.terragrunt-cache*
+**/.terragrunt-cache/*
+# .tfstate files
+*.tfstate
+*.tfstate.*
+crash.log
+
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+.terraformrc
+terraform.rc
+*.secrets
+.idea
+aws.secret
