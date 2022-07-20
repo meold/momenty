@@ -9,6 +9,13 @@
         <form-kit-schema :schema="schema" />
 
       </div>
+      <template #actions>
+        <FormKit
+          type="submit"
+          label="Save"
+          wrapper-class="text-right"
+        />
+      </template>
     </form-kit>
   </div>
 </template>
@@ -30,8 +37,7 @@ const schema = [
       outer: 'relative row-span-2',
       messages: 'absolute right-0'
     },
-    placeholder: 'Enter title (maximum 120 symbols)',
-    validation: 'required|length:1,120',
+    validation: 'required',
     validationVisibility: 'blur'
   },
   {
@@ -49,45 +55,56 @@ const schema = [
     validationVisibility: 'blur'
   },
   {
+    $formkit: 'email',
+    name: 'email',
+    label: 'Email',
+    classes: {
+      label: 'text-xl font-bold mb-2',
+      input: 'placeholder:text-sm placeholder:opacity-30 placeholder:text-black w-full',
+      outer: 'relative',
+      messages: 'absolute right-0'
+    },
+    placeholder: 'Your Email',
+    validation: 'required|email',
+    validationVisibility: 'blur'
+  },
+  {
+    $formkit: 'textarea',
+    name: 'bio',
+    label: 'Bio',
+    classes: {
+      label: 'text-xl font-bold mb-2',
+      input: 'placeholder:text-sm placeholder:opacity-30 placeholder:text-black w-full',
+      outer: 'relative row-span-2',
+      messages: 'absolute right-0'
+    },
+    placeholder: 'Your Bio (maximum 400 symbols)',
+    validation: 'required|length:1,400',
+    validationVisibility: 'blur'
+  },
+  {
     $formkit: 'text',
-    name: 'title1',
-    label: 'Title',
+    name: 'twitter',
+    label: 'Twitter account',
     classes: {
       label: 'text-xl font-bold mb-2',
       input: 'placeholder:text-sm placeholder:opacity-30 placeholder:text-black w-full',
       outer: 'relative',
       messages: 'absolute right-0'
     },
-    placeholder: 'Enter title (maximum 120 symbols)',
-    validation: 'required|length:1,120',
-    validationVisibility: 'blur'
+    placeholder: 'https://twitter.com/...'
   },
   {
-    $formkit: 'textarea',
-    name: 'description',
-    label: 'Description',
+    $formkit: 'text',
+    name: 'site',
+    label: 'Personal website',
     classes: {
       label: 'text-xl font-bold mb-2',
       input: 'placeholder:text-sm placeholder:opacity-30 placeholder:text-black w-full',
       outer: 'relative',
       messages: 'absolute right-0'
     },
-    placeholder: 'Enter description (maximum 400 symbols)',
-    validation: 'required|length:1,400',
-    validationVisibility: 'blur'
-  },
-  {
-    $formkit: 'textarea',
-    name: 'description2',
-    label: 'Description',
-    classes: {
-      label: 'text-xl font-bold mb-2',
-      input: 'placeholder:text-sm placeholder:opacity-30 placeholder:text-black w-full',
-      outer: 'relative',
-      messages: 'absolute right-0'
-    },
-    placeholder: 'Enter description (maximum 400 symbols)',
-    validation: 'required|length:1,400',
+    placeholder: 'https://...',
     validationVisibility: 'blur'
   }
 ];
