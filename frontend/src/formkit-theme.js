@@ -12,7 +12,7 @@ const textClassification = {
     formkit-invalid:ring-red-500/50
   `,
   input:
-    'w-full h-10 px-3 border-none text-base text-gray-700 placeholder-gray-400'
+    'w-full h-10 px-3 border-none text-base text-gray-700 placeholder:text-gray-300 placeholder:text-sm'
 };
 const boxClassification = {
   fieldset: 'border-2 border-gray-300 rounded-md px-2 pb-1',
@@ -26,7 +26,7 @@ const boxClassification = {
 const buttonClassification = {
   wrapper: 'mb-1',
   input:
-    'flex items-center justify-center px-8 py-4 bg-primary hover:opacity-80 hover:shadow-inner border-2 border-primary rounded-xl text-sm font-bold leading-none text-white'
+    'inline-flex items-center justify-center px-8 py-4 bg-primary hover:opacity-80 hover:shadow-inner border-2 border-primary rounded-xl text-sm font-bold leading-none text-white'
 };
 
 // export our definitions using our above
@@ -81,8 +81,7 @@ export default {
   text: textClassification,
   textarea: {
     ...textClassification,
-    input:
-      'block w-full h-32 px-3 border-none text-base text-gray-700 placeholder-gray-400'
+    input: textClassification.input + ' !h-32'
   },
   time: textClassification,
   url: textClassification,

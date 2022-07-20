@@ -130,13 +130,31 @@ const schema = [
     label: 'Title',
     classes: {
       label: 'text-xl font-bold mb-2',
-      input: 'placeholder:text-sm placeholder:opacity-30 placeholder:text-black w-full',
+      input: 'w-full',
       outer: 'relative',
       messages: 'absolute right-0'
     },
     // labelClass: 'text-xl font-bold mb-2',
     placeholder: 'Enter title (maximum 120 symbols)',
     validation: 'required|length:1,120',
+    validationVisibility: 'dirty'
+  },
+  {
+    $formkit: 'select',
+    name: 'section',
+    label: 'Topic',
+    options: [
+      'foo',
+      'bar'
+    ],
+    classes: {
+      label: 'text-xl font-bold mb-2',
+      input: 'w-full',
+      outer: 'relative',
+      messages: 'absolute right-0'
+    },
+    placeholder: 'Please select one',
+    validation: 'required',
     validationVisibility: 'dirty'
   },
   {
@@ -157,7 +175,7 @@ const schema = [
     $formkit: 'textarea',
     name: 'description',
     classes: {
-      input: 'placeholder:text-sm placeholder:opacity-30 placeholder:text-black w-full',
+      input: 'w-full',
       outer: 'relative',
       messages: 'absolute right-0'
     },
@@ -196,3 +214,8 @@ async function submit(data) {
 }
 </script>
 
+<style lang="scss">
+select.formkit-input[data-placeholder] {
+  @apply text-gray-300 text-sm;
+}
+</style>
