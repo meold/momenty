@@ -5,6 +5,8 @@ import CreatePage from '@/views/CreatePage.vue';
 import ProfilePage from '@/views/ProfilePage.vue';
 import ViewPage from '@/views/ViewPage.vue';
 import SettingsPage from '@/views/SettingsPage.vue';
+import TermsPage from '@/views/TermsPage.vue';
+import PrivacyPage from '@/views/PrivacyPage.vue';
 import ComingSoonPage from '@/views/ComingSoonPage.vue';
 import ErrorPage from '@/views/ErrorPage.vue';
 
@@ -45,6 +47,18 @@ const routes = [
     path: '/formkit',
     name: 'FormkitPage',
     component: FormkitPage
+  },
+
+  {
+    path: '/terms',
+    name: 'TermsPage',
+    component: TermsPage
+  },
+
+  {
+    path: '/privacy',
+    name: 'PrivacyPage',
+    component: PrivacyPage
   },
 
   {
