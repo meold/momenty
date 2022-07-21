@@ -1,7 +1,7 @@
 <template>
   <div>
     <h1 class="font-display text-2xl leading-tight mb-10">
-      Create or sell your NFT
+      Create your NFT
     </h1>
     <form-kit ref="form" v-model="nft" :actions="false" type="form" autocomplete="off" message-class="text-right" @submit="submit">
       <div class="flex flex-row gap-x-10">
@@ -12,7 +12,7 @@
             <div v-if="nft.image?.length" class="w-full h-full flex justify-center items-center">
               <div class="w-full text-center">
                 <div class="mx-3 font-semibold">Image:</div>
-                <div class="m-3 text-xs truncate ...">
+                <div class="m-3 text-xs truncate">
                   {{ nft.image[0].name }}
                 </div>
                 <button class="text-primary underline hover:opacity:80" @click="nft.image = []">Remove</button>
@@ -42,7 +42,7 @@
             <div v-if="nft.video?.length" class="w-full h-full flex justify-center items-center">
               <div class="w-full text-center">
                 <div class="mx-3 font-semibold">Video:</div>
-                <div class="m-3 text-xs truncate ...">
+                <div class="m-3 text-xs truncate">
                   {{ nft.video[0].name }}
                 </div>
                 <button class="text-primary underline hover:opacity:80" @click="nft.video = []">Remove</button>
@@ -92,6 +92,7 @@ import NftCardContainer from '@/components/NftCardContainer.vue';
 import DropArea from '@/components/DropArea.vue';
 import { ref, computed } from 'vue';
 import { post } from 'axios';
+import sections from '@/../../common/sections.mjs';
 
 const form = ref(null);
 const nft = ref({});
@@ -143,13 +144,10 @@ const schema = [
     $formkit: 'select',
     name: 'section',
     label: 'Topic',
-    options: [
-      'foo',
-      'bar'
-    ],
+    options: sections,
     classes: {
       label: 'text-xl font-bold mb-2',
-      input: 'w-full',
+      input: 'w-full capitalize',
       outer: 'relative',
       messages: 'absolute right-0'
     },

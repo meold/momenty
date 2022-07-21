@@ -7,7 +7,7 @@ const textClassification = {
     border-2
     border-gray-300
     formkit-invalid:border-red-500
-    rounded-xl mb-1
+    rounded-xl mb-3
     overflow-hidden
     formkit-invalid:ring-red-500/50
   `,

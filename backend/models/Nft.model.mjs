@@ -1,5 +1,5 @@
 import { Sequelize, Model } from 'sequelize';
-
+import sections from '../../common/sections.mjs';
 export default class Nft extends Model {
   static modelAttributes() {
     return {
@@ -12,6 +12,11 @@ export default class Nft extends Model {
         type: Sequelize.DataTypes.STRING(400),
         allowNull: false,
         unique: true
+      },
+
+      section: {
+        type: Sequelize.DataTypes.ENUM(...sections),
+        allowNull: false
       },
 
       imageData: {
