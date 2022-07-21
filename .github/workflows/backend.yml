@@ -140,6 +140,10 @@ jobs:
         cluster: ${{ env.ECS_CLUSTER }}
         wait-for-service-stability: true
 
+    - name: Check deployed revision
+      run: |
+        bash deploy/check_service_revision.sh `expr ${{ steps.download-task-backend.outputs.revision }} + 1` ${{ env.ECS_SERVICE_MAIN }} ${{ env.ECS_CLUSTER }}
+
     - name: Deregister previous revision
       run: |
         aws ecs deregister-task-definition --task-definition ${{ env.ECS_CONTAINER_MAIN }}:${{ steps.download-task-backend.outputs.revision }} >> /dev/null

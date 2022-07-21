@@ -31,7 +31,7 @@ inputs = {
   min_size               = local.environment_vars.locals.min_size
   capacity_provider_name = dependency.ecs-capacity-provider.outputs.name
   memory                 = 1024
-  command                = "node dist/main"
+  command                = "node index.mjs"
 }
 
 
