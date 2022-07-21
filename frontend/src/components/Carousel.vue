@@ -90,7 +90,7 @@ section.carousel {
   .carousel__next--in-active {
     color: var(--vc-nav-background-color);
     background-color: #ffffff55;
-    pointer-events: none;
+    cursor: default;
   }
 }
 </style>
