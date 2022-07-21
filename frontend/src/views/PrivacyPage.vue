@@ -1,5 +1,5 @@
 <template>
-  <div class="w-full rounded-2xl bg-white p-20 text-slate-700 shadow-[0_8px_60px_0_rgba(0,0,0,0.05)]">
+  <div class="w-full rounded-2xl bg-white p-5 sm:p-20 text-slate-700 shadow-[0_8px_60px_0_rgba(0,0,0,0.05)]">
     <h1 class="font-display text-2xl leading-tight mb-10 text-black">
       Privacy Policy
     </h1>
