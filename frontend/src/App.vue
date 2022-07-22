@@ -15,6 +15,8 @@
     </div>
   </router-view>
 
+  <the-notifier />
+
   <the-footer />
 </template>
 
@@ -22,4 +24,5 @@
 import TheHeader from '@/components/TheHeader.vue';
 import TheFooter from '@/components/TheFooter.vue';
 import TheBanner from '@/components/TheBanner.vue';
+import TheNotifier from '@/components/TheNotifier.vue';
 </script>

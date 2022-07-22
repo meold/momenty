@@ -42,7 +42,8 @@
       You love
     </router-link>
 
-    <button-wallet class="my-10 px-5 w-full" />
+    <!-- FIXME: -->
+    <button-primary class="my-10 px-5 w-full">Connect wallet</button-primary>
 
     <h3 class="text-xl mb-6">Topics</h3>
 
@@ -130,6 +131,6 @@
 </template>
 
 <script setup>
-import ButtonWallet from '@/components/ButtonWallet.vue';
+import ButtonPrimary from '@/components/ButtonPrimary.vue';
 import MenuSocials from '@/components/MenuSocials.vue';
 </script>

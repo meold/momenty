@@ -6,6 +6,7 @@ import fastifyStatic from '@fastify/static';
 import FastifyCors from '@fastify/cors';
 import fastifyMultipart from '@fastify/multipart';
 import FastifyHttpProxy from '@fastify/http-proxy';
+import fastifyJwt from '@fastify/jwt';
 import url from 'url';
 import { v4 as uuidv4 } from 'uuid';
 import pinoms from 'pino-multi-stream';
@@ -13,16 +14,6 @@ import sequelize from '../backend/plugins/sequelize.mjs';
 
 const isProduction = process.env.NODE_ENV === 'production';
 const __dirname = url.fileURLToPath(new URL('.', import.meta.url));
-
-let logger = false;
-
-if (!isProduction) {
-  logger = {
-    transport: {
-      target: 'pino-pretty'
-    }
-  };
-}
 
 const fastify = Fastify({
   logger: pinoms(pinoms.multistream([
@@ -45,6 +36,10 @@ fastify.register(FastifyCors, {});
 fastify.register(fastifyMultipart, {
   addToBody: true
 });
+
+fastify.register(fastifyJwt, {
+  secret: process.env.JWT_SECRET
+})
 
 fastify.decorate('sequelize', await sequelize({
   connection: process.env.SQL_CONNECTION

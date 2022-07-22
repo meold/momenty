@@ -22,10 +22,6 @@
         </div>
       </div>
 
-      <div v-if="false" class="FIXME: kill it">
-        <!--  -->
-      </div>
-
       <h2 class="text-xl font-bold mt-28 -mb-5">New</h2>
       <carousel />
 
@@ -39,5 +35,5 @@
 import MenuVertical from '@/components/MenuVertical.vue';
 import ButtonPrimary from '@/components/ButtonPrimary.vue';
 import TheTron from '@/components/TheTron.vue';
-import Carousel from '../components/Carousel.vue';
+import Carousel from '@/components/Carousel.vue';
 </script>

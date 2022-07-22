@@ -7,6 +7,18 @@ import { generateClasses } from '@formkit/tailwindcss';
 import theme from './formkit-theme.js';
 // import ipfs from './ipfs';
 
+import { configureApi } from './useApi.js';
+import { error, processError } from './notify.js';
+
+configureApi({
+  prefix: import.meta.env.VITE_API_URL_PREFIX,
+  onError: (err, result) => {
+    error({
+      text: processError(err, result)
+    });
+  }
+});
+
 import '@/assets/styles/main.scss';
 
 createApp(App)

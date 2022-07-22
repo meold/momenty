@@ -1,5 +1,5 @@
 <template>
-  <div class="overflow-visible">
+  <div>
     <button-primary v-if="!isDapp" @click="connectTronLink">
       Install Tronlink
     </button-primary>
@@ -22,7 +22,7 @@
       </svg>
     </button-secondary>
 
-    <pre v-if="hint" class="absolute right-0 mt-1 text-sm text-primary">{{ hint }}</pre>
+    <pre v-if="hint">Hint: {{ hint }}</pre>
   </div>
 </template>
 
@@ -42,7 +42,7 @@ export default {
   data() {
     return {
       isDapp: false,
-      hint: 'Oh my dear!',
+      hint: null,
       web3: {
         connected: false,
         provider: null,
