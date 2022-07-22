@@ -38,6 +38,9 @@
 
         <div class="shrink-0 basis-2/12">
           <h2 class="text-xl text-center font-bold mb-2">Add video</h2>
+
+
+          <example-media-upload @image="imageAttached" @video="videoAttached" />
           <nft-card-container :class="{ 'border-2 border-red-500': isVideoInvalid }">
             <div v-if="nft.video?.length" class="w-full h-full flex justify-center items-center">
               <div class="w-full text-center">
@@ -90,6 +93,7 @@
 <script setup>
 import NftCardContainer from '@/components/NftCardContainer.vue';
 import DropArea from '@/components/DropArea.vue';
+import ExampleMediaUpload from '@/components/ExampleMediaUpload.vue';
 import { ref, computed } from 'vue';
 import { post } from 'axios';
 import sections from '@/../../common/sections.mjs';
@@ -209,6 +213,14 @@ async function submit(data) {
 
   const result = await post(url, data, config);
   console.log(result);
+}
+
+async function imageAttached(imageId) {
+  console.log('Done image', imageId);
+}
+
+async function videoAttached(videoId) {
+  console.log('Done video', videoId);
 }
 </script>
 
