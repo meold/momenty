@@ -20,3 +20,4 @@ terraform.rc
 *.secrets
 .idea
 aws.secret
+/elasticmq/elasticmq-server-1.1.0.jar
