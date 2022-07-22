@@ -8,12 +8,15 @@ import fastifyMultipart from '@fastify/multipart';
 import FastifyHttpProxy from '@fastify/http-proxy';
 import fastifyJwt from '@fastify/jwt';
 import url from 'url';
+import S3 from './helpers/S3.mjs';
 import { v4 as uuidv4 } from 'uuid';
 import pinoms from 'pino-multi-stream';
 import sequelize from '../backend/plugins/sequelize.mjs';
 
 const isProduction = process.env.NODE_ENV === 'production';
 const __dirname = url.fileURLToPath(new URL('.', import.meta.url));
+
+const s3 = new S3();
 
 const fastify = Fastify({
   logger: pinoms(pinoms.multistream([
@@ -40,6 +43,8 @@ fastify.register(fastifyMultipart, {
 fastify.register(fastifyJwt, {
   secret: process.env.JWT_SECRET
 })
+
+fastify.decorate('s3', s3);
 
 fastify.decorate('sequelize', await sequelize({
   connection: process.env.SQL_CONNECTION
