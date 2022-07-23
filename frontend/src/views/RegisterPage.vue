@@ -39,7 +39,7 @@
         Your are now can create your first NFT moment!
         <div class="mt-5 flex justify-end">
           <router-link v-slot="{ navigate }" to="/new" custom>
-            <button-primary @click="[() => {isRegistered = false} , navigate()]" @keypress.enter="navigate">
+            <button-primary @click="[closeRegistered(), navigate()]" @keypress.enter="navigate">
               Let's go!
             </button-primary>
           </router-link>
@@ -165,5 +165,9 @@ const schema = [
 async function submit(user) {
   const { success } = await post('/user/', { user });
   isRegistered.value = success;
+}
+
+function closeRegistered() {
+  isRegistered.value = false;
 }
 </script>

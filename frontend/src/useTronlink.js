@@ -39,7 +39,7 @@ function useTronlink() {
 }
 
 function installWallet() {
-  window.open(
+  return window.open(
     getInstallLink(),
     '_blank'
   );
@@ -84,7 +84,8 @@ async function connectTronLink() {
         return;
       }
     } else {
-      console.log('FIXME')
+      error({ text: 'Looks like your wallet is locked. Please unlock it.' });
+      return;
     }
 
     tronlinkState.value = 'not_connected';
@@ -104,7 +105,15 @@ function resetListeners() {
 }
 
 function onMessage(e) {
-  if (e.data.message && e.data.message.action == "accountsChanged") {
+  // console.log('MESSAGE', e.data?.message?.action)
+
+  if (e.data.message && e.data.message.action == 'disconnect') {
+    tronlinkState.value = 'not_connected';
+    connectWeb3();
+    return;
+  }
+
+  if (e.data.message && e.data.message.action == 'accountsChanged') {
     console.log("accountsChanged event", JSON.stringify(e.data.message));
     console.log("current address:", e.data.message.data.address);
 
@@ -117,6 +126,7 @@ function onMessage(e) {
 
     tronlinkState.value = 'not_connected';
     connectWeb3();
+    return;
   }
 
   // Not now

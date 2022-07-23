@@ -6,11 +6,11 @@
     </svg>
   </button-secondary>
 
-  <button-primary v-else-if="shouldInstallWallet" v-bind="$attrs" @click="install">
+  <button-primary v-else-if="shouldInstallWallet" v-bind="$attrs" @click="doInstall">
     Install Tronlink
   </button-primary>
 
-  <button-primary v-else-if="shouldConnect" v-bind="$attrs" @click="connectTronLink">
+  <button-primary v-else-if="shouldConnect" v-bind="$attrs" @click="doConnect">
     Connect Wallet
   </button-primary>
 
@@ -31,7 +31,7 @@
         </button-secondary>
 
         <router-link v-slot="{ navigate }" to="/register" custom>
-          <button-primary @click="[() => {isOpen.value = false} , navigate()]" @keypress.enter="navigate">
+          <button-primary @click="[closeModal() , navigate()]" @keypress.enter="navigate">
             Register me!
           </button-primary>
         </router-link>
@@ -68,14 +68,25 @@ import {
 
 const isOpen = ref(false);
 
-function install() {
+function doInstall() {
   if (isBrowserSupported) {
-    installWallet();
+    const _window = installWallet();
+    const timer = setInterval(() => {
+      if (_window.closed) {
+        clearInterval(timer);
+        window.location.reload();
+      }
+    }, 1000);
     return;
   }
 
   error({ text: 'Yor browser doesn\'t support Tronlink wallet. Please use supported one.' });
   setTimeout(() => window.location = getInstallLink(), 4000);
+}
+
+async function doConnect() {
+  await connectTronLink();
+  doLogin();
 }
 
 function doLogin() {
@@ -84,5 +95,9 @@ function doLogin() {
     return;
   }
   isOpen.value = true;
+}
+
+function closeModal() {
+  isOpen.value = false;
 }
 </script>
