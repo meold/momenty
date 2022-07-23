@@ -19,23 +19,15 @@ export default class Nft extends Model {
         allowNull: false
       },
 
-      imageData: {
-        type: Sequelize.DataTypes.BLOB('medium')
-      },
-
-     imageMimeType: {
-        type: Sequelize.DataTypes.STRING(100),
+      image: {
+        type: Sequelize.DataTypes.STRING(255),
         allowNull: false
       },
 
-      videoData: {
-        type: Sequelize.DataTypes.BLOB('long')
-      },
-
-      videoMimeType: {
-        type: Sequelize.DataTypes.STRING(100),
+      video: {
+        type: Sequelize.DataTypes.STRING(255),
         allowNull: false
-      },
+      }
     }
   }
 
@@ -44,6 +36,11 @@ export default class Nft extends Model {
       sequelize,
       freezeTableName: true
     };
+  }
+
+  static associate(sequelize) {
+    this.belongsTo(sequelize.models.User, { foreignKey: 'userId' });
+    sequelize.models.User.hasMany(this, { foreignKey: 'userId', as: 'nfts' });
   }
 }
 

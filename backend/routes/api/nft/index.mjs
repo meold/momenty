@@ -1,53 +1,52 @@
+import sections from '../../../../common/sections.mjs';
+
 export default async function routes(instance) {
 
   instance.post(
     '/',
 
-    // {
-    //   schema: {
-    //     body: {
-    //       type: 'object',
-    //       properties: {
-    //         user: {
-    //           type: 'object',
-    //           properties: {
-    //             name: {
-    //               type: 'string'
-    //             },
-    //             email: {
-    //               type: 'string'
-    //             },
-    //             title: {
-    //               type: 'string'
-    //             }
-    //           },
-    //           required: ['name', 'email', 'title']
-    //         },
-    //       },
-    //       required: ['user']
-    //     }
-    //   }
-    // },
+    {
+      schema: {
+        body: {
+          type: 'object',
+          properties: {
+            title: {
+              type: 'string'
+            },
+            description: {
+              type: 'string'
+            },
+            section: {
+              type: 'string',
+              enum: sections
+            },
+            image: {
+              type: 'string',
+              format: 'uri'
+            },
+            video: {
+              type: 'string',
+              format: 'uri'
+            }
+          },
+          required: ['title', 'image', 'video']
+        }
+      }
+    },
 
     async (request) => {
-      // NOTE: see https://github.com/fastify/fastify-multipart/blob/master/examples/example.js
-
-      console.log(request.body)
-
-      const title = request.body.title;
-      const description = request.body.description;
-      const { data: imageData, mimetype: imageMimeType } = request.body['image.0'][0];
-      const { data: videoData, mimetype: videoMimeType } = request.body['video.0'][0];
+      const nft = request.body;
+      nft.userId = request.user.id;
 
       let result;
       try {
-        result = await instance.sequelize.models.Nft.create({ title, description, imageData, imageMimeType, videoData, videoMimeType });
+        result = await instance.sequelize.models.Nft.create(nft);
       } catch (error) {
         // FIXME:
         console.log(error);
       }
 
-      return { success: Boolean(result) };
+      return { success: Boolean(result), id: result.id };
     }
   );
 

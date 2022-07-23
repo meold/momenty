@@ -3,21 +3,26 @@
     <h1 class="font-display text-2xl leading-tight mb-10">
       Create your NFT
     </h1>
+
     <form-kit ref="form" v-model="nft" :actions="false" type="form" autocomplete="off" message-class="text-right" @submit="submit">
       <div class="flex flex-row gap-x-10">
 
         <div class="shrink-0 basis-2/12">
           <h2 class="text-xl text-center font-bold mb-2">Add image</h2>
           <nft-card-container :class="{ 'border-2 border-red-500': isImageInvalid }">
-            <div v-if="nft.image?.length" class="w-full h-full flex justify-center items-center">
-              <div class="w-full text-center">
-                <div class="mx-3 font-semibold">Image:</div>
-                <div class="m-3 text-xs truncate">
-                  {{ nft.image[0].name }}
-                </div>
-                <button class="text-primary underline hover:opacity:80" @click="nft.image = []">Remove</button>
-              </div>
+            <div v-if="nft.image" class="relative w-full h-full flex justify-center items-center">
+              <img :src="nft.image" class="w-full h-full object-cover" alt="">
+              <button class="absolute top-4 right-4 text-white bg-primary p-2 rounded-xl shadow hover:opacity:80" @click="nft.image = null">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                </svg>
+              </button>
             </div>
+
+            <div v-else-if="isImageLoading" class="w-full h-full flex justify-center items-center">
+              <progress-bar :value="progress" class="text-primary" />
+            </div>
+
             <drop-area v-else accept="image/*" @change="onImageChange">
               <div class="hidden lg:block xl:hidden">
                 <div>5 mb, JPG, PNG</div>
@@ -39,18 +44,29 @@
         <div class="shrink-0 basis-2/12">
           <h2 class="text-xl text-center font-bold mb-2">Add video</h2>
 
-
-          <example-media-upload @image="imageAttached" @video="videoAttached" />
           <nft-card-container :class="{ 'border-2 border-red-500': isVideoInvalid }">
-            <div v-if="nft.video?.length" class="w-full h-full flex justify-center items-center">
-              <div class="w-full text-center">
-                <div class="mx-3 font-semibold">Video:</div>
-                <div class="m-3 text-xs truncate">
-                  {{ nft.video[0].name }}
-                </div>
-                <button class="text-primary underline hover:opacity:80" @click="nft.video = []">Remove</button>
-              </div>
+
+            <div v-if="nft.video" class="w-full h-full flex justify-center items-center">
+              <video
+                :src="nft.video"
+                class="w-full h-full object-cover"
+                muted
+                loop
+                playsinline
+                disablepictureinpicture
+                preload="metadata"
+              />
+              <button class="absolute top-4 right-4 text-white bg-primary p-2 rounded-xl shadow hover:opacity:80" @click="nft.video = null">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                </svg>
+              </button>
             </div>
+
+            <div v-else-if="isVideoLoading" class="w-full h-full flex justify-center items-center">
+              <progress-bar :value="progress" class="text-primary" />
+            </div>
+
             <drop-area v-else accept="video/*" @change="onVideoChange">
               <div class="hidden lg:block xl:hidden">
                 <div>15 sec</div>
@@ -65,6 +81,7 @@
                 <div>Aspect ratio 9:16</div>
               </div>
             </drop-area>
+
           </nft-card-container>
           <div v-if="isVideoInvalid" class="text-red-500 mb-1 text-xs text-right mt-2">Video is required</div>
         </div>
@@ -93,13 +110,22 @@
 <script setup>
 import NftCardContainer from '@/components/NftCardContainer.vue';
 import DropArea from '@/components/DropArea.vue';
-import ExampleMediaUpload from '@/components/ExampleMediaUpload.vue';
+import ProgressBar from '@/components/ProgressBar.vue';
 import { ref, computed } from 'vue';
-import { post } from 'axios';
+import { post } from '@/useApi.js';
 import sections from '@/../../common/sections.mjs';
+import { error } from '@/notify.js';
+import { useRouter } from 'vue-router';
+
+const S3prefix = 'https://main-nftmoments-incoming-media.s3.eu-central-1.amazonaws.com/'
 
 const form = ref(null);
 const nft = ref({});
+const isImageLoading = ref(false);
+const isVideoLoading = ref(false);
+const progress = ref(0);
+
+const router = useRouter();
 
 const isImageInvalid = computed(() => (
   form.value?.node?.children[0]?.context?.state?.dirty &&
@@ -114,20 +140,15 @@ const isVideoInvalid = computed(() => (
 const schema = [
   // NOTE: image and video must be in this order becuase of computed
   {
-    $formkit: 'file',
+    $formkit: 'hidden',
     name: 'image',
-    accept: 'image/*',
-    outerClass: 'h-0 opacity-0 overflow-hidden absolute',
-    validation: 'required',
-    validationVisibility: 'dirty'
+    validation: 'required'
   },
   {
-    $formkit: 'file',
+    $formkit: 'hidden',
     name: 'video',
     accept: 'video/*',
-    outerClass: 'h-0 opacity-0 overflow-hidden absolute',
-    validation: 'required',
-    validationVisibility: 'dirty'
+    validation: 'required'
   },
   {
     $formkit: 'text',
@@ -187,41 +208,104 @@ const schema = [
   }
 ];
 
-function onVideoChange(event) {
-  if (event[0]?.type?.split('/')[0] !== 'video') {
-    nft.value.video = [];
+async function onVideoChange(event) {
+  const file = event[0];
+  if (!file || !file.type.startsWith('video/')) {
+    nft.value.video = null;
     return;
   }
-  nft.value.video = event;
+
+  isVideoLoading.value = true;
+  const videoId = await uploadMedia({ file, type: 'video' });
+  isVideoLoading.value = false;
+  progress.value = 0;
+  if (!videoId) {
+    nft.value.video = null;
+    return;
+  }
+
+  //NOTE url to file will be https://main-nftmoments-incoming-media.s3.eu-central-1.amazonaws.com/{{videoId}}
+  nft.value.video = S3prefix + videoId;
 }
 
-function onImageChange(event) {
-  if (event[0]?.type?.split('/')[0] !== 'image') {
-    nft.value.image = [];
+async function onImageChange(event) {
+  const file = event[0];
+  if (!file || !file.type.startsWith('image/')) {
+    nft.value.image = null;
     return;
   }
-  nft.value.image = event;
+  isImageLoading.value = true;
+  const imageId = await uploadMedia({ file, type: 'image' });
+  isImageLoading.value = false;
+  progress.value = 0;
+  if (!imageId) {
+    nft.value.image = null;
+    return;
+  }
+
+  //NOTE url to file will be https://main-nftmoments-incoming-media.s3.eu-central-1.amazonaws.com/{{imageId}}
+  nft.value.image = S3prefix + imageId;
 }
 
 async function submit(data) {
-  const url = '/api/nft/';
-  const config = {
-    headers: {
-      'content-type': 'multipart/form-data'
+  const url = '/nft/';
+  const { success, id } = await post(url, data);
+  if (success) {
+    router.push(`/view/${id}`);
+  }
+}
+
+function uploadMedia({ file, type }) {
+  // eslint-disable-next-line no-async-promise-executor
+  return new Promise(async resolve => {
+
+    const postUrl = '/sign-media-upload/' + type + '/'
+
+    const arr = file.name.split('.');
+    const extension = arr[arr.length - 1];
+
+    // Random image UUID and signed upload URL
+    const { success, id, url } = await post(postUrl, {
+      extension
+    });
+    console.log(file);
+
+    if (!success) {
+      error('Cannot upload media.');
+      resolve();
+      return;
     }
-  };
 
-  const result = await post(url, data, config);
-  console.log(result);
+    const xhr = new XMLHttpRequest();
+
+    xhr.open('PUT', url);
+
+    xhr.onreadystatechange = () => {
+      if (xhr.readyState !== 4) {
+        return;
+      }
+
+      if (xhr.status === 200 || xhr.status === 204) {
+        console.log('uploaded');
+        resolve(id + '.' + extension);
+        return;
+      }
+
+      console.log('failed', xhr);
+      resolve();
+    };
+
+    xhr.upload.onprogress = event => {
+      if (event.lengthComputable) {
+        console.log('onProgress ', event.loaded, event.total)
+        progress.value = parseInt(100 * event.loaded / event.total, 10);
+      }
+    };
+
+    xhr.send(file);
+  });
 }
 
-async function imageAttached(imageId) {
-  console.log('Done image', imageId);
-}
-
-async function videoAttached(videoId) {
-  console.log('Done video', videoId);
-}
 </script>
 
 <style lang="scss">

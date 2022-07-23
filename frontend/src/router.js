@@ -40,9 +40,10 @@ const routes = [
   },
 
   {
-    path: '/view',
+    path: '/view/:id',
     name: 'ViewPage',
-    component: ViewPage
+    component: ViewPage,
+    props: true
   },
 
   {

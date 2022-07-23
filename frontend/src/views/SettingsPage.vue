@@ -3,7 +3,7 @@
     <h1 class="font-display text-2xl leading-tight mb-10">
       Edit Profile
     </h1>
-    <form-kit ref="form" v-model="data" :actions="false" type="form" autocomplete="off" @submit="submit">
+    <form-kit ref="form" v-model="data" messages-class="text-right" :actions="false" type="form" autocomplete="off" @submit="submit">
       <div class="grid grid-cols-1 gap-x-20 md:grid-cols-2">
 
         <form-kit-schema :schema="schema" />
