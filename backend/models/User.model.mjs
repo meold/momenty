@@ -34,9 +34,19 @@ export default class User extends Model {
         unique: true
       },
 
-      title: {
+      bio: {
+        type: Sequelize.DataTypes.STRING(400),
+        allowNull: true,
+      },
+
+      twitter: {
         type: Sequelize.DataTypes.STRING(255),
-        allowNull: false
+        allowNull: true,
+      },
+
+      site: {
+        type: Sequelize.DataTypes.STRING(255),
+        allowNull: true,
       }
     }
   }

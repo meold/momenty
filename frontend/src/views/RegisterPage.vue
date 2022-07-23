@@ -3,7 +3,8 @@
     <h1 class="font-display text-2xl leading-tight mb-10">
       Registration
     </h1>
-    <form-kit ref="form" v-model="data" :actions="false" type="form" autocomplete="off" @submit="submit">
+
+    <form-kit ref="form" v-model="data" messages-class="text-right" :actions="false" type="form" autocomplete="off" @submit="submit">
       <div class="grid grid-cols-1 gap-x-20 md:grid-cols-2">
 
         <form-kit-schema :schema="schema" />
@@ -13,33 +14,84 @@
         <FormKit
           type="submit"
           label="Register"
-          wrapper-class="text-right"
+          wrapper-class="text-right mt-5"
         />
       </template>
     </form-kit>
+
+    <ui-dialog :show="!web3.address">
+      <ui-dialog-panel>
+        <ui-dialog-title>
+          Attention!
+        </ui-dialog-title>
+        Your wallet is disconnected. You must connect your wallet to register!
+        <div class="mt-5 flex justify-end">
+          <button-wallet />
+        </div>
+      </ui-dialog-panel>
+    </ui-dialog>
+
+    <ui-dialog :show="isRegistered">
+      <ui-dialog-panel>
+        <ui-dialog-title>
+          Congratulations!
+        </ui-dialog-title>
+        Your are now can create your first NFT moment!
+        <div class="mt-5 flex justify-end">
+          <router-link v-slot="{ navigate }" to="/new" custom>
+            <button-primary @click="[() => {isRegistered = false} , navigate()]" @keypress.enter="navigate">
+              Let's go!
+            </button-primary>
+          </router-link>
+        </div>
+      </ui-dialog-panel>
+    </ui-dialog>
   </div>
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { ref, watch } from 'vue';
+import { post } from '@/useApi.js';
+import { web3 } from '@/useTronlink.js';
 
+import UiDialog from '@/components/ui/UiDialog.vue';
+import UiDialogTitle from '@/components/ui/UiDialogTitle.vue';
+import UiDialogPanel from '@/components/ui/UiDialogPanel.vue';
+import ButtonWallet from '@/components/ButtonWallet.vue';
+import ButtonPrimary from '@/components/ButtonPrimary.vue';
+
+const isRegistered = ref(false);
 const form = ref(null);
-const data = ref({});
+const data = ref({
+  address: web3.address
+});
+
+watch(
+  () => web3.address,
+  address => {
+    console.log('watched')
+    data.value.address = address;
+  }
+)
 
 const schema = [
   {
-    $formkit: 'file',
-    name: 'avatar',
-    label: 'Avatar',
-    classes: {
-      label: 'text-xl font-bold mb-2',
-      input: 'placeholder:text-sm placeholder:opacity-30 placeholder:text-black w-full',
-      outer: 'relative row-span-2',
-      messages: 'absolute right-0'
-    },
-    validation: 'required',
-    validationVisibility: 'blur'
+    $formkit: 'hidden',
+    name: 'address',
+    validation: 'required'
   },
+  // {
+  //   $formkit: 'file',
+  //   name: 'avatar',
+  //   label: 'Avatar',
+  //   classes: {
+  //     label: 'text-xl font-bold mb-2',
+  //     input: 'placeholder:text-sm placeholder:opacity-30 placeholder:text-black w-full',
+  //     outer: 'relative row-span-2',
+  //     messages: 'absolute right-0 -mt-2'
+  //   },
+  //   validationVisibility: 'blur'
+  // },
   {
     $formkit: 'text',
     name: 'name',
@@ -48,7 +100,7 @@ const schema = [
       label: 'text-xl font-bold mb-2',
       input: 'placeholder:text-sm placeholder:opacity-30 placeholder:text-black w-full',
       outer: 'relative',
-      messages: 'absolute right-0'
+      messages: 'absolute right-0 -mt-2'
     },
     placeholder: 'Enter title (maximum 120 symbols)',
     validation: 'required|length:1,120',
@@ -62,7 +114,7 @@ const schema = [
       label: 'text-xl font-bold mb-2',
       input: 'placeholder:text-sm placeholder:opacity-30 placeholder:text-black w-full',
       outer: 'relative',
-      messages: 'absolute right-0'
+      messages: 'absolute right-0 -mt-2'
     },
     placeholder: 'Your Email',
     validation: 'required|email',
@@ -76,10 +128,10 @@ const schema = [
       label: 'text-xl font-bold mb-2',
       input: 'placeholder:text-sm placeholder:opacity-30 placeholder:text-black w-full',
       outer: 'relative row-span-2',
-      messages: 'absolute right-0'
+      messages: 'absolute right-0 -mt-2'
     },
     placeholder: 'Your Bio (maximum 400 symbols)',
-    validation: 'required|length:1,400',
+    validation: 'length:0,400',
     validationVisibility: 'blur'
   },
   {
@@ -90,7 +142,7 @@ const schema = [
       label: 'text-xl font-bold mb-2',
       input: 'placeholder:text-sm placeholder:opacity-30 placeholder:text-black w-full',
       outer: 'relative',
-      messages: 'absolute right-0'
+      messages: 'absolute right-0 -mt-2'
     },
     placeholder: 'https://twitter.com/...'
   },
@@ -102,14 +154,16 @@ const schema = [
       label: 'text-xl font-bold mb-2',
       input: 'placeholder:text-sm placeholder:opacity-30 placeholder:text-black w-full',
       outer: 'relative',
-      messages: 'absolute right-0'
+      messages: 'absolute right-0 -mt-2'
     },
     placeholder: 'https://...',
+    validation: 'url',
     validationVisibility: 'blur'
   }
 ];
 
-function submit() {
-
+async function submit(user) {
+  const { success } = await post('/user/', { user });
+  isRegistered.value = success;
 }
 </script>

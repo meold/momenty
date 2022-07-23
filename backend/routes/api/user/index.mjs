@@ -1,5 +1,54 @@
 export default async function routes(instance) {
 
+ instance.post(
+    '/',
+
+    {
+      schema: {
+        body: {
+          type: 'object',
+          properties: {
+            user: {
+              type: 'object',
+              properties: {
+                address: {
+                  type: 'string',
+                },
+                name: {
+                  type: 'string'
+                },
+                email: {
+                  type: 'string'
+                },
+                bio: {
+                  type: 'string'
+                }
+              },
+              required: ['name', 'email', 'address']
+            },
+          },
+          required: ['user']
+        }
+      }
+    },
+
+    async (request) => {
+
+      const user = request.body.user
+      user.nonce = instance.sequelize.models.User.generateNonce();
+
+      let result;
+      try {
+        result = await instance.sequelize.models.User.create(user);
+      } catch (error) {
+        // FIXME:
+        console.log(error);
+      }
+
+      return { success: Boolean(result) };
+    }
+  );
+
   // instance.get(
   //   '/',
 
@@ -39,48 +88,6 @@ export default async function routes(instance) {
   //     const result = await instance.sequelize.models.User.findAndCountAll(options);
 
   //     return { success: true, ...result };
-  //   }
-  // );
-
-  // instance.post(
-  //   '/',
-
-  //   {
-  //     schema: {
-  //       body: {
-  //         type: 'object',
-  //         properties: {
-  //           user: {
-  //             type: 'object',
-  //             properties: {
-  //               name: {
-  //                 type: 'string'
-  //               },
-  //               email: {
-  //                 type: 'string'
-  //               },
-  //               title: {
-  //                 type: 'string'
-  //               }
-  //             },
-  //             required: ['name', 'email', 'title']
-  //           },
-  //         },
-  //         required: ['user']
-  //       }
-  //     }
-  //   },
-
-  //   async (request) => {
-  //     let result;
-  //     try {
-  //       result = await instance.sequelize.models.User.create(request.body.user);
-  //     } catch (error) {
-  //       // FIXME:
-  //       console.log(error);
-  //     }
-
-  //     return { success: Boolean(result) };
   //   }
   // );
 
