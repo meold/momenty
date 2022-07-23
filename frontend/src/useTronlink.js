@@ -9,7 +9,7 @@ const shouldConnect = computed(() => tronlinkState.value == 'not_connected');
 const web3 = reactive({
   instance: null,
   balance: null,
-  account: null
+  address: null
 });
 
 const isFirefox = typeof InstallTrigger !== 'undefined';
@@ -109,7 +109,7 @@ function onMessage(e) {
     console.log("current address:", e.data.message.data.address);
 
     const address = e.data.message.data.address;
-    if (address == web3.account) {
+    if (address == web3.address) {
       return;
     }
 

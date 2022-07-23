@@ -23,7 +23,7 @@
       <ui-dialog-title>
         Attention!
       </ui-dialog-title>
-      Your wallet address <strong>{{ web3.account }}</strong> is not registered yet.
+      Your wallet address <strong>{{ web3.address }}</strong> is not registered yet.
       Make shure you are using proper account.
       <div class="flex justify-between mt-5">
         <button-secondary @click="isOpen = false">
