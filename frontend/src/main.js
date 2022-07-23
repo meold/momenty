@@ -1,14 +1,14 @@
 import { createApp } from 'vue';
 import App from './App.vue';
 import router from './router';
-import { createPinia } from 'pinia';
 import { plugin, defaultConfig } from '@formkit/vue';
 import { generateClasses } from '@formkit/tailwindcss';
 import theme from './formkit-theme.js';
-// import ipfs from './ipfs';
-
 import { configureApi } from './useApi.js';
 import { error, processError } from './notify.js';
+import { useTronlink } from './useTronlink.js';
+
+import '@/assets/styles/main.scss';
 
 configureApi({
   prefix: import.meta.env.VITE_API_URL_PREFIX,
@@ -19,11 +19,10 @@ configureApi({
   }
 });
 
-import '@/assets/styles/main.scss';
+useTronlink();
 
 createApp(App)
   .use(router)
-  .use(createPinia())
   // .use(ipfs, { host: 'ipfs.infura.io', port: 5001 })
   .use(
     plugin,

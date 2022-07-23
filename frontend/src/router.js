@@ -3,6 +3,7 @@ import { createWebHistory, createRouter } from 'vue-router';
 import MainPage from '@/views/MainPage.vue';
 import CreatePage from '@/views/CreatePage.vue';
 import ProfilePage from '@/views/ProfilePage.vue';
+import RegisterPage from '@/views/RegisterPage.vue';
 import ViewPage from '@/views/ViewPage.vue';
 import SettingsPage from '@/views/SettingsPage.vue';
 import TermsPage from '@/views/TermsPage.vue';
@@ -29,6 +30,12 @@ const routes = [
     path: '/profile',
     name: 'ProfilePage',
     component: ProfilePage
+  },
+
+  {
+    path: '/register',
+    name: 'RegisterPage',
+    component: RegisterPage
   },
 
   {

@@ -1,7 +1,7 @@
 <template>
   <header class="py-7">
     <div class="container">
-      <nav class="relative z-50 flex items-center justify-between gap-x-5 md:gap-x-8">
+      <nav class="relative flex items-center justify-between gap-x-5 md:gap-x-8">
         <div class="flex grow items-center md:gap-x-12">
           <router-link to="/" aria-label="Home" class="shrink-0 text-primary hover:opacity-80">
             <the-logo class="h-5" />
@@ -28,7 +28,7 @@
           <div class="-mr-1">
             <popover v-slot="{ open }">
               <popover-button
-                class="relative z-10 flex h-8 w-8 items-center justify-center [&:not(:focus-visible)]:focus:outline-none"
+                class="relative flex h-8 w-8 items-center justify-center [&:not(:focus-visible)]:focus:outline-none"
                 aria-label="Toggle Navigation"
               >
                 <svg

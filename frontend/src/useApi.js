@@ -65,32 +65,30 @@ async function _fetch(url, options = {}) {
 
   Loader.start(options.timeout);
 
-  const _options = {...options};
-
-  if (!_options.headers) {
-    _options.headers = {};
+  if (!options.headers) {
+    options.headers = {};
   }
 
-  if (!_options.headers.accept && !_options.headers.Accept) {
-    _options.headers.accept = 'application/json';
+  if (!options.headers.accept && !options.headers.Accept) {
+    options.headers.accept = 'application/json';
   }
 
-  if (!_options.headers['Content-Type'] && !_options.headers['content-type']) {
-    _options.headers['content-type'] = 'application/json';
+  if (!options.headers['Content-Type'] && !options.headers['content-type']) {
+    options.headers['content-type'] = 'application/json';
   }
 
-  const onError = options.onError || Config.onError;
+  const onError = options.onError ?? Config.onError;
 
-  const _url = (options.prefix || Config.prefix) + url;
+  const _url = (options.prefix ?? Config.prefix) + url;
 
-  const response = await fetch(_url, _options);
+  const response = await fetch(_url, options);
 
   if (response.ok) {
     const result = await response.json();
     if (result.success) {
       Loader.stop();
 
-      const onSuccess = options.onSuccess || Config.onSuccess;
+      const onSuccess = options.onSuccess ?? Config.onSuccess;
       if (typeof onSuccess === 'function') {
         onSuccess(result);
       }
@@ -120,32 +118,24 @@ async function _fetch(url, options = {}) {
 }
 
 export async function get(url, data = null, options = {}) {
-  const _options = {
-    ...options,
-    method: 'GET'
-  }
+  options.method = 'GET';
   let searchParams = '';
   if (data) {
     searchParams = '?' + new URLSearchParams(data);
   }
-  return _fetch(url + searchParams, _options);
+  return _fetch(url + searchParams, options);
 }
 
 export async function post(url, data = null, options = {}) {
-  const _options = {
-    ...options,
-    method: 'POST',
-    body: data ? JSON.stringify(data) : undefined
-  }
+  options.method = 'POST';
+  options.body = data ? JSON.stringify(data) : undefined;
 
-  return _fetch(url, _options);
+  return _fetch(url, options);
 }
 
 export async function put(url, data = null, options = {}) {
-  const _options = {
-    ...options,
-    method: 'PUT',
-    body: data ? JSON.stringify(data) : undefined
-  }
-  return _fetch(url, _options);
+  options.method = 'PUT';
+  options.body = data ? JSON.stringify(data) : undefined;
+
+  return _fetch(url, options);
 }

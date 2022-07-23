@@ -42,10 +42,9 @@
       You love
     </router-link>
 
-    <!-- FIXME: -->
-    <button-primary class="my-10 px-5 w-full">Connect wallet</button-primary>
+    <button-wallet v-if="!userState.isLogged" class="mt-10 mb-5 !px-3 w-full" />
 
-    <h3 class="text-xl mb-6">Topics</h3>
+    <h3 class="text-xl mb-6 mt-5">Topics</h3>
 
     <router-link to="/soon" class="menu-link">
       <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -131,6 +130,7 @@
 </template>
 
 <script setup>
-import ButtonPrimary from '@/components/ButtonPrimary.vue';
+import ButtonWallet from '@/components/ButtonWallet.vue';
 import MenuSocials from '@/components/MenuSocials.vue';
+import { userState } from '@/useLogin.js';
 </script>
