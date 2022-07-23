@@ -70,7 +70,7 @@
                   leave="duration-100 ease-in"
                   leave-from="opacity-100 scale-100"
                   leave-to="opacity-0 scale-95"
-                  class="absolute right-0 left-0 md:left-auto min-w-[200px] top-full mt-4 flex origin-top flex-col rounded-2xl bg-white p-8 text-lg tracking-tight text-slate-900 shadow-xl ring-1 ring-slate-900/5 opacity-100 scale-100"
+                  class="absolute right-0 left-0 md:left-auto min-w-[200px] top-full mt-4 flex origin-top flex-col rounded-2xl bg-white p-8 text-lg tracking-tight text-slate-900 shadow-xl ring-1 ring-slate-900/5 opacity-100 scale-100 z-[1]"
                 >
                   <popover-panel>
                     <router-link to="/">

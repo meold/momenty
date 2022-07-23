@@ -77,6 +77,13 @@ async function _fetch(url, options = {}) {
     options.headers['content-type'] = 'application/json';
   }
 
+  if (!options.headers.authorization && !options.headers.Authorization) {
+    const token = window.localStorage.getItem(import.meta.env.VITE_APP_LOCALSTORAGE_KEY_NAME);
+    if (token) {
+      options.headers.authorization = 'Bearer ' + token + '1';
+    }
+  }
+
   const onError = options.onError ?? Config.onError;
 
   const _url = (options.prefix ?? Config.prefix) + url;

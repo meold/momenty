@@ -1,4 +1,5 @@
 import { createWebHistory, createRouter } from 'vue-router';
+import { authGuard } from '@/useLogin.js';
 
 import MainPage from '@/views/MainPage.vue';
 import CreatePage from '@/views/CreatePage.vue';
@@ -47,7 +48,8 @@ const routes = [
   {
     path: '/settings',
     name: 'SettingsPage',
-    component: SettingsPage
+    component: SettingsPage,
+    beforeEnter: authGuard
   },
 
   { // FIXME: remove this

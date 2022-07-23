@@ -112,8 +112,14 @@ function parseJwt (token) {
   return JSON.parse(jsonPayload);
 }
 
+function authGuard() {
+  error({ text: 'You must be logged in!' });
+  return userState.isLogged;
+}
+
 export {
   login,
   logout,
-  userState
+  userState,
+  authGuard
 };

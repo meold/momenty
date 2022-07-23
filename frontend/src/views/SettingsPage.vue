@@ -22,6 +22,9 @@
 
 <script setup>
 import { ref } from 'vue';
+import { put } from '@/useApi.js';
+import { success } from '@/notify.js';
+import { userState } from '@/useLogin.js';
 
 const form = ref(null);
 const data = ref({});
@@ -37,7 +40,7 @@ const schema = [
       outer: 'relative row-span-2',
       messages: 'absolute right-0'
     },
-    validation: 'required',
+    // validation: 'required',
     validationVisibility: 'blur'
   },
   {
@@ -79,7 +82,7 @@ const schema = [
       messages: 'absolute right-0'
     },
     placeholder: 'Your Bio (maximum 400 symbols)',
-    validation: 'required|length:1,400',
+    validation: 'length:1,400',
     validationVisibility: 'blur'
   },
   {
@@ -109,7 +112,10 @@ const schema = [
   }
 ];
 
-function submit() {
-
+async function submit(user) {
+  const result = await put(`/user/${userState.data.id}/`, { user });
+  if (result.success) {
+    success({ text: 'User datails updated' })
+  }
 }
 </script>

@@ -22,6 +22,12 @@ export default async function routes(instance) {
                 },
                 bio: {
                   type: 'string'
+                },
+                twitter: {
+                  type: 'string'
+                },
+                site: {
+                  type: 'string'
                 }
               },
               required: ['name', 'email', 'address']
@@ -91,51 +97,57 @@ export default async function routes(instance) {
   //   }
   // );
 
-  // instance.put(
-  //   '/:id(^\\d+)/',
+  instance.put(
+    '/:id(^\\d+)/',
 
-  //   {
-  //     schema: {
-  //       body: {
-  //         type: 'object',
-  //         properties: {
-  //           user: {
-  //             type: 'object',
-  //             properties: {
-  //               name: {
-  //                 type: 'string'
-  //               },
-  //               email: {
-  //                 type: 'string'
-  //               },
-  //               title: {
-  //                 type: 'string'
-  //               }
-  //             },
-  //             required: ['name', 'email', 'title']
-  //           },
-  //         },
-  //         required: ['user']
-  //       }
-  //     }
-  //   },
+    {
+      schema: {
+        body: {
+          type: 'object',
+          properties: {
+            user: {
+              type: 'object',
+              properties: {
+                name: {
+                  type: 'string'
+                },
+                email: {
+                  type: 'string'
+                },
+                bio: {
+                  type: 'string'
+                },
+                twitter: {
+                  type: 'string'
+                },
+                site: {
+                  type: 'string'
+                }
+              },
+              required: ['name', 'email']
+            },
+          },
+          required: ['user']
+        }
+      }
+    },
 
-  //   async (request) => {
-  //     const { id } = request.params;
-  //     let result;
-  //     try {
-  //       result = await instance.sequelize.models.User.update(
-  //         request.body.user,
-  //         {
-  //           where: { id }
-  //         }
-  //       );
-  //     } catch (error) {
-  //       // FIXME:
-  //       console.log(error);
-  //     }
+    async (request) => {
+      const { id } = request.params;
+      let result;
+      try {
+        result = await instance.sequelize.models.User.update(
+          request.body.user,
+          {
+            where: { id }
+          }
+        );
+      } catch (error) {
+        // FIXME:
+        console.log(error);
+      }
 
-  //     return { success: Boolean(result) };
-  //   }
-  // );
+      return { success: Boolean(result) };
+    }
+  );
 }

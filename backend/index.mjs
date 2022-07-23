@@ -44,6 +44,25 @@ fastify.register(fastifyJwt, {
   secret: process.env.JWT_SECRET
 })
 
+// skip JWT authorization for whitelisted routes
+const whitelist = {
+  POST: ['/api/user/']
+}
+
+fastify.addHook('onRequest', async (request, reply) => {
+  if (
+    request.url.startsWith('/api/') &&
+    !request.url.startsWith('/api/auth/') &&
+    !whitelist[request.method]?.includes(request.url)
+  ) {
+    try {
+      await request.jwtVerify();
+    } catch (err) {
+      reply.send(err);
+    }
+  }
+});
+
 fastify.decorate('s3', s3);
 
 fastify.decorate('sequelize', await sequelize({
@@ -103,10 +122,16 @@ fastify.setErrorHandler(async (error, _request, reply) => {
   console.error("Caught error:");
   console.error(error);
   // FIXME: catch sequelize errors here ???
-  if (error.validation) {
-    reply.status(422).send(new Error('validation failed'));
+  if (error.code === 'FST_JWT_AUTHORIZATION_TOKEN_INVALID') {
+    reply.status(401).send(new Error('Authorization failed'));
     return;
   }
+
+  if (error.validation) {
+    reply.status(422).send(new Error('Validation failed'));
+    return;
+  }
+
   throw new Error();
 });
 
