@@ -53,7 +53,7 @@ export default {
     uploadMedia({ file, type }) {
       return new Promise(async resolve => {
 
-        const postUrl = '/api/sign-media-upload/' + type + '/'
+        const postUrl = import.meta.env.VITE_API_URL_PREFIX + '/sign-media-upload/' + type + '/'
 
         const arr = file.name.split('.');
         const extension =  arr[arr.length - 1];
