@@ -36,6 +36,48 @@ export default async function routes(instance) {
     }
   );
 
+  instance.get(
+    '/section/:section/',
+
+    {
+      schema: {
+        params: {
+          type: 'object',
+          properties: {
+            section: {
+              type: 'string',
+              enum: [...sections, 'new', 'trending']
+            }
+          },
+          required: [ 'section' ]
+        }
+      }
+    },
+
+    async (request) => {
+      const { section } = request.params;
+
+      const query = { limit: 30 };
+
+      if (section == 'new') {
+        query.order = [['createdAt', 'DESC']];
+      } else if(section == 'trending') {
+        // FIXME: do tranding
+        query.order = [['createdAt', 'ASC']];
+      } else {
+        query.where = { section };
+      }
+
+      const nfts = await instance.sequelize.models.Nft.findAll(query, { raw: true });
+
+      if (!nfts) {
+        return { success: false };
+      }
+
+      return { success: true, nfts };
+    }
+  );
+
   instance.post(
     '/',
 

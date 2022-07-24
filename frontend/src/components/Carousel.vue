@@ -1,9 +1,9 @@
 <template>
   <Carousel :settings="settings" :breakpoints="breakpoints">
 
-    <Slide v-for="slide in 10" :key="slide">
+    <Slide v-for="nft in nfts" :key="nft.id">
       <div class="carousel__item py-8">
-        <nft-card :nft="{}" />
+        <nft-card :nft="nft" />
       </div>
     </Slide>
 
@@ -19,12 +19,17 @@ import { Carousel, Navigation, Slide } from 'vue3-carousel';
 import NftCard from '@/components/NftCard.vue';
 
 export default defineComponent({
-  name: 'Breakpoints',
   components: {
     Carousel,
     Slide,
     Navigation,
     NftCard
+  },
+  props: {
+    nfts: {
+      type: Array,
+      default: () => []
+    }
   },
   data: () => ({
     // carousel settings

@@ -2,6 +2,7 @@ import { createWebHistory, createRouter } from 'vue-router';
 import { authGuard, userState } from '@/useLogin.js';
 
 import MainPage from '@/views/MainPage.vue';
+import SectionPage from '@/views/SectionPage.vue';
 import CreatePage from '@/views/CreatePage.vue';
 import ProfilePage from '@/views/ProfilePage.vue';
 import RegisterPage from '@/views/RegisterPage.vue';
@@ -17,6 +18,13 @@ const routes = [
     path: '/',
     name: 'MainPage',
     component: MainPage
+  },
+
+  {
+    path: '/section/:section',
+    name: 'SectionPage',
+    component: SectionPage,
+    props: true
   },
 
   {

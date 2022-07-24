@@ -29,6 +29,9 @@
   }
   .menu-link {
     @apply flex items-center gap-x-3 w-full p-2 text-base hover:text-primary;
+    &.router-link-exact-active {
+      @apply text-primary/80 pointer-events-none;
+    }
   }
 }
 

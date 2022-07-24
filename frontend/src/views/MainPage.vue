@@ -23,10 +23,10 @@
       </div>
 
       <h2 class="text-xl font-bold mt-28 -mb-5">New</h2>
-      <carousel />
+      <carousel :nfts="newNfts" />
 
       <h2 class="text-xl font-bold mt-14 -mb-5">Trending</h2>
-      <carousel />
+      <carousel :nfts="trandingNfts" />
     </div>
   </div>
 </template>
@@ -36,4 +36,27 @@ import MenuVertical from '@/components/MenuVertical.vue';
 import ButtonPrimary from '@/components/ButtonPrimary.vue';
 import TheTron from '@/components/TheTron.vue';
 import Carousel from '@/components/Carousel.vue';
+// import Spinner from '@/components/Spinner.vue';
+import { get } from '@/useApi.js';
+import { ref } from 'vue';
+
+const newNfts = ref([]);
+const isNewNftsLoaded = ref(false);
+const trandingNfts = ref([]);
+const isTrandingNftsLoaded = ref(false);
+
+getNewNfts();
+getTrandingNfts();
+
+async function getNewNfts() {
+  const { nfts } = await get(`/nft/section/new/`);
+  newNfts.value = nfts;
+  isNewNftsLoaded.value = true;
+}
+
+async function getTrandingNfts() {
+  const { nfts } = await get(`/nft/section/trending/`);
+  trandingNfts.value = nfts;
+  isTrandingNftsLoaded.value = true;
+}
 </script>
