@@ -12,5 +12,5 @@ const props = defineProps({
   }
 })
 
-const source = computed(() => props.scr || '/avatar-default.svg');
+const source = computed(() => props.src || '/avatar-default.svg');
 </script>
