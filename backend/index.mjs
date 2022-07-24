@@ -95,6 +95,10 @@ fastify.get(
   }
 );
 
+fastify.setNotFoundHandler((_req, res) => {
+  res.sendFile('index.html')
+});
+
 if (isProduction) {
   // We're in production, so all frontend assets are built, just serve them static.
   fastify.register(fastifyStatic, {

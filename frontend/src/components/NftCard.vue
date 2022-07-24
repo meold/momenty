@@ -1,5 +1,5 @@
 <template>
-  <router-link v-slot="{ navigate }" to="/view" custom>
+  <router-link v-slot="{ navigate }" :to="`/view/${nft.id}`" custom>
     <nft-card-container class="!rounded-none !shadow-none overflow-visible cursor-pointer" @click="navigate">
       <div class="flip-container w-full h-full" :class="{ hover: isFlipped }" @touchstart="isFlipped = !isFlipped" @mouseenter="onMouseenter" @mouseleave="onMouseleave">
         <div class="flipper">

@@ -50,7 +50,9 @@
     <hr class="border border-gray-300 my-14">
 
     <h2 class="text-xl font-bold mt-14 -mb-5">Other author NFT</h2>
-    <carousel />
+
+    <carousel :nfts="nfts" />
+
   </div>
 </template>
 
@@ -77,13 +79,21 @@ watch(
   }
 );
 
-getNft(props.id);
+getNft();
+getNfts();
 
 const nft = ref({});
+const nfts = ref([]);
+const isNftsLoaded = ref(false);
 
 async function getNft() {
   const { nft: _nft } = await get(`/nft/${props.id}/`);
   nft.value = _nft;
 }
 
+async function getNfts() {
+  const { nfts: _nfts } = await get(`/nft/`, { userId: props.id });
+  nfts.value = _nfts;
+  isNftsLoaded.value = true;
+}
 </script>

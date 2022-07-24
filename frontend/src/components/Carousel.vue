@@ -1,5 +1,5 @@
 <template>
-  <Carousel :settings="settings" :breakpoints="breakpoints">
+  <Carousel v-if="nfts.length" :settings="settings" :breakpoints="breakpoints">
 
     <Slide v-for="nft in nfts" :key="nft.id">
       <div class="carousel__item py-8">
@@ -55,46 +55,3 @@ export default defineComponent({
   })
 });
 </script>
-
-<style lang="scss">
-section.carousel {
-  margin-left: -10px;
-  margin-right: -10px;
-  .carousel__item {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-
-  .carousel__slide {
-      padding: 0 10px;
-  }
-
-  .carousel__prev,
-  .carousel__next {
-    border: 2px solid var(--vc-nav-background-color);
-    border-radius: 8px;
-    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
-    &:hover {
-      opacity: 0.8;
-      box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
-    }
-  }
-
-  .carousel__prev {
-    left: 35px;
-  }
-
-  .carousel__next {
-    right: 35px;
-  }
-
-  .carousel__prev--in-active,
-  .carousel__next--in-active {
-    color: var(--vc-nav-background-color);
-    background-color: #ffffff55;
-    cursor: default;
-  }
-}
-</style>

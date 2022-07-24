@@ -92,6 +92,16 @@ async function getUserState() {
   userState.isRegistered = await isUserRegistered();
 }
 
+function setUserState(token) {
+  if (!token) {
+    return;
+  }
+  window.localStorage.setItem(import.meta.env.VITE_APP_LOCALSTORAGE_KEY_NAME, token);
+  userState.isLogged = true;
+  userState.isRegistered = true;
+  userState.data = parseJwt(token);
+}
+
 async function logout() {
   userState.isLogged = false;
   userState.data = null;
@@ -123,5 +133,6 @@ export {
   login,
   logout,
   userState,
+  setUserState,
   authGuard
 };

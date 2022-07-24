@@ -65,7 +65,16 @@ export default async function routes(instance) {
         console.log(error);
       }
 
-      return { success: Boolean(result) };
+      if (!result) {
+        return { success: false };
+      }
+
+      const token = instance.jwt.sign({
+        id: user.id,
+        address: user.address
+      });
+
+      return { success: true, token };
     }
   );
 

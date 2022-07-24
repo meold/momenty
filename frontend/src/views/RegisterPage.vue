@@ -53,6 +53,7 @@
 import { ref, watch } from 'vue';
 import { post } from '@/useApi.js';
 import { web3 } from '@/useTronlink.js';
+import { setUserState } from '@/useLogin';
 
 import UiDialog from '@/components/ui/UiDialog.vue';
 import UiDialogTitle from '@/components/ui/UiDialogTitle.vue';
@@ -163,8 +164,9 @@ const schema = [
 ];
 
 async function submit(user) {
-  const { success } = await post('/user/', { user });
+  const { success, token } = await post('/user/', { user });
   isRegistered.value = success;
+  setUserState(token);
 }
 
 function closeRegistered() {
