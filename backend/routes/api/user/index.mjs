@@ -2,6 +2,22 @@ export default async function routes(instance) {
 
   instance.get(
     '/:id(^\\d+)/',
+
+    {
+      schema: {
+        params: {
+          $id: 'id-parser',
+          properties: {
+            id: {
+              type: 'number',
+              default: null
+            }
+          },
+          required: ['id']
+        }
+      }
+    },
+
     async (request) => {
       const { id } = request.params;
 
@@ -111,11 +127,27 @@ export default async function routes(instance) {
           },
           required: ['user']
         }
+      },
+      params: {
+        $id: 'id-parser',
+        properties: {
+          id: {
+            type: 'number',
+            default: null
+          }
+        },
+        required: ['id']
       }
     },
 
     async (request) => {
+
       const { id } = request.params;
+
+      if (id != request.user.id) {
+        return { success: false };
+      }
+
       let result;
       try {
         result = await instance.sequelize.models.User.update(

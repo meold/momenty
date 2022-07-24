@@ -136,6 +136,21 @@ export default async function routes(instance) {
   instance.get(
     '/:id(^\\d+)/',
 
+    {
+      schema: {
+        params: {
+          $id: 'id-parser',
+          properties: {
+            id: {
+              type: 'number',
+              default: null
+            }
+          },
+          required: ['id']
+        }
+      }
+    },
+
     async (request) => {
       const { id } = request.params;
 
