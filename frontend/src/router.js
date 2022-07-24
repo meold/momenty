@@ -1,5 +1,5 @@
 import { createWebHistory, createRouter } from 'vue-router';
-import { authGuard, userState } from '@/useLogin.js';
+import { authGuard } from '@/useLogin.js';
 
 import MainPage from '@/views/MainPage.vue';
 import SectionPage from '@/views/SectionPage.vue';
@@ -30,8 +30,7 @@ const routes = [
   {
     path: '/new',
     name: 'CreatePage',
-    component: CreatePage,
-    beforeEnter: authGuard
+    component: CreatePage
   },
 
   {
@@ -44,8 +43,7 @@ const routes = [
   {
     path: '/register',
     name: 'RegisterPage',
-    component: RegisterPage,
-    redirect: userState.data?.id ? '/' : undefined
+    component: RegisterPage
   },
 
   {

@@ -104,10 +104,26 @@
         </div>
       </div>
     </form-kit>
+
+    <ui-dialog :show="!userState.isLogged">
+      <ui-dialog-panel>
+        <ui-dialog-title>
+          Attention!
+        </ui-dialog-title>
+        Your wallet is disconnected. You must connect your wallet to create moment!
+        <div class="mt-5 flex justify-end">
+          <button-wallet />
+        </div>
+      </ui-dialog-panel>
+    </ui-dialog>
   </div>
 </template>
 
 <script setup>
+import UiDialog from '@/components/ui/UiDialog.vue';
+import UiDialogTitle from '@/components/ui/UiDialogTitle.vue';
+import UiDialogPanel from '@/components/ui/UiDialogPanel.vue';
+import ButtonWallet from '@/components/ButtonWallet.vue';
 import NftCardContainer from '@/components/NftCardContainer.vue';
 import DropArea from '@/components/DropArea.vue';
 import ProgressBar from '@/components/ProgressBar.vue';
@@ -116,6 +132,13 @@ import { post } from '@/useApi.js';
 import sections from '@/../../common/sections.mjs';
 import { error } from '@/notify.js';
 import { useRouter } from 'vue-router';
+import { userState } from '@/useLogin.js';
+
+const router = useRouter();
+
+if (!userState.isLogged) {
+  router.push('/register');
+}
 
 const S3prefix = 'https://main-nftmoments-incoming-media.s3.eu-central-1.amazonaws.com/'
 
@@ -125,7 +148,7 @@ const isImageLoading = ref(false);
 const isVideoLoading = ref(false);
 const progress = ref(0);
 
-const router = useRouter();
+
 
 const isImageInvalid = computed(() => (
   form.value?.node?.children[0]?.context?.state?.dirty &&

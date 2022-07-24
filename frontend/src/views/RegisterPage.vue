@@ -61,6 +61,24 @@ import UiDialogPanel from '@/components/ui/UiDialogPanel.vue';
 import ButtonWallet from '@/components/ButtonWallet.vue';
 import ButtonPrimary from '@/components/ButtonPrimary.vue';
 
+import { useRouter } from 'vue-router';
+import { userState } from '@/useLogin.js';
+
+const router = useRouter();
+
+if (userState.isLogged) {
+  router.push('/');
+}
+watch(
+  () => userState.isLogged,
+  value => {
+    if (value) {
+      router.push('/');
+    }
+  }
+);
+
+
 const isRegistered = ref(false);
 const form = ref(null);
 const data = ref({
@@ -70,10 +88,9 @@ const data = ref({
 watch(
   () => web3.address,
   address => {
-    console.log('watched')
     data.value.address = address;
   }
-)
+);
 
 const schema = [
   {
