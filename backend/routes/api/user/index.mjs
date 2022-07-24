@@ -18,7 +18,6 @@ export default async function routes(instance) {
     '/',
 
     {
-      onRequest: instance.authenticate,
       schema: {
         body: {
           type: 'object',
