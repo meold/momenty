@@ -9,7 +9,7 @@
     <div class="container grow">
       <div class="lg:col-span-7">
         <transition name="fade" mode="out-in" appear>
-          <component :is="Component" :key="$route.path" />
+          <component :is="Component" :key="$route.fullPath" />
         </transition>
       </div>
     </div>

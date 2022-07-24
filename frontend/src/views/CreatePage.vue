@@ -140,7 +140,7 @@ if (!userState.isLogged) {
   router.push('/register');
 }
 
-const S3prefix = 'https://main-nftmoments-incoming-media.s3.eu-central-1.amazonaws.com/'
+const S3prefix = 'https://main-nftmoments-incoming-media.s3.eu-central-1.amazonaws.com/';
 
 const form = ref(null);
 const nft = ref({});

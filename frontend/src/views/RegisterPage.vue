@@ -19,7 +19,7 @@
       </template>
     </form-kit>
 
-    <ui-dialog :show="!web3.address">
+    <ui-dialog :show="!web3?.address">
       <ui-dialog-panel>
         <ui-dialog-title>
           Attention!
@@ -69,15 +69,6 @@ const router = useRouter();
 if (userState.isLogged) {
   router.push('/');
 }
-watch(
-  () => userState.isLogged,
-  value => {
-    if (value) {
-      router.push('/');
-    }
-  }
-);
-
 
 const isRegistered = ref(false);
 const form = ref(null);
@@ -182,6 +173,9 @@ const schema = [
 
 async function submit(user) {
   const { success, token } = await post('/user/', { user });
+  if (!success) {
+    return;
+  }
   isRegistered.value = success;
   setUserState(token);
 }
