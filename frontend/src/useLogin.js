@@ -16,7 +16,6 @@ watch(
     getUserState();
   }
 );
-getUserState();
 
 async function isUserRegistered() {
   if (!web3.address) {
@@ -83,10 +82,15 @@ async function login() {
 async function getUserState() {
   const token = window.localStorage.getItem(import.meta.env.VITE_APP_LOCALSTORAGE_KEY_NAME);
   if (token) {
-    userState.isLogged = true;
-    userState.isRegistered = true;
-    userState.data = parseJwt(token);
-    return true;
+    const data = parseJwt(token);
+    console.log('Get user state', web3.address, data);
+    if (data.address == web3.address) {
+      userState.isLogged = true;
+      userState.isRegistered = true;
+      userState.data = data;
+      return true;
+    }
+    logout();
   }
 
   userState.isRegistered = await isUserRegistered();
@@ -134,5 +138,6 @@ export {
   logout,
   userState,
   setUserState,
+  isUserRegistered,
   authGuard
 };

@@ -30,14 +30,7 @@ const routes = [
   {
     path: '/new',
     name: 'CreatePage',
-    component: CreatePage
-  },
-
-  {
-    path: '/profile',
-    name: 'MyProfilePage',
-    component: userState.data?.id ? ProfilePage : ErrorPage,
-    props: { id: userState.data?.id },
+    component: CreatePage,
     beforeEnter: authGuard
   },
 

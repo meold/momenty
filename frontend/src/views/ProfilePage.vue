@@ -41,8 +41,9 @@ const props = defineProps({
 
 watch(
   () => props.id,
-  val => {
-    getUser(val)
+  () => {
+    getUser();
+    getNfts();
   }
 );
 

@@ -58,6 +58,7 @@ import {
 
 import {
   login,
+  isUserRegistered,
   userState
 } from '@/useLogin.js';
 
@@ -81,6 +82,9 @@ function doInstall() {
 
 async function doConnect() {
   await connectTronLink();
+  if (!userState.isRegistered) {
+    await isUserRegistered();
+  }
   doLogin();
 }
 
