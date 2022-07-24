@@ -80,7 +80,6 @@ watch(
 );
 
 getNft();
-getNfts();
 
 const nft = ref({});
 const nfts = ref([]);
@@ -89,10 +88,14 @@ const isNftsLoaded = ref(false);
 async function getNft() {
   const { nft: _nft } = await get(`/nft/${props.id}/`);
   nft.value = _nft;
+  await getNfts();
 }
 
 async function getNfts() {
-  const { nfts: _nfts } = await get(`/nft/`, { userId: props.id });
+  if (!nft.value?.user?.id) {
+    return;
+  }
+  const { nfts: _nfts } = await get(`/nft/`, { userId: nft.value?.user?.id });
   nfts.value = _nfts;
   isNftsLoaded.value = true;
 }
