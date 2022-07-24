@@ -3,7 +3,7 @@
 
     <Slide v-for="slide in 10" :key="slide">
       <div class="carousel__item py-8">
-        <nft-card :nft="slide + salt" />
+        <nft-card :nft="{}" />
       </div>
     </Slide>
 
@@ -27,7 +27,6 @@ export default defineComponent({
     NftCard
   },
   data: () => ({
-    salt: parseInt(10 * Math.random(), 10), // FIXME: kill this
     // carousel settings
     settings: {
       wrapAround: false,

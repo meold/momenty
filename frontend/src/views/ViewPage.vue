@@ -2,23 +2,23 @@
   <div>
     <div class="flex flex-row gap-x-20 max-w-5xl mx-auto">
       <div class="shrink-0 basis-1/3 max-w-[240px]">
-        <nft-card />
+        <nft-card :nft="nft" />
       </div>
       <div class="grow">
 
         <div class="mb-8 flex justify-between items-center">
-          <router-link class="inline-block" to="/profile">
-            <user-card />
+          <router-link class="inline-block" :to="`/profile/${nft.user?.id}`">
+            <user-card :user="nft.user" />
           </router-link>
           <button-primary class="!py-3">Folow</button-primary>
         </div>
 
         <h1 class="font-display text-2xl leading-tight mb-4">
-          Silent Ocean NFT with dark purple color background
+          {{ nft.title }}
         </h1>
 
         <p class="opacity-50 text-sm mb-8">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea rem velit voluptatem, voluptas rerum illo saepe eos? Soluta quia numquam velit neque ducimus, fuga magni fugiat repellendus architecto possimus voluptates.
+          {{ nft.description }}
         </p>
 
         <div class="mb-3">
@@ -60,5 +60,30 @@ import UserCard from '@/components/UserCard.vue';
 import Carousel from '@/components/Carousel.vue';
 import ButtonPrimary from '@/components/ButtonPrimary.vue';
 import ButtonSecondary from '@/components/ButtonSecondary.vue';
+import { ref, watch } from 'vue';
+import { get } from '@/useApi.js';
+
+const props = defineProps({
+  id: {
+    type: [Number, String],
+    default: null
+  }
+});
+
+watch(
+  () => props.id,
+  val => {
+    getNft(val)
+  }
+);
+
+getNft(props.id);
+
+const nft = ref({});
+
+async function getNft() {
+  const { nft: _nft } = await get(`/nft/${props.id}/`);
+  nft.value = _nft;
+}
 
 </script>

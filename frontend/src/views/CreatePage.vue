@@ -203,7 +203,7 @@ const schema = [
       messages: 'absolute right-0'
     },
     placeholder: 'Enter description (maximum 400 symbols)',
-    validation: 'required|length:1,400',
+    validation: 'length:0,400',
     validationVisibility: 'dirty'
   }
 ];

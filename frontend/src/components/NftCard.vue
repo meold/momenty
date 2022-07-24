@@ -4,13 +4,13 @@
       <div class="flip-container w-full h-full" :class="{ hover: isFlipped }" @touchstart="isFlipped = !isFlipped" @mouseenter="onMouseenter" @mouseleave="onMouseleave">
         <div class="flipper">
           <div class="front w-full h-full">
-            <nft-card-container class="!shadow-sm object-cover">
-              <img :src="`/killme/image${nft % 3 + 1}.png`" class="min-w-full min-h-full" alt="">
+            <nft-card-container class="!shadow-sm">
+              <img :src="nft.image || '/killme/image2.png'" class="w-full h-full object-cover" alt="">
             </nft-card-container>
           </div>
           <div class="back w-full h-full">
             <nft-card-container class="!shadow-sm">
-              <video-player class="w-full h-full" :play="isFlipped" />
+              <video-player class="w-full h-full" :src="nft.video || '/killme/vid.mov'" :play="isFlipped" />
             </nft-card-container>
           </div>
         </div>
@@ -28,8 +28,8 @@ const isFlipped = ref(false);
 
 defineProps({
   nft: {
-    type: Number,
-    default: 1
+    type: Object,
+    default: () => {}
   }
 })
 

@@ -26,7 +26,7 @@ export default async function routes(instance) {
 
       const address = request.params.address;
 
-      const user = await instance.sequelize.models.User.findOne({
+      const user = await instance.sequelize.models.User.scope('allAttributes').findOne({
         where: {
           address
         },
@@ -60,7 +60,7 @@ export default async function routes(instance) {
 
       const address = request.params.address;
 
-      const user = await instance.sequelize.models.User.findOne({
+      const user = await instance.sequelize.models.User.scope('allAttributes').findOne({
         where: {
           address
         },

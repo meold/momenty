@@ -25,9 +25,19 @@ import { ref } from 'vue';
 import { put } from '@/useApi.js';
 import { success } from '@/notify.js';
 import { userState } from '@/useLogin.js';
+import { get } from '@/useApi.js';
 
 const form = ref(null);
 const data = ref({});
+
+if (userState.data?.id) {
+  getUser(userState.data.id);
+}
+
+async function getUser(id) {
+  const { user } = await get(`/user/${id}/`);
+  data.value = user;
+}
 
 const schema = [
   {

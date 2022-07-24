@@ -1,9 +1,24 @@
 export default async function routes(instance) {
 
- instance.post(
+  instance.get(
+    '/:id(^\\d+)/',
+    async (request) => {
+      const { id } = request.params;
+
+      const user = await instance.sequelize.models.User.findByPk(id);
+      if (!user) {
+        return { success: false };
+      }
+
+      return { success: true, user };
+    }
+  );
+
+  instance.post(
     '/',
 
     {
+      onRequest: instance.authenticate,
       schema: {
         body: {
           type: 'object',
@@ -55,52 +70,11 @@ export default async function routes(instance) {
     }
   );
 
-  // instance.get(
-  //   '/',
-
-  //   {
-  //     schema: {
-  //       query: {
-  //         type: 'object',
-  //         properties: {
-  //           limit: {
-  //             type: 'number'
-  //           },
-  //           offset: {
-  //             type: 'number'
-  //           },
-  //           sort: {
-  //             type: 'string'
-  //           },
-  //           direction: {
-  //             type: 'string'
-  //           }
-  //         },
-  //         required: ['limit', 'offset']
-  //       }
-  //     }
-  //   },
-
-  //   async (request) => {
-  //     const options = {
-  //       limit: request.query.limit,
-  //       offset: request.query.offset
-  //     };
-
-  //     if (request.query.sort) {
-  //       options.order = [[ request.query.sort, request.query.direction == 'DESC' ? 'DESC' : 'ASC' ]];
-  //     }
-
-  //     const result = await instance.sequelize.models.User.findAndCountAll(options);
-
-  //     return { success: true, ...result };
-  //   }
-  // );
-
   instance.put(
     '/:id(^\\d+)/',
 
     {
+      onRequest: instance.authenticate,
       schema: {
         body: {
           type: 'object',

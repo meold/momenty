@@ -28,9 +28,10 @@ const routes = [
   },
 
   {
-    path: '/profile',
+    path: '/profile/:id(\\d+)',
     name: 'ProfilePage',
-    component: ProfilePage
+    component: ProfilePage,
+    props: true
   },
 
   {
@@ -40,7 +41,7 @@ const routes = [
   },
 
   {
-    path: '/view/:id',
+    path: '/view/:id(\\d+)',
     name: 'ViewPage',
     component: ViewPage,
     props: true

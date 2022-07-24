@@ -6,6 +6,7 @@ export default async function routes(instance) {
     '/',
 
     {
+      onRequest: instance.authenticate,
       schema: {
         body: {
           type: 'object',
@@ -29,7 +30,7 @@ export default async function routes(instance) {
               format: 'uri'
             }
           },
-          required: ['title', 'image', 'video']
+          required: ['title', 'section', 'image', 'video']
         }
       }
     },
@@ -50,4 +51,24 @@ export default async function routes(instance) {
     }
   );
 
+  instance.get(
+    '/:id(^\\d+)/',
+
+    async (request) => {
+      const { id } = request.params;
+
+      const nft = await instance.sequelize.models.Nft.findByPk(id, {
+        include: [{
+          model: instance.sequelize.models.User,
+          as: 'user'
+        }]
+      });
+
+      if (!nft) {
+        return { success: false };
+      }
+
+      return { success: true, nft };
+    }
+  );
 };

@@ -44,24 +44,13 @@ fastify.register(fastifyJwt, {
   secret: process.env.JWT_SECRET
 })
 
-// skip JWT authorization for whitelisted routes
-const whitelist = {
-  POST: ['/api/user/']
-}
-
-fastify.addHook('onRequest', async (request, reply) => {
-  if (
-    request.url.startsWith('/api/') &&
-    !request.url.startsWith('/api/auth/') &&
-    !request.url.startsWith('/api/sign-media-upload/') && // FIXME: remove
-    !whitelist[request.method]?.includes(request.url)
-  ) {
-    try {
-      await request.jwtVerify();
-    } catch (err) {
-      reply.send(err);
-    }
+fastify.decorate('authenticate', async function(request, reply, done) {
+  try {
+    await request.jwtVerify();
+  } catch (err) {
+    reply.send(err);
   }
+  done();
 });
 
 fastify.decorate('s3', s3);

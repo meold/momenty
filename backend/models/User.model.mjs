@@ -53,6 +53,14 @@ export default class User extends Model {
 
   static modelOptions(sequelize) {
     return {
+      defaultScope: {
+        attributes: { exclude: ['nonce', 'createdAt', 'updatedAt'] },
+      },
+      scopes: {
+        allAttributes: {
+          attributes: { },
+        }
+      },
       sequelize,
       freezeTableName: true
     };

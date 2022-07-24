@@ -9,7 +9,7 @@
       disablepictureinpicture
       preload="metadata"
       class="w-full h-full object-cover"
-      :src="videoUrl"
+      :src="src"
       :controls="controls"
       :autoplay="autoplay"
       @click="onClick"
@@ -24,6 +24,10 @@ export default {
     play: {
       type: Boolean,
       default: false
+    },
+    src: {
+      type: String,
+      default: null
     }
   },
 
@@ -32,8 +36,7 @@ export default {
       key: 0,
       controls: false,
       autoplay: false,
-      player: null,
-      videoUrl: window.location.origin + '/killme/vid.mov'
+      player: null
     };
   },
 
