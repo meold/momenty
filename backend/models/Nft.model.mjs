@@ -9,9 +9,7 @@ export default class Nft extends Model {
       },
 
       description: {
-        type: Sequelize.DataTypes.STRING(400),
-        allowNull: false,
-        unique: true
+        type: Sequelize.DataTypes.STRING(400)
       },
 
       section: {

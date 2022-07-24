@@ -86,8 +86,8 @@ export default async function routes(instance) {
       }
 
       const token = instance.jwt.sign({
-        id: user.id,
-        address: user.address
+        id: result.id,
+        address: result.address
       });
 
       return { success: true, token };

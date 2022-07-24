@@ -113,11 +113,6 @@ export default async function routes(instance) {
 
     async (request) => {
 
-      if (!request.user?.id) {
-        // FIXME: find out how it can happen
-        return { success: false };
-      }
-
       const nft = request.body;
       nft.userId = request.user.id;
 

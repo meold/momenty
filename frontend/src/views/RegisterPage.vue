@@ -176,7 +176,7 @@ async function submit(user) {
   if (!success) {
     return;
   }
-  isRegistered.value = success;
+  isRegistered.value = true;
   setUserState(token);
 }
 

@@ -155,6 +155,7 @@ export {
   useTronlink,
   installWallet,
   connectTronLink,
+  connectWeb3,
   getInstallLink,
   tronlinkState,
   web3,

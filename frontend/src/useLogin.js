@@ -2,7 +2,7 @@ import { reactive, watch } from 'vue';
 import { get, post } from '@/useApi.js';
 import { error } from '@/notify.js';
 
-import { web3 } from '@/useTronlink.js';
+import { web3, connectWeb3 } from '@/useTronlink.js';
 
 const userState = reactive({
   isLogged: false,
@@ -103,6 +103,7 @@ function setUserState(token) {
   userState.isLogged = true;
   userState.isRegistered = true;
   userState.data = parseJwt(token);
+  connectWeb3();
 }
 
 async function logout() {
