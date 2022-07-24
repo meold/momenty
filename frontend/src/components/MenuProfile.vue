@@ -1,7 +1,7 @@
 <template>
   <div class="menu-vertical max-w-xs">
     <div class="relative flex flex-col items-center">
-      <user-avatar class="h-28 w-28 border-4" />
+      <user-avatar class="h-28 w-28 border-4" :src="user.avatarUrl" />
       <div class="text-primary underline my-3">{{ user.name }}</div>
       <div v-if="isCurrentUser" class="absolute top-0 right-0">
         <router-link class="text-black/50 hover:text-primary" to="/settings">

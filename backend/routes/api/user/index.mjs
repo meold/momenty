@@ -50,6 +50,9 @@ export default async function routes(instance) {
                 email: {
                   type: 'string'
                 },
+                avatarUrl: {
+                  type: 'string'
+                },
                 bio: {
                   type: 'string'
                 },
@@ -110,6 +113,9 @@ export default async function routes(instance) {
                   type: 'string'
                 },
                 email: {
+                  type: 'string'
+                },
+                avatarUrl: {
                   type: 'string'
                 },
                 bio: {

@@ -3,6 +3,9 @@
     <h1 class="font-display text-2xl leading-tight mb-10">
       Edit Profile
     </h1>
+
+    <avatar-uploader v-model:url="data.avatarUrl" />
+
     <form-kit ref="form" v-model="data" messages-class="text-right" :actions="false" type="form" autocomplete="off" @submit="submit">
       <div class="grid grid-cols-1 gap-x-20 md:grid-cols-2">
 
@@ -17,10 +20,28 @@
         />
       </template>
     </form-kit>
+
+    <ui-dialog :show="!userState.isLogged">
+      <ui-dialog-panel>
+        <ui-dialog-title>
+          Attention!
+        </ui-dialog-title>
+        Your wallet is disconnected. You must connect your wallet to proceed!
+        <div class="mt-5 flex justify-end">
+          <button-wallet />
+        </div>
+      </ui-dialog-panel>
+    </ui-dialog>
   </div>
 </template>
 
 <script setup>
+import UiDialog from '@/components/ui/UiDialog.vue';
+import UiDialogTitle from '@/components/ui/UiDialogTitle.vue';
+import UiDialogPanel from '@/components/ui/UiDialogPanel.vue';
+import ButtonWallet from '@/components/ButtonWallet.vue';
+import AvatarUploader from '@/components/AvatarUploader.vue';
+
 import { ref } from 'vue';
 import { put } from '@/useApi.js';
 import { success } from '@/notify.js';
@@ -41,17 +62,8 @@ async function getUser(id) {
 
 const schema = [
   {
-    $formkit: 'file',
-    name: 'avatar',
-    label: 'Avatar',
-    classes: {
-      label: 'text-xl font-bold mb-2',
-      input: 'placeholder:text-sm placeholder:opacity-30 placeholder:text-black w-full',
-      outer: 'relative row-span-2',
-      messages: 'absolute right-0'
-    },
-    // validation: 'required',
-    validationVisibility: 'blur'
+    $formkit: 'hidden',
+    name: 'avatarUrl'
   },
   {
     $formkit: 'text',

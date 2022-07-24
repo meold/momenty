@@ -34,6 +34,10 @@ export default class User extends Model {
         unique: true
       },
 
+      avatarUrl: {
+        type: Sequelize.DataTypes.STRING(255),
+      },
+
       bio: {
         type: Sequelize.DataTypes.STRING(400),
         allowNull: true,
