@@ -19,7 +19,6 @@
 <script setup>
 import MenuProfile from '@/components/MenuProfile.vue';
 import NftCard from '@/components/NftCard.vue';
-import ButtonPrimary from '../components/ButtonPrimary.vue';
 import { ref, watch } from 'vue';
 import { get } from '@/useApi.js';
 

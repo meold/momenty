@@ -12,8 +12,6 @@ import PrivacyPage from '@/views/PrivacyPage.vue';
 import ComingSoonPage from '@/views/ComingSoonPage.vue';
 import ErrorPage from '@/views/ErrorPage.vue';
 
-import FormkitPage from '@/views/FormkitPage.vue';
-
 const routes = [
   {
     path: '/',
@@ -52,12 +50,6 @@ const routes = [
     name: 'SettingsPage',
     component: SettingsPage,
     beforeEnter: authGuard
-  },
-
-  { // FIXME: remove this
-    path: '/formkit',
-    name: 'FormkitPage',
-    component: FormkitPage
   },
 
   {
