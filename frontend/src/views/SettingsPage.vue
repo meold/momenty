@@ -4,10 +4,15 @@
       Edit Profile
     </h1>
 
-    <avatar-uploader v-model:url="data.avatarUrl" />
-
     <form-kit ref="form" v-model="data" messages-class="text-right" :actions="false" type="form" autocomplete="off" @submit="submit">
       <div class="grid grid-cols-1 gap-x-20 md:grid-cols-2">
+
+        <div class="row-span-2">
+          <div class="formkit-div block font-bold text-xl mb-7">Avatar</div>
+          <div class="flex justify-center">
+            <avatar-uploader v-model:url="data.avatarUrl" />
+          </div>
+        </div>
 
         <form-kit-schema :schema="schema" />
 
@@ -65,6 +70,7 @@ const schema = [
     $formkit: 'hidden',
     name: 'avatarUrl'
   },
+
   {
     $formkit: 'text',
     name: 'name',

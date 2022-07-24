@@ -81,7 +81,7 @@ export default {
   text: textClassification,
   textarea: {
     ...textClassification,
-    input: textClassification.input + ' !h-32'
+    input: textClassification.input + ' !h-36'
   },
   time: textClassification,
   url: textClassification,

@@ -9,7 +9,7 @@
         <progress-bar :value="progress" class="text-primary" />
       </div>
 
-      <div v-else class="w-full h-full flex justify-center items-center">
+      <div v-else class="w-full h-full flex justify-center items-center cursor-pointer">
         +
       </div>
     </div>
