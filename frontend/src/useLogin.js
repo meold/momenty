@@ -59,7 +59,10 @@ async function signMessage(nonce) {
     return await web3.instance.trx.sign(web3.instance.fromUtf8(`Nonce:${nonce}`));
   } catch (err) {
     if (err == 'Confirmation declined by user') {
-      error({ text: 'You must sign message to login!' });
+      error({
+        title: 'You must sign message to login!',
+        text: 'Despite displayed trx cost it absolutely FREE.'
+      });
     }
   }
   return null;

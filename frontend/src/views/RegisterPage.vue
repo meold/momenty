@@ -7,6 +7,13 @@
     <form-kit ref="form" v-model="data" messages-class="text-right" :actions="false" type="form" autocomplete="off" @submit="submit">
       <div class="grid grid-cols-1 gap-x-20 md:grid-cols-2">
 
+        <div class="row-span-2">
+          <div class="formkit-div block font-bold text-xl mb-7">Avatar</div>
+          <div class="flex justify-center">
+            <avatar-uploader v-model:url="data.avatarUrl" />
+          </div>
+        </div>
+
         <form-kit-schema :schema="schema" />
 
       </div>
@@ -60,6 +67,7 @@ import UiDialogTitle from '@/components/ui/UiDialogTitle.vue';
 import UiDialogPanel from '@/components/ui/UiDialogPanel.vue';
 import ButtonWallet from '@/components/ButtonWallet.vue';
 import ButtonPrimary from '@/components/ButtonPrimary.vue';
+import AvatarUploader from '@/components/AvatarUploader.vue';
 
 import { useRouter } from 'vue-router';
 import { userState } from '@/useLogin.js';
@@ -89,18 +97,10 @@ const schema = [
     name: 'address',
     validation: 'required'
   },
-  // {
-  //   $formkit: 'file',
-  //   name: 'avatar',
-  //   label: 'Avatar',
-  //   classes: {
-  //     label: 'text-xl font-bold mb-2',
-  //     input: 'placeholder:text-sm placeholder:opacity-30 placeholder:text-black w-full',
-  //     outer: 'relative row-span-2',
-  //     messages: 'absolute right-0 -mt-2'
-  //   },
-  //   validationVisibility: 'blur'
-  // },
+  {
+    $formkit: 'hidden',
+    name: 'avatarUrl'
+  },
   {
     $formkit: 'text',
     name: 'name',
