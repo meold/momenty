@@ -113,7 +113,9 @@ function parseJwt (token) {
 }
 
 function authGuard() {
-  error({ text: 'You must be logged in!' });
+  if (!userState.isLogged) {
+    error({ text: 'You must be logged in!' });
+  }
   return userState.isLogged;
 }
 

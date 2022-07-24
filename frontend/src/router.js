@@ -1,5 +1,5 @@
 import { createWebHistory, createRouter } from 'vue-router';
-import { authGuard } from '@/useLogin.js';
+import { authGuard, userState } from '@/useLogin.js';
 
 import MainPage from '@/views/MainPage.vue';
 import CreatePage from '@/views/CreatePage.vue';
@@ -26,6 +26,14 @@ const routes = [
   },
 
   {
+    path: '/profile',
+    name: 'MyProfilePage',
+    component: userState.data?.id ? ProfilePage : ErrorPage,
+    props: { id: userState.data?.id },
+    beforeEnter: authGuard
+  },
+
+  {
     path: '/profile/:id(\\d+)',
     name: 'ProfilePage',
     component: ProfilePage,
@@ -35,7 +43,8 @@ const routes = [
   {
     path: '/register',
     name: 'RegisterPage',
-    component: RegisterPage
+    component: RegisterPage,
+    redirect: userState.data?.id ? '/' : undefined
   },
 
   {

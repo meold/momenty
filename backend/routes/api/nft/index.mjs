@@ -2,6 +2,40 @@ import sections from '../../../../common/sections.mjs';
 
 export default async function routes(instance) {
 
+  instance.get(
+    '/',
+
+    {
+      schema: {
+        query: {
+          type: 'object',
+          properties: {
+            userId: {
+              type: 'number'
+            }
+          },
+          required: ['userId']
+        }
+      }
+    },
+
+    async (request) => {
+      const { userId } = request.query;
+
+      const nfts = await instance.sequelize.models.Nft.findAll({
+        where: {
+          userId
+        }
+      }, { raw: true });
+
+      if (!nfts) {
+        return { success: false };
+      }
+
+      return { success: true, nfts };
+    }
+  );
+
   instance.post(
     '/',
 
