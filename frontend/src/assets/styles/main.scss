@@ -28,9 +28,12 @@
     @apply flex flex-col rounded-2xl bg-white p-8 text-lg tracking-tight text-slate-900 shadow-[0_8px_60px_0_rgba(0,0,0,0.05)];
   }
   .menu-link {
-    @apply flex items-center gap-x-3 w-full p-2 text-base hover:text-primary;
+    @apply flex items-center gap-x-3 w-full p-2 text-base hover:text-primary truncate;
     &.router-link-exact-active {
       @apply text-primary/80 pointer-events-none;
+    }
+    svg {
+      flex-shrink: 0;
     }
   }
 }

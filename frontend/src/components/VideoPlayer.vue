@@ -3,7 +3,7 @@
     <video
       ref="videoPlayer"
       :key="key"
-      muted
+      :muted="!isUnmuted"
       loop
       playsinline
       disablepictureinpicture
@@ -28,6 +28,10 @@ export default {
     src: {
       type: String,
       default: null
+    },
+    isUnmuted: {
+      type: Boolean,
+      default: false
     }
   },
 
