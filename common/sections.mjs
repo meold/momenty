@@ -1,7 +1,7 @@
 export default [
   'funny',
   'pranks',
-  'memes',
+  'lifestyle',
   'stars',
   'sport',
   'fluffs'
