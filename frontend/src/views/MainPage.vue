@@ -42,7 +42,7 @@ import MenuVertical from '@/components/MenuVertical.vue';
 import ButtonPrimary from '@/components/ButtonPrimary.vue';
 import TheTron from '@/components/TheTron.vue';
 import Carousel from '@/components/Carousel.vue';
-// import Spinner from '@/components/Spinner.vue';
+import Spinner from '@/components/Spinner.vue';
 import { get } from '@/useApi.js';
 import { ref } from 'vue';
 
