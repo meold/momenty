@@ -198,4 +198,25 @@ export default async function routes(instance) {
       return { success: true, nfts };
     }
   );
+
+  instance.get(
+    '/image/',
+
+    async () => {
+      const { image } = await instance.sequelize.models.Nft.findOne({
+        attributes: ['image' ],
+        where: {
+          image: {
+            [Sequelize.Op.or]: {
+              [Sequelize.Op.like]: '%.jpeg',
+              [Sequelize.Op.like]: '%.jpg',
+            }
+          }
+        },
+        order: instance.sequelize.random()
+      }, { raw: true });
+
+      return { success: true, image };
+    }
+  );
 };

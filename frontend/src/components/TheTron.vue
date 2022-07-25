@@ -59,6 +59,8 @@
 </template>
 
 <script>
+import { get } from '@/useApi.js';
+
 export default {
   data() {
     return {
@@ -67,29 +69,41 @@ export default {
       interval: null,
       keys: [0, 1, 2, 3],
       classes: ['opacity-80', 'opacity-90', 'opacity-100', 'opacity-75'],
-      images: [
-        'https://picsum.photos/200/300?1',
-        'https://picsum.photos/200/300?2',
-        'https://picsum.photos/200/300?3',
-        'https://picsum.photos/200/300?4'
-      ]
+      images: []
     };
   },
+
+  async created() {
+    this.images = await Promise.all([
+      this.getImage(),
+      this.getImage(),
+      this.getImage(),
+      this.getImage()
+    ]);
+  },
+
   mounted() {
-    this.interval = setInterval(() => {
+    this.interval = setInterval(async () => {
       let rand;
       do {
         rand = Math.floor(Math.random() * 4)
       } while (rand === this.previous);
 
-      this.nonce++;
       this.previous = rand;
-      this.images[rand] = `https://picsum.photos/200/300?${this.nonce}`;
+      this.images[rand] = await this.getImage();
       this.keys[rand] = this.nonce;
     }, 6000);
   },
   beforeUnmount() {
     clearInterval(this.interval);
+  },
+
+  methods: {
+    async getImage() {
+      this.nonce++;
+      const { image } = await get('/nft/image/', { q: this.nonce }, { onError: () => {} });
+      return image;
+    }
   }
 };
 </script>
