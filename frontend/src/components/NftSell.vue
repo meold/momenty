@@ -4,8 +4,8 @@
   </div>
 
   <div class="font-bold text-2xl mb-5">
-    <input type="number" value="0.01">
-    ETH
+    <input type="number" value="999">
+    TRX
   </div>
 
   <div class="flex gap-x-3">
