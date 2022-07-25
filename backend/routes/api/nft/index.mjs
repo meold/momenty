@@ -1,4 +1,5 @@
 import sections from '../../../../common/sections.mjs';
+import Sequelize from 'sequelize';
 
 export default async function routes(instance) {
 
@@ -27,10 +28,6 @@ export default async function routes(instance) {
           userId
         }
       }, { raw: true });
-
-      if (!nfts) {
-        return { success: false };
-      }
 
       return { success: true, nfts };
     }
@@ -161,6 +158,44 @@ export default async function routes(instance) {
       }
 
       return { success: true, nft };
+    }
+  );
+
+  instance.get(
+    '/search/',
+
+    {
+      schema: {
+        query: {
+          type: 'object',
+          properties: {
+            search: {
+              type: 'string'
+            }
+          },
+          required: ['search']
+        }
+      }
+    },
+
+    async (request) => {
+      const { search } = request.query;
+
+
+      const nfts = await instance.sequelize.models.Nft.findAll({
+        where: {
+          [Sequelize.Op.or]: [
+            { 'title': { [Sequelize.Op.like]: '%' + search + '%' } },
+            { 'description': { [Sequelize.Op.like]: '%' + search + '%' } },
+            { '$user.name$': { [Sequelize.Op.like]: '%' + search + '%' } }
+          ]
+        },
+        include: [{ model: instance.sequelize.models.User, as: 'user', attributes: [] }],
+        limit: 30,
+        raw: true
+      });
+
+      return { success: true, nfts };
     }
   );
 };

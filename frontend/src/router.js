@@ -8,6 +8,7 @@ import ProfilePage from '@/views/ProfilePage.vue';
 import RegisterPage from '@/views/RegisterPage.vue';
 import ViewPage from '@/views/ViewPage.vue';
 import SettingsPage from '@/views/SettingsPage.vue';
+import SearchPage from '@/views/SearchPage.vue';
 import TermsPage from '@/views/TermsPage.vue';
 import PrivacyPage from '@/views/PrivacyPage.vue';
 import ComingSoonPage from '@/views/ComingSoonPage.vue';
@@ -50,6 +51,13 @@ const routes = [
     path: '/view/:id(\\d+)',
     name: 'ViewPage',
     component: ViewPage,
+    props: true
+  },
+
+  {
+    path: '/search',
+    name: 'SearchPage',
+    component: SearchPage,
     props: true
   },
 

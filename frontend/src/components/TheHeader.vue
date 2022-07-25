@@ -7,12 +7,7 @@
             <the-logo class="h-5" />
           </router-link>
           <div class="grow hidden md:flex justify-center">
-            <div class="relative w-full max-w-md">
-              <div class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
-                <svg aria-hidden="true" class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd" /></svg>
-              </div>
-              <input type="search" placeholder="Search by collection, NFT, username" class="w-full p-[13px] pl-10 border-2 rounded-xl border-gray-300 text-sm placeholder:text-gray-300">
-            </div>
+            <the-search />
           </div>
         </div>
         <div class="flex shrink-0 items-center gap-x-5 md:gap-x-8">
@@ -170,11 +165,10 @@
 
 <script setup>
 import TheLogo from '@/components/TheLogo.vue';
+import TheSearch from '@/components/TheSearch.vue';
 import MenuSocials from '@/components/MenuSocials.vue';
 import ButtonWallet from '@/components/ButtonWallet.vue';
 import ButtonSecondary from '@/components/ButtonSecondary.vue';
 import { Popover, PopoverButton, PopoverOverlay, PopoverPanel, TransitionRoot, TransitionChild } from '@headlessui/vue';
 import { logout, userState } from '@/useLogin.js';
-
-
 </script>
