@@ -8,7 +8,7 @@ import { computed } from 'vue';
 const props = defineProps({
   src: {
     type: String,
-    default: '/avatar.svg'
+    default: '/avatar-default.svg'
   }
 })
 
