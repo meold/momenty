@@ -5,8 +5,7 @@
       <div class="flex items-center justify-between flex-wrap">
         <div class="w-0 flex-1 flex items-center">
           <p class="ml-3 font-medium truncate">
-            <span class="md:hidden"> We announced a new product! </span>
-            <span class="hidden md:inline"> Big news! We're excited to announce a brand new product. </span>
+            <span>Note: NFT smartcontract is managed manually now. We are working on smartcontract, website and BTFS interactions.</span>
           </p>
         </div>
         <div class="flex-shrink-0 mx-2">
