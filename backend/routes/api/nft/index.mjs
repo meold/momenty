@@ -180,16 +180,27 @@ export default async function routes(instance) {
 
     async (request) => {
       const { search } = request.query;
+      const query = (search).toLowerCase();
 
+      let where;
+      if (search) {
+        where = {
+          [Sequelize.Op.or]: [
+            instance.sequelize.where(
+              instance.sequelize.fn('LOWER', instance.sequelize.col('title')), {[Sequelize.Op.like]: `%${query}%`}
+            ),
+            instance.sequelize.where(
+              instance.sequelize.fn('LOWER', instance.sequelize.col('description')), {[Sequelize.Op.like]: `%${query}%`}
+            ),
+            instance.sequelize.where(
+              instance.sequelize.fn('LOWER', instance.sequelize.col('user.name')), {[Sequelize.Op.like]: `%${query}%`}
+            )
+          ]
+        };
+      }
 
       const nfts = await instance.sequelize.models.Nft.findAll({
-        where: {
-          [Sequelize.Op.or]: [
-            { 'title': { [Sequelize.Op.like]: '%' + search + '%' } },
-            { 'description': { [Sequelize.Op.like]: '%' + search + '%' } },
-            { '$user.name$': { [Sequelize.Op.like]: '%' + search + '%' } }
-          ]
-        },
+        where,
         include: [{ model: instance.sequelize.models.User, as: 'user', attributes: [] }],
         limit: 30,
         raw: true
