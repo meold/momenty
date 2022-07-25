@@ -6,7 +6,7 @@
 
     <div class="grow">
       <h1 class="text-xl font-bold mb-2">
-        <span class="capitalize">Search results for "{{ route.params.search }}"</span>
+        Search results for "{{ route.params.search }}"
       </h1>
 
       <div v-if="!isNftsLoaded" class="flex justify-center items-center h-40">
