@@ -18,7 +18,7 @@
         </div>
       </div>
 
-      <div v-else class="flex justify-center items-center h-40 FIXME:more_details">
+      <div v-else class="flex justify-center items-center h-40">
         No moments found
       </div>
     </div>
