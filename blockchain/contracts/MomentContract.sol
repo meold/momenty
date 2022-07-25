@@ -5,6 +5,8 @@ import "@openzeppelin/contracts/token/ERC721/extensions/IERC721Metadata.sol";
 import "./ERC721Full.sol";
 
 contract MomentContract is IERC721Metadata, ERC721Full {
+    event MomentSold(uint256 _momentId, address _buyer, uint256 _price);
+
     struct metadata {
         string name;
         string description;
@@ -80,5 +82,16 @@ contract MomentContract is IERC721Metadata, ERC721Full {
 
     function nftSold(uint256 _tokenId) public {
         _listedForSale[_tokenId] = false;
+    }
+
+    function buyMoment(
+        address _owner,
+        uint256 _momentId,
+        uint256 _price
+    ) public payable {
+        momentContract.transferFrom(_owner, msg.sender, _momentId);
+        momentContract.nftSold(_momentId);
+
+        emit MomentSold(_momentId, msg.sender, _price);
     }
 }
