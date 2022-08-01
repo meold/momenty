@@ -7,10 +7,10 @@ on:
 name: Main Pipeline
 
 env:
-  ECR_REPOSITORY_MAIN         : main-nftmoments
-  ECS_CLUSTER                 : nftmoments-main
-  ECS_CONTAINER_MAIN          : backend-main
-  ECS_SERVICE_MAIN            : backend-main-service
+  ECR_REPOSITORY_MAIN         : main-momenty
+  ECS_CLUSTER                 : momenty-main
+  ECS_CONTAINER_MAIN          : backend-momenty-main
+  ECS_SERVICE_MAIN            : backend-momenty-main-service
 
 
 
@@ -31,7 +31,7 @@ jobs:
 
     - name: Get .env from Secret Manager
       run: |
-        aws secretsmanager get-secret-value --secret-id env/main --query SecretString --output text >> backend/.env
+        aws secretsmanager get-secret-value --secret-id env/momenty/main --query SecretString --output text >> backend/.env
 
     - uses: actions/cache@v3
       with:

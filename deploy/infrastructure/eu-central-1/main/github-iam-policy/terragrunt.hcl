@@ -32,8 +32,8 @@ inputs = {
          "Effect": "Allow",
          "Action": "s3:*",
          "Resource": [
-           "arn:aws:s3:::main-nftmoments-origin/*",
-           "arn:aws:s3:::main-nftmoments-origin"
+           "arn:aws:s3:::main-momenty-origin/*",
+           "arn:aws:s3:::main-momenty-origin"
          ]
       },
       {

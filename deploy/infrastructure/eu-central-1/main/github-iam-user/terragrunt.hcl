@@ -14,7 +14,7 @@ terraform {
 
 inputs = {
   
-  name = "github-actions-${local.env}"
+  name = "github-actions-${local.env}-${local.project}"
   create_iam_user_login_profile = false
   create_iam_access_key         = true
   // Check iam_access_key_secret in terraform.tfstate in relative path.

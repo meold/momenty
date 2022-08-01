@@ -140,7 +140,7 @@ if (!userState.isLogged) {
   router.push('/register');
 }
 
-const S3prefix = 'https://main-nftmoments-incoming-media.s3.eu-central-1.amazonaws.com/';
+const S3prefix = 'https://main-momenty-incoming-media.s3.eu-central-1.amazonaws.com/';
 
 const form = ref(null);
 const nft = ref({});
@@ -247,7 +247,7 @@ async function onVideoChange(event) {
     return;
   }
 
-  //NOTE url to file will be https://main-nftmoments-incoming-media.s3.eu-central-1.amazonaws.com/{{videoId}}
+  //NOTE url to file will be https://main-momenty-incoming-media.s3.eu-central-1.amazonaws.com/{{videoId}}
   nft.value.video = S3prefix + videoId;
 }
 
@@ -266,7 +266,7 @@ async function onImageChange(event) {
     return;
   }
 
-  //NOTE url to file will be https://main-nftmoments-incoming-media.s3.eu-central-1.amazonaws.com/{{imageId}}
+  //NOTE url to file will be https://main-momenty-incoming-media.s3.eu-central-1.amazonaws.com/{{imageId}}
   nft.value.image = S3prefix + imageId;
 }
 

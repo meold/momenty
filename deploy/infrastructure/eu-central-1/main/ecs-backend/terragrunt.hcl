@@ -14,8 +14,8 @@ terraform {
 
 inputs = {
   cluster_name           = dependency.ecs.outputs.ecs_cluster_name
-  log_group_name         = "backend-${local.environment_vars.locals.environment}"
-  app_name               = "backend-${local.environment_vars.locals.environment}"
+  log_group_name         = "backend-${local.environment_vars.locals.project}-${local.environment_vars.locals.environment}"
+  app_name               = "backend-${local.environment_vars.locals.project}-${local.environment_vars.locals.environment}"
   alb_target_group       = dependency.alb.outputs.target_group_arns[0]
   node_env               = "production"
   container_port         = local.environment_vars.locals.back_end_port

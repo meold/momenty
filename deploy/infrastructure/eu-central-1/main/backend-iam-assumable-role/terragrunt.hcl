@@ -20,7 +20,7 @@ inputs = {
 
   create_role = true
 
-  role_name         = "backend-${local.env}"
+  role_name         = "backend-${local.env}-${local.project}"
   role_requires_mfa = false
 
 

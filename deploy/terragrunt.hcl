@@ -46,7 +46,7 @@ remote_state {
   backend = "s3"
   config = {
     encrypt        = true
-    bucket         = "nftmoments-infrastructure"
+    bucket         = "momenty-infrastructure"
     key            = "${path_relative_to_include()}/terraform.tfstate"
     region         = "eu-central-1"
     dynamodb_table = "${local.project}-${local.env}-terraform-locks"

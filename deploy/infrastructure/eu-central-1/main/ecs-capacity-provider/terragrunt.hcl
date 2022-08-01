@@ -13,7 +13,7 @@ terraform {
 }
 
 inputs = {
-  name                  = "cp-${local.environment_vars.locals.environment}"
+  name                  = "cp-${local.environment_vars.locals.project}-${local.environment_vars.locals.environment}"
   min_size              = local.environment_vars.locals.min_size
   max_size              = local.environment_vars.locals.max_size
   autoscaling_group_arn = dependency.asg.outputs.autoscaling_group_arn

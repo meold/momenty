@@ -13,9 +13,9 @@ terraform {
 
 inputs = {
   
-  name              = "/${local.environment_vars.locals.environment}/rdsmysql/password"
+  name              = "/${local.environment_vars.locals.environment}/${local.project}/rdsmysql/password"
   env               = local.env
-  description       = "RDS ${local.environment_vars.locals.environment} master password"
+  description       = "RDS ${local.environment_vars.locals.environment} ${local.project} master password"
   length            = 14
   override_special  = "@#$%^*()-=_+[]{};<>?,''./' '"
   pass_version      = 3

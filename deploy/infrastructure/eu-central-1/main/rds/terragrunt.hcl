@@ -44,7 +44,7 @@ inputs = {
   performance_insights_enabled          = false
   performance_insights_retention_period = 7
   create_monitoring_role                = true
-  monitoring_role_name                  = "RDSMonitoringRole"
+  monitoring_role_name                  = "RDSRole${local.environment_vars.locals.project}"
   monitoring_interval                   = 60
   enabled_cloudwatch_logs_exports       = ["audit", "error", "general", "slowquery"]
 

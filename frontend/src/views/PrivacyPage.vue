@@ -5,7 +5,7 @@
     </h1>
 
     <p>
-      Magicals, Inc. d/b/a NFTmoments (“NFTmoments,” “we”, “us”, or “our”) is committed to protecting your privacy. We have prepared this Privacy Policy to describe to you our practices regarding the Personal Data (as defined below) we collect, use, and share in connection with the NFTmoments website, mobile app, and other software provided on or in connection with our services, as described in our Terms of Service (collectively, the “Service”). “NFT” in this Privacy Policy means a non-fungible token or similar digital item implemented on a blockchain (such as the TRON blockchain), which uses smart contracts to link to or otherwise be associated with certain content or data.
+      Magicals, Inc. d/b/a Momenty (“Momenty,” “we”, “us”, or “our”) is committed to protecting your privacy. We have prepared this Privacy Policy to describe to you our practices regarding the Personal Data (as defined below) we collect, use, and share in connection with the Momenty website, mobile app, and other software provided on or in connection with our services, as described in our Terms of Service (collectively, the “Service”). “NFT” in this Privacy Policy means a non-fungible token or similar digital item implemented on a blockchain (such as the TRON blockchain), which uses smart contracts to link to or otherwise be associated with certain content or data.
     </p>
 
     <ol>
@@ -155,9 +155,9 @@
             obligations regarding your Personal Data as described in this Privacy Policy.
           </li>
           <li>
-            <strong>Legal Rights</strong>. Regardless of any choices you make regarding your Personal Data (as described below), NFTmoments may disclose Personal
+            <strong>Legal Rights</strong>. Regardless of any choices you make regarding your Personal Data (as described below), Momenty may disclose Personal
             Data if it believes in good faith that such disclosure is necessary: (a) in connection with any legal investigation; (b) to comply with relevant laws
-            or to respond to subpoenas, warrants, or other legal process served on NFTmoments; (c) to protect or defend the rights or property of NFTmoments or users of
+            or to respond to subpoenas, warrants, or other legal process served on Momenty; (c) to protect or defend the rights or property of Momenty or users of
             the Service; and/or (d) to investigate or assist in preventing any violation or potential violation of the law, this Privacy Policy, or our Terms of
             Service.
           </li>
@@ -215,7 +215,7 @@
           </li>
           <li>
             If you wish to exercise your rights under the GDPR, CCPA, or other applicable data protection or privacy laws, please contact us by using the “Submit
-            a request” link <a href="https://t.me/nftmoments22" rel="nofollow noopener" target="_blank">here</a> or
+            a request” link <a href="https://t.me/Momenty22" rel="nofollow noopener" target="_blank">here</a> or
             at the address provided in Section 13 below, specify your request, and reference the applicable law. We may ask you to verify your identity, or ask
             for more information about your request. We will consider and act upon any above request in accordance with applicable law. We will not discriminate
             against you for exercising any of these rights.
@@ -249,11 +249,11 @@
       </li>
       <li>
         <strong>Minors</strong>. We do not intentionally gather Personal Data from visitors who are under the age of 13. Our Terms of Service require all users to
-        be at least 18 years old. Minors who are at least 13 years old but are under 18 years old may use a parent or guardian’s NFTmoments account, but only with
-        the involvement of the account holder. If a child under 13 submits Personal Data to NFTmoments and we learn that the Personal Data is the information of a
+        be at least 18 years old. Minors who are at least 13 years old but are under 18 years old may use a parent or guardian’s Momenty account, but only with
+        the involvement of the account holder. If a child under 13 submits Personal Data to Momenty and we learn that the Personal Data is the information of a
         child under 13, we will attempt to delete the information as soon as possible. If you believe that we might have any Personal Data from a child under 13,
         please contact us by using the “Submit a request” link
-        <a href="https://t.me/nftmoments22" rel="nofollow noopener" target="_blank">here</a> or at the address
+        <a href="https://t.me/Momenty22" rel="nofollow noopener" target="_blank">here</a> or at the address
         indicated in Section 13 below.
       </li>
       <li>
@@ -264,14 +264,14 @@
       </li>
       <li>
         <strong>Changes to This Privacy Policy</strong>. This Privacy Policy may be updated from time to time for any reason. We will notify you of any changes to
-        our Privacy Policy by posting the new Privacy Policy at <a href="/privacy">https://nftmoments.fun/privacy</a>. The date the
+        our Privacy Policy by posting the new Privacy Policy at <a href="/privacy">https://Momenty.fun/privacy</a>. The date the
         Privacy Policy was last revised is identified at the beginning of this Privacy Policy. You are responsible for periodically visiting our Service and this
         Privacy Policy to check for any changes.
       </li>
       <li>
         <strong>Questions; Contacting NFTmoment; Reporting Violations</strong>. If you have any questions or concerns or complaints about our Privacy Policy or our
         data collection or processing practices, or if you want to report any security violations to us, please contact us by using the “Submit a request” link
-        <a href="https://t.me/nftmoments22" rel="nofollow noopener" target="_blank">here</a> or at the following
+        <a href="https://t.me/Momenty22" rel="nofollow noopener" target="_blank">here</a> or at the following
         address: 228 Park Avenue South, #22014, New York, NY 10003.
       </li>
     </ol>

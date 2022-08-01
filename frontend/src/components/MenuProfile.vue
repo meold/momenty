@@ -29,7 +29,7 @@
       </div>
     </a>
 
-    <a v-if="user.site" class="menu-link text-black/50" href="https://nftmoments.fun" target="_blank" rel="nofollow noopener">
+    <a v-if="user.site" class="menu-link text-black/50" href="https://momenty.io" target="_blank" rel="nofollow noopener">
       <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M14.6663 8.00001C14.6663 11.6819 11.6816 14.6667 7.99967 14.6667M14.6663 8.00001C14.6663 4.31811 11.6816 1.33334 7.99967 1.33334M14.6663 8.00001H1.33301M7.99967 14.6667C4.31778 14.6667 1.33301 11.6819 1.33301 8.00001M7.99967 14.6667C9.66719 12.8411 10.6148 10.472 10.6663 8.00001C10.6148 5.52803 9.66719 3.15891 7.99967 1.33334M7.99967 14.6667C6.33215 12.8411 5.38451 10.472 5.33301 8.00001C5.38451 5.52803 6.33215 3.15891 7.99967 1.33334M1.33301 8.00001C1.33301 4.31811 4.31778 1.33334 7.99967 1.33334" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
       </svg>
