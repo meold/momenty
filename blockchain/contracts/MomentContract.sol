@@ -21,7 +21,7 @@ contract MomentContract is IERC721Metadata, ERC721Full {
 
     mapping(uint256 => bool) _listedForSale;
 
-    constructor() public ERC721("NFT_MOMENTS", "MMNT") {}
+    constructor() public ERC721("Momenty", "MMT") {}
 
     function mint(
         string memory _name,

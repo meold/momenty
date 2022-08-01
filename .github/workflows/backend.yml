@@ -7,8 +7,8 @@ on:
 name: Main Pipeline
 
 env:
-  ECR_REPOSITORY_MAIN         : main-nftmoments
-  ECS_CLUSTER                 : nftmoments-main
+  ECR_REPOSITORY_MAIN         : main-momenty
+  ECS_CLUSTER                 : momenty-main
   ECS_CONTAINER_MAIN          : backend-main
   ECS_SERVICE_MAIN            : backend-main-service
 

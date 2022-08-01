@@ -29,7 +29,7 @@ import { ref } from 'vue';
 import { post } from '@/useApi.js';
 import { error } from '@/notify.js';
 
-const S3prefix = 'https://main-nftmoments-incoming-media.s3.eu-central-1.amazonaws.com/';
+const S3prefix = 'https://main-momenty-incoming-media.s3.eu-central-1.amazonaws.com/';
 
 defineProps({
   url: {
@@ -62,7 +62,7 @@ async function onChange(event) {
     return;
   }
 
-  //NOTE url to file will be https://main-nftmoments-incoming-media.s3.eu-central-1.amazonaws.com/{{imageId}}
+  //NOTE url to file will be https://main-momenty-incoming-media.s3.eu-central-1.amazonaws.com/{{imageId}}
   setUrl(S3prefix + imageId);
 }
 
