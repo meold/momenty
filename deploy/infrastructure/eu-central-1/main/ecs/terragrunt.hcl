@@ -13,10 +13,10 @@ terraform {
 }
 inputs = {
   name                     = "${local.project}-${local.env}"
-  capacity_providers       = ["cp-${local.environment_vars.locals.environment}"]
+  capacity_providers       = ["cp-${local.environment_vars.locals.project}-${local.environment_vars.locals.environment}"]
 
   default_capacity_provider_strategy = [{
-    capacity_provider = "cp-${local.environment_vars.locals.environment}"
+    capacity_provider = "cp-${local.environment_vars.locals.project}-${local.environment_vars.locals.environment}"
     weight            = "1"
   }]
   tags = {

@@ -13,7 +13,7 @@ terraform {
 
 inputs = {
 
-  name = "alb-${local.env}"
+  name = "alb-${local.env}-${local.project}"
 
   load_balancer_type = "application"
 
@@ -45,7 +45,7 @@ inputs = {
 
   target_groups = [
     {
-      name                 = "app"
+      name                = "app-${local.project}"
       backend_protocol     = "HTTP"
       backend_port         = local.environment_vars.locals.back_end_port
       target_type          = "instance"

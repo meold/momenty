@@ -20,7 +20,7 @@ inputs = {
 
   create_role = true
 
-  role_name         = "github-action-${local.env}"
+  role_name         = "github-action-${local.env}-${local.project}"
   role_requires_mfa = false
 
 

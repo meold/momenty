@@ -26,8 +26,17 @@ inputs = {
          "Resource": [
            "arn:aws:s3:::*"
          ]
+      },
+      {
+        "Sid": "Stmt1645190459413",
+        "Action": "sqs:*",
+        "Effect": "Allow",
+        "Resource": [
+          "arn:aws:sqs:eu-central-1:738261233018:momentlyrenderImages",
+          "arn:aws:sqs:eu-central-1:738261233018:momentlyrenderVideo"
+        ]
       }
-   ]
+  ]
 }
 EOF
 

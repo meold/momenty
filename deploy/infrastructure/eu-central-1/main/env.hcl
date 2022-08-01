@@ -18,5 +18,5 @@ locals {
   min_size                    = 2
   max_size                    = 4
   // DNS     
-  main_domain                 = "momenty.fun"
+  main_domain                 = "momenty.io"
 }
