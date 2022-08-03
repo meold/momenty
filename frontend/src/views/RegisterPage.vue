@@ -59,7 +59,7 @@
 <script setup>
 import { ref, watch } from 'vue';
 import { post } from '@/useApi.js';
-import { web3 } from '@/useTronlink.js';
+import { web3 } from '@/useMetamask.js';
 import { setUserState } from '@/useLogin';
 
 import UiDialog from '@/components/ui/UiDialog.vue';

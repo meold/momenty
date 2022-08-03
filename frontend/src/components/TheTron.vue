@@ -74,29 +74,29 @@ export default {
   },
 
   async created() {
-    this.images = await Promise.all([
-      this.getImage(),
-      this.getImage(),
-      this.getImage(),
-      this.getImage()
-    ]);
+    // this.images = await Promise.all([
+    //   this.getImage(),
+    //   this.getImage(),
+    //   this.getImage(),
+    //   this.getImage()
+    // ]);
   },
 
-  mounted() {
-    this.interval = setInterval(async () => {
-      let rand;
-      do {
-        rand = Math.floor(Math.random() * 4)
-      } while (rand === this.previous);
+  // mounted() {
+  //   this.interval = setInterval(async () => {
+  //     let rand;
+  //     do {
+  //       rand = Math.floor(Math.random() * 4)
+  //     } while (rand === this.previous);
 
-      this.previous = rand;
-      this.images[rand] = await this.getImage();
-      this.keys[rand] = this.nonce;
-    }, 6000);
-  },
-  beforeUnmount() {
-    clearInterval(this.interval);
-  },
+  //     this.previous = rand;
+  //     this.images[rand] = await this.getImage();
+  //     this.keys[rand] = this.nonce;
+  //   }, 6000);
+  // },
+  // beforeUnmount() {
+  //   clearInterval(this.interval);
+  // },
 
   methods: {
     async getImage() {

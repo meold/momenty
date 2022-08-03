@@ -9,7 +9,7 @@
   </div>
 
   <div class="flex gap-x-3">
-    <a href="https://shasta.tronscan.org/#/token721/TF3eYJEEmdyzUWfvCPyowWDwoKXg4xJGuy" target="_blank" class="flex items-center justify-center px-8 bg-primary hover:opacity-90 hover:shadow-inner border-2 border-primary rounded-xl text-sm font-bold leading-none text-white py-3">
+    <a href="#" target="_blank" class="flex items-center justify-center px-8 bg-primary hover:opacity-90 hover:shadow-inner border-2 border-primary rounded-xl text-sm font-bold leading-none text-white py-3">
       Sell NFT
     </a>
     <button-secondary class="!p-3">
