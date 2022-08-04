@@ -10,7 +10,8 @@ const shouldConnect = computed(() => metamaskState.value == 'not_connected');
 const web3 = reactive({
   instance: null,
   balance: null,
-  address: null
+  address: null,
+  chainId: null
 });
 
 const isFirefox = typeof InstallTrigger !== 'undefined';
@@ -31,12 +32,6 @@ function useMetamask() {
   }
 
   resetListeners();
-
-  if (!window.ethereum.selectedAddress) {
-    metamaskState.value = 'not_connected';
-    return;
-  }
-
   connectWeb3();
 }
 
@@ -60,14 +55,20 @@ function getInstallLink() {
   return 'https://metamask.io';
 }
 
-function connectWeb3() {
+async function connectWeb3() {
 
-  window.ethereum.request({ method: 'eth_accounts' }).then(a => console.log('CONNECTING', a, window.ethereum.selectedAddress));
+  const [ chainId, accounts ] = await Promise.all([
+    window.ethereum.request({ method: 'eth_chainId' }),
+    window.ethereum.request({ method: 'eth_accounts' })
+  ]);
+
+  console.log('CONNECTING', accounts, window.ethereum.selectedAddress)
 
   web3.instance = window.ethereum;
-  web3.address = window.ethereum.selectedAddress;
+  web3.address = accounts[0];
+  web3.chainId = chainId;
 
-  metamaskState.value = window.ethereum.selectedAddress ? 'connected' : 'not_connected';
+  metamaskState.value = web3.address ? 'connected' : 'not_connected';
 
   // Not now
   // getBalance();

@@ -25,8 +25,4 @@ import TheHeader from '@/components/TheHeader.vue';
 import TheFooter from '@/components/TheFooter.vue';
 import TheBanner from '@/components/TheBanner.vue';
 import TheNotifier from '@/components/TheNotifier.vue';
-import { useMetamask } from './useMetamask.js';
-import { onMounted } from 'vue';
-
-onMounted(useMetamask);
 </script>
