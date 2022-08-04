@@ -14,6 +14,14 @@ const web3 = reactive({
   chainId: null
 });
 
+const shortAddress = computed(() => {
+  if (!web3.address) {
+    return null;
+  }
+
+  return web3.address.substring(0, 6) + '...' + web3.address.substring(38);
+});
+
 const isFirefox = typeof InstallTrigger !== 'undefined';
 const isChrome = !!window.chrome;
 const isEdge = /Edge/.test(navigator.userAgent);
@@ -197,6 +205,7 @@ export {
   connectWeb3,
   getInstallLink,
   signMessage,
+  shortAddress,
   metamaskState,
   web3,
   shouldInstallWallet,

@@ -19,7 +19,7 @@
       <ui-dialog-title>
         Attention!
       </ui-dialog-title>
-      Your wallet address <strong>{{ web3.address }}</strong> is not registered yet.
+      Your wallet address <strong>{{ shortAddress }}</strong> is not registered yet.
       Make shure you are using proper account.
       <div class="flex justify-between mt-5">
         <button-secondary @click="isOpen = false">
@@ -47,7 +47,7 @@ import { error } from '@/notify.js';
 import { ref } from 'vue';
 
 import {
-  web3,
+  shortAddress,
   installWallet,
   connectMetamask,
   shouldInstallWallet,
