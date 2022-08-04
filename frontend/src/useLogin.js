@@ -2,8 +2,7 @@ import { reactive, watch } from 'vue';
 import { get, post } from '@/useApi.js';
 import { error } from '@/notify.js';
 
-import { web3, connectWeb3 } from '@/useMetamask.js';
-import { ethers } from 'ethers';
+import { web3, connectWeb3, signMessage } from '@/useMetamask.js';
 
 const userState = reactive({
   isLogged: false,
@@ -50,27 +49,6 @@ async function getToken() {
   }
 
   return token;
-}
-
-async function signMessage(nonce) {
-  if (!web3.instance || !web3.address) {
-    return;
-  }
-
-  const provider = new ethers.providers.Web3Provider(web3.instance);
-  const signer = provider.getSigner();
-
-  try {
-    return await signer.signMessage(`Nonce:${nonce}`);
-  } catch (err) {
-    if (err.code == 4001) {
-      error({
-        title: 'You must sign message to login!',
-        text: 'It\'s absolutely FREE.'
-      });
-    }
-  }
-  return null;
 }
 
 async function login() {

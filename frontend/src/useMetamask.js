@@ -1,5 +1,6 @@
 import { ref, reactive, computed } from 'vue';
 import { error } from '@/notify.js';
+import { ethers } from 'ethers';
 
 const metamaskState = ref(null);
 
@@ -64,8 +65,6 @@ async function connectWeb3() {
   web3.address = window.ethereum.selectedAddress;
 
   metamaskState.value = window.ethereum.selectedAddress ? 'connected' : 'not_connected';
-
-
 
   // Not now
   // getBalance();
@@ -155,6 +154,26 @@ function onAccountsChanged(e) {
   connectWeb3();
 }
 
+async function signMessage(nonce) {
+  if (!web3.instance || !web3.address) {
+    return;
+  }
+
+  const provider = new ethers.providers.Web3Provider(web3.instance);
+  const signer = provider.getSigner();
+
+  try {
+    return await signer.signMessage(`Nonce:${nonce}`);
+  } catch (err) {
+    if (err.code == 4001) {
+      error({
+        title: 'You must sign message to login!',
+        text: 'It\'s absolutely FREE.'
+      });
+    }
+  }
+  return null;
+}
 
 export {
   useMetamask,
@@ -162,6 +181,7 @@ export {
   connectMetamask,
   connectWeb3,
   getInstallLink,
+  signMessage,
   metamaskState,
   web3,
   shouldInstallWallet,
