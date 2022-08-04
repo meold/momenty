@@ -3,6 +3,7 @@ import { get, post } from '@/useApi.js';
 import { error } from '@/notify.js';
 
 import { web3, connectWeb3 } from '@/useMetamask.js';
+import { ethers } from 'ethers';
 
 const userState = reactive({
   isLogged: false,
@@ -52,16 +53,20 @@ async function getToken() {
 }
 
 async function signMessage(nonce) {
-  if (!web3.instance) {
+  if (!web3.instance || !web3.address) {
     return;
   }
+
+  const provider = new ethers.providers.Web3Provider(web3.instance);
+  const signer = provider.getSigner();
+
   try {
-    return await web3.instance.trx.sign(web3.instance.fromUtf8(`Nonce:${nonce}`));
+    return await signer.signMessage(`Nonce:${nonce}`);
   } catch (err) {
-    if (err == 'Confirmation declined by user') {
+    if (err.code == 4001) {
       error({
         title: 'You must sign message to login!',
-        text: 'Despite displayed trx cost it absolutely FREE.'
+        text: 'It\'s absolutely FREE.'
       });
     }
   }

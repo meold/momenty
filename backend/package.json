@@ -18,12 +18,12 @@
     "@fastify/multipart": "^7.1.0",
     "@fastify/static": "^6.4.1",
     "dotenv": "^16.0.1",
+    "ethers": "^5.6.9",
     "fastify": "^4.3.0",
     "mime-types": "^2.1.35",
     "mysql2": "^2.3.3",
     "package-lock": "^1.0.5",
     "sequelize": "^6.21.3",
-    "tronweb": "^4.2.0",
     "uuid": "^8.3.2"
   },
   "devDependencies": {

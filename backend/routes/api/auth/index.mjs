@@ -1,4 +1,4 @@
-import TronWeb from 'tronweb';
+import { ethers } from 'ethers';
 
 export default async function routes(instance) {
 
@@ -52,6 +52,14 @@ export default async function routes(instance) {
             }
           },
           required: ['signedMessage']
+        },
+        params: {
+          properties: {
+            address: {
+              type: 'string'
+            }
+          },
+          required: ['address']
         }
       }
     },
@@ -70,11 +78,11 @@ export default async function routes(instance) {
         return { success: false };
       }
 
-      const messsage = `Nonce:${user.nonce}`;
+      const message = `Nonce:${user.nonce}`;
 
-      const isValid = TronWeb.Trx.verifySignature(TronWeb.toHex(messsage), TronWeb.address.toHex(address), request.body.signedMessage);
+      const signerAddr = ethers.utils.verifyMessage(message, request.body.signedMessage);
 
-      if (!isValid) {
+      if (!signerAddr || signerAddr.toLowerCase() != address) {
         return { success: false };
       }
 
