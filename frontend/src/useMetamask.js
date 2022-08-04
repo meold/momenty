@@ -31,7 +31,6 @@ function useMetamask() {
     return;
   }
 
-  resetListeners();
   connectWeb3();
 }
 
@@ -62,7 +61,7 @@ async function connectWeb3() {
     window.ethereum.request({ method: 'eth_accounts' })
   ]);
 
-  console.log('CONNECTING', accounts, window.ethereum.selectedAddress)
+  console.log('CONNECTING', accounts)
 
   web3.instance = window.ethereum;
   web3.address = accounts[0];
@@ -70,6 +69,7 @@ async function connectWeb3() {
 
   metamaskState.value = web3.address ? 'connected' : 'not_connected';
 
+  resetListeners();
   // Not now
   // getBalance();
 }
@@ -117,7 +117,8 @@ function resetListeners() {
   window.ethereum.removeListener('accountsChanged', onAccountsChanged);
   window.ethereum.on('accountsChanged', onAccountsChanged);
 
-  // chainChanged
+  window.ethereum.removeListener('chainChanged', onChainChanged);
+  window.ethereum.on('chainChanged', onChainChanged);
 }
 
 // switch chain
@@ -157,6 +158,15 @@ function onAccountsChanged(e) {
 
   metamaskState.value = 'not_connected';
   connectWeb3();
+}
+
+function onChainChanged(e) {
+  console.log('CHAIN CHANGED', e, web3.chainId);
+  if (e == web3.chainId) {
+    return;
+  }
+
+  web3.chainId = e;
 }
 
 async function signMessage(nonce) {
