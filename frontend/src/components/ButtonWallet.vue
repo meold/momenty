@@ -3,7 +3,7 @@
   <div v-if="userState.isLogged" class="hidden" />
 
   <button-primary v-else-if="shouldInstallWallet" v-bind="$attrs" @click="doInstall">
-    Install Tronlink
+    Install Wallet
   </button-primary>
 
   <button-primary v-else-if="shouldConnect" v-bind="$attrs" @click="doConnect">
@@ -49,12 +49,12 @@ import { ref } from 'vue';
 import {
   web3,
   installWallet,
-  connectTronLink,
+  connectMetamask,
   shouldInstallWallet,
   shouldConnect,
   isBrowserSupported,
   getInstallLink
-} from '@/useTronlink.js';
+} from '@/useMetamask.js';
 
 import {
   login,
@@ -76,12 +76,15 @@ function doInstall() {
     return;
   }
 
-  error({ text: 'Yor browser doesn\'t support Tronlink wallet. Please use supported one.' });
+  error({ text: 'Yor browser doesn\'t support Metamask wallet. Please use supported one.' });
   setTimeout(() => window.location = getInstallLink(), 4000);
 }
 
 async function doConnect() {
-  await connectTronLink();
+  const result = await connectMetamask();
+  if (!result) {
+    return;
+  }
   if (!userState.isRegistered) {
     await isUserRegistered();
   }

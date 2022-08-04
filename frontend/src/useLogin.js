@@ -2,7 +2,7 @@ import { reactive, watch } from 'vue';
 import { get, post } from '@/useApi.js';
 import { error } from '@/notify.js';
 
-import { web3, connectWeb3 } from '@/useTronlink.js';
+import { web3, connectWeb3 } from '@/useMetamask.js';
 
 const userState = reactive({
   isLogged: false,

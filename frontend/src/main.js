@@ -6,7 +6,7 @@ import { generateClasses } from '@formkit/tailwindcss';
 import theme from './formkit-theme.js';
 import { configureApi } from './useApi.js';
 import { error, processError } from './notify.js';
-import { useTronlink } from './useTronlink.js';
+import { useMetamask } from './useMetamask.js';
 
 import '@/assets/styles/main.scss';
 
@@ -19,7 +19,7 @@ configureApi({
   }
 });
 
-useTronlink();
+useMetamask();
 
 createApp(App)
   .use(router)

@@ -5,7 +5,7 @@
     </h1>
 
     <p>
-      Magicals, Inc. d/b/a Momenty (“Momenty,” “we”, “us”, or “our”) is committed to protecting your privacy. We have prepared this Privacy Policy to describe to you our practices regarding the Personal Data (as defined below) we collect, use, and share in connection with the Momenty website, mobile app, and other software provided on or in connection with our services, as described in our Terms of Service (collectively, the “Service”). “NFT” in this Privacy Policy means a non-fungible token or similar digital item implemented on a blockchain (such as the TRON blockchain), which uses smart contracts to link to or otherwise be associated with certain content or data.
+      Magicals, Inc. d/b/a Momenty (“Momenty,” “we”, “us”, or “our”) is committed to protecting your privacy. We have prepared this Privacy Policy to describe to you our practices regarding the Personal Data (as defined below) we collect, use, and share in connection with the Momenty website, mobile app, and other software provided on or in connection with our services, as described in our Terms of Service (collectively, the “Service”). “NFT” in this Privacy Policy means a non-fungible token or similar digital item implemented on a blockchain (such as the Polygon blockchain), which uses smart contracts to link to or otherwise be associated with certain content or data.
     </p>
 
     <ol>
@@ -269,7 +269,7 @@
         Privacy Policy to check for any changes.
       </li>
       <li>
-        <strong>Questions; Contacting NFTmoment; Reporting Violations</strong>. If you have any questions or concerns or complaints about our Privacy Policy or our
+        <strong>Questions; Contacting Momenty; Reporting Violations</strong>. If you have any questions or concerns or complaints about our Privacy Policy or our
         data collection or processing practices, or if you want to report any security violations to us, please contact us by using the “Submit a request” link
         <a href="https://t.me/Momenty22" rel="nofollow noopener" target="_blank">here</a> or at the following
         address: 228 Park Avenue South, #22014, New York, NY 10003.
