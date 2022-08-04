@@ -60,7 +60,10 @@ function getInstallLink() {
   return 'https://metamask.io';
 }
 
-async function connectWeb3() {
+function connectWeb3() {
+
+  window.ethereum.request({ method: 'eth_accounts' }).then(a => console.log('CONNECTING', a, window.ethereum.selectedAddress));
+
   web3.instance = window.ethereum;
   web3.address = window.ethereum.selectedAddress;
 
@@ -146,6 +149,7 @@ function resetListeners() {
 
 
 function onAccountsChanged(e) {
+  console.log('ACCOUNTS CHANGED', e, web3.address);
   if (e[0] == web3.address) {
     return;
   }
