@@ -10,7 +10,7 @@
       </h1>
 
       <div v-if="!isNftsLoaded" class="flex justify-center items-center h-40">
-        <spinner class="!w-10 !h-10" />
+        <spinner />
       </div>
 
       <div v-else-if="nfts.length" class="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">

@@ -24,13 +24,13 @@
 
       <h2 class="text-xl font-bold mt-28 -mb-5">New</h2>
       <div v-if="!isNewNftsLoaded" class="grow flex justify-center items-center h-40">
-        <spinner class="!w-10 !h-10" />
+        <spinner />
       </div>
       <carousel v-else :nfts="newNfts" />
 
       <h2 class="text-xl font-bold mt-14 -mb-5">Trending</h2>
       <div v-if="!isTrandingNftsLoaded" class="grow flex justify-center items-center h-40">
-        <spinner class="!w-10 !h-10" />
+        <spinner />
       </div>
       <carousel v-else :nfts="trandingNfts" />
     </div>

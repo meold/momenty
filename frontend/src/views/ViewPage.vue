@@ -27,7 +27,7 @@
       </div>
 
       <div v-else class="grow flex justify-center items-center h-40">
-        <spinner class="!w-10 !h-10" />
+        <spinner />
       </div>
     </div>
 
@@ -36,7 +36,7 @@
     <h2 class="text-xl font-bold mt-14 -mb-5">Other author Moments</h2>
 
     <div v-if="!isNftsLoaded" class="grow flex justify-center items-center h-40">
-      <spinner class="!w-10 !h-10" />
+      <spinner />
     </div>
 
     <carousel v-if="nfts.length" :nfts="nfts" />
