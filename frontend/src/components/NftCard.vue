@@ -5,12 +5,12 @@
         <div class="flipper">
           <div class="front w-full h-full">
             <nft-card-container class="!shadow-sm">
-              <img :src="nft.image || '/killme/image2.png'" class="w-full h-full object-cover" alt="">
+              <img :src="nft.image" class="w-full h-full object-cover" alt="">
             </nft-card-container>
           </div>
           <div class="back w-full h-full relative">
             <nft-card-container class="!shadow-sm">
-              <video-player class="w-full h-full" :src="nft.video || '/killme/vid.mov'" :play="isFlipped" :is-unmuted="isUnmuted" />
+              <video-player class="w-full h-full" :src="nft.video" :play="isFlipped" :is-unmuted="isUnmuted" />
             </nft-card-container>
 
             <button class="absolute top-0 right-0 m-[7%] text-primary hover:opacity-80" @click.stop.prevent="isUnmuted = !isUnmuted">
