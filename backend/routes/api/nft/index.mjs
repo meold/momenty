@@ -218,10 +218,7 @@ export default async function routes(instance) {
         attributes: ['image' ],
         where: {
           image: {
-            [Sequelize.Op.or]: {
-              [Sequelize.Op.like]: '%.jpeg',
-              [Sequelize.Op.like]: '%.jpg',
-            }
+            [Sequelize.Op.not]: null
           }
         },
         order: instance.sequelize.random()
