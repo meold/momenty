@@ -27,12 +27,6 @@
         <spinner />
       </div>
       <carousel v-else :nfts="newNfts" />
-
-      <h2 class="text-xl font-bold mt-14 -mb-5">Trending</h2>
-      <div v-if="!isTrandingNftsLoaded" class="grow flex justify-center items-center h-40">
-        <spinner />
-      </div>
-      <carousel v-else :nfts="trandingNfts" />
     </div>
   </div>
 </template>
@@ -53,21 +47,12 @@ const isPolyHidden = breakpoints.smaller('xl');
 
 const newNfts = ref([]);
 const isNewNftsLoaded = ref(false);
-const trandingNfts = ref([]);
-const isTrandingNftsLoaded = ref(false);
 
 getNewNfts();
-getTrandingNfts();
 
 async function getNewNfts() {
   const { nfts } = await get(`/nft/section/new/`);
   newNfts.value = nfts;
   isNewNftsLoaded.value = true;
-}
-
-async function getTrandingNfts() {
-  const { nfts } = await get(`/nft/section/trending/`);
-  trandingNfts.value = nfts;
-  isTrandingNftsLoaded.value = true;
 }
 </script>
