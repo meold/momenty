@@ -7,12 +7,12 @@
       <h1 class="font-display text-5xl leading-tight my-20 text-primary">
         Coming soon ...
       </h1>
-      <the-tron />
+      <the-poly class="text-primary" />
     </div>
   </div>
 </template>
 
 <script setup>
 import MenuVertical from '@/components/MenuVertical.vue';
-import TheTron from '@/components/TheTron.vue';
+import ThePoly from '@/components/ThePoly.vue';
 </script>

@@ -6,19 +6,19 @@
 
     <div class="grow">
       <div class="flex">
-        <div class="grow">
+        <div class="grow max-w-2xl">
           <h1 class="font-display text-5xl leading-tight mt-20">
             Create your first decentralized <div class="text-primary">moment as NFT</div>
           </h1>
           <router-link v-slot="{ navigate }" to="/new" custom>
-            <button-primary class="text-3xl my-10" @click="navigate" @keypress.enter="navigate">
+            <button-primary class="text-3xl mt-10" @click="navigate" @keypress.enter="navigate">
               Create moment
               <span class="ml-2 text-2xl">+</span>
             </button-primary>
           </router-link>
         </div>
-        <div class="srink-0 grow-0 hidden xl:block">
-          <the-tron />
+        <div class="srink-0 grow-0 hidden xl:flex items-end ml-10 xl:ml-20">
+          <the-poly v-if="!isPolyHidden" class="text-primary" />
         </div>
       </div>
 
@@ -40,11 +40,16 @@
 <script setup>
 import MenuVertical from '@/components/MenuVertical.vue';
 import ButtonPrimary from '@/components/ButtonPrimary.vue';
-import TheTron from '@/components/TheTron.vue';
+import ThePoly from '@/components/ThePoly.vue';
 import Carousel from '@/components/Carousel.vue';
 import Spinner from '@/components/Spinner.vue';
 import { get } from '@/useApi.js';
 import { ref } from 'vue';
+import { breakpointsTailwind, useBreakpoints } from '@vueuse/core'
+
+const breakpoints = useBreakpoints(breakpointsTailwind)
+const isPolyHidden = breakpoints.smaller('xl');
+
 
 const newNfts = ref([]);
 const isNewNftsLoaded = ref(false);
