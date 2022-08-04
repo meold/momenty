@@ -4,7 +4,7 @@
   </div>
 
   <div class="font-bold text-2xl mb-5">
-    0.01 ETH
+    999 TRX
   </div>
 
   <div class="flex gap-x-3">
