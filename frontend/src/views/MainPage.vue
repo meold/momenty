@@ -17,8 +17,8 @@
             </button-primary>
           </router-link>
         </div>
-        <div class="srink-0 grow-0 hidden xl:flex items-end ml-10 xl:ml-20">
-          <the-poly v-if="!isPolyHidden" class="text-primary" />
+        <div v-if="!isPolyHidden" class="srink-0 grow-0 flex items-end ml-20">
+          <the-poly class="text-primary" />
         </div>
       </div>
 
