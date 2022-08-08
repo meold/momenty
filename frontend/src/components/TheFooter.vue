@@ -5,7 +5,9 @@
       <router-link to="/terms" class="text-sm leading-none hover:underline hover:opacity-60">
         Terms of Use
       </router-link>
-      <a href="#" class="text-sm leading-none hover:underline hover:opacity-60">Privacy Policy</a>
+      <router-link to="/privacy" class="text-sm leading-none hover:underline hover:opacity-60">
+        Privacy Policy
+      </router-link>
     </div>
   </div>
 </template>
