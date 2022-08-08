@@ -103,6 +103,11 @@ export default {
   height: 58px;
   @apply absolute skew-y-12 rounded-lg overflow-hidden shadow;
 }
+.image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
 .cube-1 {
   position: absolute;
   top: 56px;
