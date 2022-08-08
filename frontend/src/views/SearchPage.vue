@@ -5,51 +5,20 @@
     </div>
 
     <div class="grow">
-      <h1 class="text-xl font-bold mb-2">
-        Search results for "{{ route.params.search }}"
-      </h1>
-
-      <div v-if="!isNftsLoaded" class="flex justify-center items-center h-40">
-        <spinner />
-      </div>
-
-      <div v-else-if="nfts.length" class="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
-        <div v-for="nft in nfts" :key="nft.id">
-          <nft-card :nft="nft" />
-        </div>
-      </div>
-
-      <div v-else class="flex justify-center items-center h-40">
-        No moments found
-      </div>
+      <nft-list
+        :key="route.params.search"
+        :title="`Search results for &quot;${route.params.search }&quot;`"
+        url="/nft/search/"
+        :url-options="{ search: route.params.search }"
+      />
     </div>
   </div>
 </template>
 
 <script setup>
 import MenuVertical from '@/components/MenuVertical.vue';
-import NftCard from '@/components/NftCard.vue';
-import Spinner from '@/components/Spinner.vue';
-import { get } from '@/useApi.js';
-import { ref, watch } from 'vue';
 import { useRoute } from 'vue-router';
+import NftList from '@/components/NftList.vue';
 
 const route = useRoute();
-
-watch(
-  () => route.params.search,
-  val => getNfts(val)
-);
-
-const nfts = ref([]);
-const isNftsLoaded = ref(false);
-
-getNfts(route.params.search);
-
-async function getNfts(search) {
-  isNftsLoaded.value = false;
-  const { nfts: _nfts } = await get(`/nft/search/`, { search });
-  nfts.value = _nfts;
-  isNftsLoaded.value = true;
-}
 </script>

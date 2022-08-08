@@ -58,7 +58,13 @@ const routes = [
     path: '/search',
     name: 'SearchPage',
     component: SearchPage,
-    props: true
+    props: true,
+    beforeEnter: to => {
+      // prevent search page reload
+      if (to.params.search === undefined) {
+        return { path: '/' };
+      }
+    }
   },
 
   {

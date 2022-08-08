@@ -4,12 +4,12 @@
       <div class="flip-container w-full h-full" :class="{ hover: isFlipped }" @touchstart="isFlipped = !isFlipped" @mouseenter="onMouseenter" @mouseleave="onMouseleave">
         <div class="flipper">
           <div class="front w-full h-full">
-            <nft-card-container class="!shadow-sm">
+            <nft-card-container class="!shadow-lg border">
               <img :src="nft.image" class="w-full h-full object-cover" alt="">
             </nft-card-container>
           </div>
           <div class="back w-full h-full relative">
-            <nft-card-container class="!shadow-sm">
+            <nft-card-container class="!shadow-lg border">
               <video-player class="w-full h-full" :src="nft.video" :play="isFlipped" :is-unmuted="isUnmuted" />
             </nft-card-container>
 

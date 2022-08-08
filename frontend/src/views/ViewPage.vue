@@ -33,17 +33,12 @@
 
     <hr class="border border-gray-300 my-14">
 
-    <h2 class="text-xl font-bold mt-14 -mb-5">Other author Moments</h2>
-
-    <div v-if="!isNftsLoaded" class="grow flex justify-center items-center h-40">
-      <spinner />
-    </div>
-
-    <carousel v-if="nfts.length" :nfts="nfts" />
-
-    <div v-else class="flex justify-center items-center h-40">
-      No moments found
-    </div>
+    <nft-list
+      v-if="isNftLoaded"
+      title="Other author Moments"
+      :url="`/nft/`"
+      :url-options="{ userId: nft.user.id }"
+    />
   </div>
 </template>
 
@@ -52,12 +47,12 @@ import NftBuy from '@/components/NftBuy.vue';
 import NftSell from '@/components/NftSell.vue';
 import NftCard from '@/components/NftCard.vue';
 import UserCard from '@/components/UserCard.vue';
-import Carousel from '@/components/Carousel.vue';
 import Spinner from '@/components/Spinner.vue';
 import ButtonPrimary from '@/components/ButtonPrimary.vue';
 import { ref, watch, computed } from 'vue';
 import { get } from '@/useApi.js';
 import { userState } from '@/useLogin.js';
+import NftList from '@/components/NftList.vue';
 
 const props = defineProps({
   id: {
@@ -78,23 +73,11 @@ getNft();
 const isCurrentUser = computed(() => nft.value?.user?.id == userState.data?.id);
 
 const nft = ref({});
-const nfts = ref([]);
 const isNftLoaded = ref(false);
-const isNftsLoaded = ref(false);
 
 async function getNft() {
   const { nft: _nft } = await get(`/nft/${props.id}/`);
   nft.value = _nft;
   isNftLoaded.value = true;
-  await getNfts();
-}
-
-async function getNfts() {
-  if (!nft.value?.user?.id) {
-    return;
-  }
-  const { nfts: _nfts } = await get(`/nft/`, { userId: nft.value?.user?.id });
-  nfts.value = _nfts;
-  isNftsLoaded.value = true;
 }
 </script>

@@ -5,7 +5,7 @@
     </div>
 
     <div class="grow">
-      <div class="flex">
+      <div class="flex mb-28">
         <div class="grow max-w-2xl">
           <h1 class="font-display text-5xl leading-tight mt-20">
             Create your first decentralized <div class="text-primary">moment as NFT</div>
@@ -22,11 +22,7 @@
         </div>
       </div>
 
-      <h2 class="text-xl font-bold mt-28 -mb-5">New</h2>
-      <div v-if="!isNewNftsLoaded" class="grow flex justify-center items-center h-40">
-        <spinner />
-      </div>
-      <carousel v-else :nfts="newNfts" />
+      <nft-list title="New" url="/nft/section/new/" />
     </div>
   </div>
 </template>
@@ -35,24 +31,10 @@
 import MenuVertical from '@/components/MenuVertical.vue';
 import ButtonPrimary from '@/components/ButtonPrimary.vue';
 import ThePoly from '@/components/ThePoly.vue';
-import Carousel from '@/components/Carousel.vue';
-import Spinner from '@/components/Spinner.vue';
-import { get } from '@/useApi.js';
-import { ref } from 'vue';
+import NftList from '@/components/NftList.vue';
 import { breakpointsTailwind, useBreakpoints } from '@vueuse/core'
 
 const breakpoints = useBreakpoints(breakpointsTailwind)
 const isPolyHidden = breakpoints.smaller('xl');
 
-
-const newNfts = ref([]);
-const isNewNftsLoaded = ref(false);
-
-getNewNfts();
-
-async function getNewNfts() {
-  const { nfts } = await get(`/nft/section/new/`);
-  newNfts.value = nfts;
-  isNewNftsLoaded.value = true;
-}
 </script>

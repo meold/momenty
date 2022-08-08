@@ -47,6 +47,18 @@ export default async function routes(instance) {
             }
           },
           required: [ 'section' ]
+        },
+        query: {
+          type: 'object',
+          properties: {
+            page: {
+              type: 'number'
+            },
+            perPage: {
+              type: 'number'
+            }
+          },
+          required: ['page', 'perPage']
         }
       }
     },
@@ -54,7 +66,10 @@ export default async function routes(instance) {
     async (request) => {
       const { section } = request.params;
 
-      const query = { limit: 30 };
+      const limit = request.query.perPage;
+      const offset = request.query.page * limit;
+
+      const query = { limit, offset };
 
       if (section == 'new') {
         query.order = [['createdAt', 'DESC']];
@@ -171,16 +186,25 @@ export default async function routes(instance) {
           properties: {
             search: {
               type: 'string'
+            },
+            page: {
+              type: 'number'
+            },
+            perPage: {
+              type: 'number'
             }
           },
-          required: ['search']
+          required: ['search', 'page', 'perPage']
         }
       }
     },
 
     async (request) => {
-      const { search } = request.query;
+      const { search, page, perPage } = request.query;
       const query = (search).toLowerCase();
+
+      const limit = perPage;
+      const offset = page * limit;
 
       let where;
       if (search) {
@@ -202,7 +226,8 @@ export default async function routes(instance) {
       const nfts = await instance.sequelize.models.Nft.findAll({
         where,
         include: [{ model: instance.sequelize.models.User, as: 'user', attributes: [] }],
-        limit: 30,
+        limit,
+        offset,
         raw: true
       });
 
