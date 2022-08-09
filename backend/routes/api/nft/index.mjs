@@ -13,20 +13,31 @@ export default async function routes(instance) {
           properties: {
             userId: {
               type: 'number'
+            },
+            page: {
+              type: 'number'
+            },
+            perPage: {
+              type: 'number'
             }
           },
-          required: ['userId']
+          required: ['userId', 'page', 'perPage']
         }
       }
     },
 
     async (request) => {
-      const { userId } = request.query;
+      const { userId, page, perPage } = request.query;
+
+      const limit = perPage;
+      const offset = page * limit;
 
       const nfts = await instance.sequelize.models.Nft.findAll({
         where: {
           userId
-        }
+        },
+        limit,
+        offset
       }, { raw: true });
 
       return { success: true, nfts };

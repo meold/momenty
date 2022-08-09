@@ -1,6 +1,8 @@
 <template>
   <the-header />
 
+  <div class="h-[106px]"><!-- header compensator --></div>
+
   <transition name="fade" mode="out-in">
     <the-banner />
   </transition>

@@ -1,6 +1,6 @@
 <template>
   <h2 v-if="title" class="text-xl font-bold mb-2">{{ title }}</h2>
-  <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3">
+  <div class="gallery grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3">
     <div v-for="nft in nfts" :key="nft.id">
       <nft-card :nft="nft" />
     </div>
@@ -49,7 +49,7 @@ const props = defineProps({
   }
 });
 
-const PAGE_SIZE = 9;
+const PAGE_SIZE = 3;
 let page = 0;
 const nfts = ref([]);
 

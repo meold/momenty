@@ -1,11 +1,11 @@
 <template>
   <router-link v-slot="{ navigate }" :to="`/view/${nft.id}`" custom>
     <nft-card-container class="!rounded-none !shadow-none overflow-visible cursor-pointer" @click="navigate">
-      <div class="flip-container w-full h-full" :class="{ hover: isFlipped }" @touchstart="isFlipped = !isFlipped" @mouseenter="onMouseenter" @mouseleave="onMouseleave">
+      <div ref="card" class="flip-container w-full h-full" :class="{ hover: isFlipped }" @touchstart="isFlipped = !isFlipped" @mouseenter="onMouseenter" @mouseleave="onMouseleave">
         <div class="flipper">
           <div class="front w-full h-full">
             <nft-card-container class="!shadow-lg border">
-              <img :src="nft.image" class="w-full h-full object-cover" alt="">
+              <img ref="front" :src="nft.image" class="w-full h-full object-cover opacity-0" alt="">
             </nft-card-container>
           </div>
           <div class="back w-full h-full relative">
@@ -27,12 +27,16 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { ref, onMounted, onBeforeUnmount } from 'vue';
 import NftCardContainer from './NftCardContainer.vue';
 import VideoPlayer from '../components/VideoPlayer.vue';
+import { gsap } from 'gsap';
 
 const isFlipped = ref(false);
 const isUnmuted = ref(false);
+
+const card = ref(null);
+const front = ref(null);
 
 defineProps({
   nft: {
@@ -49,6 +53,18 @@ function onMouseleave() {
   isFlipped.value = false;
 }
 
+function onImageLoad() {
+  gsap.fromTo(front.value, { opacity: 0 }, { opacity: 1, duration: 0.5 });
+}
+
+onMounted(() => {
+  gsap.fromTo(card.value, { scale: 0 }, { scale: 1, duration: 0.5 });
+  front.value.addEventListener('load', onImageLoad, { once: true });
+});
+
+onBeforeUnmount(() => {
+  front.value.removeEventListener('load', onImageLoad);
+})
 </script>
 
 <style scoped>

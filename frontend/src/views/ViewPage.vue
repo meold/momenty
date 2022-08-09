@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="flex flex-row gap-x-20 max-w-5xl mx-auto">
-      <div class="shrink-0 basis-1/3 max-w-[240px]">
+      <div class="shrink-0 basis-1/3">
         <nft-card :nft="nft" />
       </div>
 

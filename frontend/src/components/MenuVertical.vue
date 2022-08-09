@@ -1,5 +1,5 @@
 <template>
-  <div class="menu-vertical">
+  <div class="menu-vertical sticky top-24">
     <router-link to="/" class="menu-link">
       <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path
