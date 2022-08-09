@@ -4,7 +4,6 @@ import Fastify from 'fastify';
 import fastifyAutoload from '@fastify/autoload';
 import fastifyStatic from '@fastify/static';
 import FastifyCors from '@fastify/cors';
-import fastifyMultipart from '@fastify/multipart';
 import FastifyHttpProxy from '@fastify/http-proxy';
 import fastifyJwt from '@fastify/jwt';
 import url from 'url';
@@ -36,9 +35,6 @@ const fastify = Fastify({
 });
 
 fastify.register(FastifyCors, {});
-fastify.register(fastifyMultipart, {
-  addToBody: true
-});
 
 fastify.register(fastifyJwt, {
   secret: process.env.JWT_SECRET

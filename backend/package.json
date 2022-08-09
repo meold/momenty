@@ -10,16 +10,15 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@aws-sdk/s3-request-presigner": "^3.142.0",
-    "@fastify/autoload": "^5.1.0",
+    "@aws-sdk/s3-request-presigner": "^3.145.0",
+    "@fastify/autoload": "^5.2.0",
     "@fastify/cors": "^8.1.0",
     "@fastify/http-proxy": "^8.2.1",
     "@fastify/jwt": "^6.3.2",
-    "@fastify/multipart": "^7.1.0",
     "@fastify/static": "^6.5.0",
     "dotenv": "^16.0.1",
     "ethers": "^5.6.9",
-    "fastify": "^4.3.0",
+    "fastify": "^4.4.0",
     "mime-types": "^2.1.35",
     "mysql2": "^2.3.3",
     "package-lock": "^1.0.5",
@@ -27,8 +26,8 @@
     "uuid": "^8.3.2"
   },
   "devDependencies": {
-    "@aws-sdk/client-s3": "^3.142.0",
-    "@faker-js/faker": "^7.3.0",
+    "@aws-sdk/client-s3": "^3.145.0",
+    "@faker-js/faker": "^7.4.0",
     "fastify-static": "^4.7.0",
     "pino-multi-stream": "^6.0.0",
     "pino-pretty": "^8.1.0"
