@@ -21,7 +21,7 @@ const s3 = new S3();
 const fastify = Fastify({
   logger: pinoms(pinoms.multistream([
     {
-      level: 'debug',
+      level: 'warn',
       stream: pinoms.prettyStream({
         prettyPrint: {
           colorize: true,
@@ -42,6 +42,14 @@ fastify.register(fastifyMultipart, {
 
 fastify.register(fastifyJwt, {
   secret: process.env.JWT_SECRET
+})
+
+fastify.addHook('onRequest', async (request) => {
+  try {
+    await request.jwtVerify()
+  } catch (err) {
+    // just to add user to request
+  }
 })
 
 fastify.decorate('authenticate', async function(request, reply) {
@@ -116,6 +124,11 @@ fastify.setErrorHandler(async (error, _request, reply) => {
   console.error(error);
   // FIXME: catch sequelize errors here ???
   if (error.code === 'FST_JWT_AUTHORIZATION_TOKEN_INVALID') {
+    reply.status(401).send(new Error('Authorization failed'));
+    return;
+  }
+
+  if (error.code === 'FST_JWT_NO_AUTHORIZATION_IN_HEADER') {
     reply.status(401).send(new Error('Authorization failed'));
     return;
   }

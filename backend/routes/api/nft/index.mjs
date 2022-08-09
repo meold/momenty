@@ -172,11 +172,24 @@ export default async function routes(instance) {
     async (request) => {
       const { id } = request.params;
 
+      const userId = request.user?.id || null;
+
       const nft = await instance.sequelize.models.Nft.findByPk(id, {
-        include: [{
-          model: instance.sequelize.models.User,
-          as: 'user'
-        }]
+        include: [
+          {
+            model: instance.sequelize.models.User,
+            as: 'user'
+          },
+          {
+            model: instance.sequelize.models.Like,
+            as: 'likes',
+            attributes: ['userId'],
+            where: {
+              userId
+            },
+            required: false
+          }
+        ]
       });
 
       if (!nft) {

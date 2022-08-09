@@ -12,7 +12,7 @@
     <a href="#" target="_blank" class="flex items-center justify-center px-8 bg-primary hover:opacity-90 hover:shadow-inner border-2 border-primary rounded-xl text-sm font-bold leading-none text-white py-3">
       Sell NFT
     </a>
-    <button-secondary class="!p-3">
+    <button-secondary class="!p-3" :class="{disabled: !userState.isLogged, 'text-primary': nft.likes?.length }" @click="like">
       <svg width="22" height="20" viewBox="0 0 22 20" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M15.8376 2.125C16.3836 2.12454 16.9243 2.2331 17.4278 2.44431C17.9314 2.65552 18.3877 2.96514 18.7701 3.355C19.5579 4.15479 19.9995 5.23237 19.9995 6.355C19.9995 7.47764 19.5579 8.55522 18.7701 9.355L11.0001 17.2225L3.23008 9.355C2.44226 8.55522 2.00067 7.47764 2.00067 6.355C2.00067 5.23237 2.44226 4.15479 3.23008 3.355C3.61264 2.96542 4.06901 2.65596 4.57251 2.44472C5.07601 2.23348 5.61656 2.12468 6.16258 2.12468C6.70859 2.12468 7.24914 2.23348 7.75264 2.44472C8.25614 2.65596 8.71251 2.96542 9.09508 3.355L11.0001 5.305L12.8976 3.37C13.2788 2.97549 13.7356 2.6619 14.2407 2.44798C14.7459 2.23406 15.289 2.12421 15.8376 2.125ZM15.8376 0.625002C15.0918 0.62437 14.3534 0.772643 13.6657 1.06113C12.9779 1.34961 12.3547 1.7725 11.8326 2.305L11.0001 3.145L10.1676 2.305C9.64479 1.77346 9.02142 1.35131 8.33382 1.06314C7.64621 0.774981 6.90812 0.626573 6.16258 0.626573C5.41703 0.626573 4.67894 0.774981 3.99133 1.06314C3.30373 1.35131 2.68036 1.77346 2.15758 2.305C1.09398 3.38772 0.498047 4.84477 0.498047 6.3625C0.498047 7.88023 1.09398 9.33728 2.15758 10.42L11.0001 19.375L19.8426 10.42C20.9062 9.33728 21.5021 7.88023 21.5021 6.3625C21.5021 4.84477 20.9062 3.38772 19.8426 2.305C19.3199 1.77318 18.6966 1.35073 18.009 1.0623C17.3214 0.773862 16.5832 0.625207 15.8376 0.625002Z" fill="currentColor" />
       </svg>
@@ -27,11 +27,19 @@
 
 <script setup>
 import ButtonSecondary from '@/components/ButtonSecondary.vue';
+import { post } from '@/useApi';
 
-defineProps({
+const props = defineProps({
   nft: {
     type: Object,
     default: () => ({})
   }
 })
+
+async function like() {
+  const { isLiked } = await post(`/like/`, { nftId: props.nft.id });
+
+  // eslint-disable-next-line vue/no-mutating-props
+  props.nft.likes = isLiked ? [ true ] : [];
+}
 </script>

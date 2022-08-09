@@ -29,7 +29,7 @@ const props = defineProps({
 });
 
 watch(
-  props.id,
+  () => props.id,
   () => {
     getUser();
   }
