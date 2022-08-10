@@ -9,7 +9,9 @@
 
         <div class="shrink-0 basis-2/12">
           <h2 class="text-xl text-center font-bold mb-2">Add image</h2>
-          <nft-card-container :class="{ 'border-2 border-red-500': isImageInvalid }">
+
+          <nft-card-container class="shadow-lg border" :class="{ 'border-2 border-red-500': isImageInvalid }">
+
             <div v-if="nft.image" class="relative w-full h-full flex justify-center items-center">
               <img :src="nft.image" class="w-full h-full object-cover" alt="">
               <button class="absolute top-4 right-4 text-white bg-primary p-2 rounded-xl shadow hover:opacity:80" @click="nft.image = null">
@@ -37,6 +39,7 @@
                 <div>&nbsp;</div>
               </div>
             </drop-area>
+
           </nft-card-container>
           <div v-if="isImageInvalid" class="text-red-500 mb-1 text-xs text-right mt-2">Image is required</div>
         </div>
@@ -44,7 +47,7 @@
         <div class="shrink-0 basis-2/12">
           <h2 class="text-xl text-center font-bold mb-2">Add video</h2>
 
-          <nft-card-container :class="{ 'border-2 border-red-500': isVideoInvalid }">
+          <nft-card-container class="shadow-lg border" :class="{ 'border-2 border-red-500': isVideoInvalid }">
 
             <div v-if="nft.video" class="w-full h-full flex justify-center items-center">
               <video
