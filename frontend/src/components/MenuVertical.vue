@@ -30,7 +30,7 @@
       Trending
     </router-link>
 
-    <router-link v-if="userState.isLogged" to="/section/favorite" class="menu-link">
+    <component :is="userState.isLogged ? 'router-link' : 'span'" to="/section/favorite" class="menu-link" :class="{ 'disabled': !userState.isLogged }">
       <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path
           fill-rule="evenodd"
@@ -40,7 +40,7 @@
         />
       </svg>
       You love
-    </router-link>
+    </component>
 
     <button-wallet v-if="!userState.isLogged" class="mt-10 mb-5 !px-3 w-full" />
 
