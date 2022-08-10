@@ -1,8 +1,15 @@
 <template>
   <h2 v-if="title" class="text-xl font-bold mb-2">{{ title }}</h2>
-  <div class="gallery grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3">
+  <div class="gallery grid grid-cols-1 gap-10 sm:grid-cols-2 md:grid-cols-3">
     <div v-for="nft in nfts" :key="nft.id">
-      <nft-card :nft="nft" />
+      <user-card :user="nft.user" is-short />
+      <div class="flex">
+        <div class="shrink-0 mr-2">
+          <button-like :nft="nft" class="h-10 w-10 rounded-full !p-2 mt-2" />
+          <button-share :nft="nft" class="h-10 w-10 rounded-full !p-2 mt-2" />
+        </div>
+        <nft-card :nft="nft" />
+      </div>
     </div>
   </div>
 
@@ -29,6 +36,9 @@
 
 <script setup>
 import NftCard from '@/components/NftCard.vue';
+import UserCard from '@/components/UserCard.vue';
+import ButtonLike from '@/components/ButtonLike.vue';
+import ButtonShare from '@/components/ButtonShare.vue';
 import { VueEternalLoading } from '@ts-pro/vue-eternal-loading';
 import Spinner from '@/components/Spinner.vue';
 import { get } from '@/useApi.js';

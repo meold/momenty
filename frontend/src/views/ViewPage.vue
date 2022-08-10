@@ -8,9 +8,7 @@
       <div v-if="isNftLoaded" class="grow">
 
         <div class="mb-8 flex justify-between items-center">
-          <router-link class="inline-block" :to="`/profile/${nft.user?.id}`">
-            <user-card :user="nft.user" />
-          </router-link>
+          <user-card :user="nft.user" />
           <button-primary v-if="!isCurrentUser" class="!py-3">Follow</button-primary>
         </div>
 

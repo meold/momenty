@@ -29,6 +29,26 @@ export default async function routes(instance) {
     async (request) => {
       const { userId, page, perPage } = request.query;
 
+      const include = [
+        {
+          model: instance.sequelize.models.User,
+          as: 'user',
+          attributes: ['id', 'name', 'avatarUrl']
+        }
+      ];
+
+      if (userId) {
+        include.push({
+          model: instance.sequelize.models.Like,
+          as: 'likes',
+          attributes: ['userId'],
+          where: {
+            userId
+          },
+          required: false
+        })
+      }
+
       const limit = perPage;
       const offset = page * limit;
 
@@ -36,6 +56,7 @@ export default async function routes(instance) {
         where: {
           userId
         },
+        include,
         limit,
         offset
       }, { raw: true });
@@ -54,7 +75,7 @@ export default async function routes(instance) {
           properties: {
             section: {
               type: 'string',
-              enum: [...sections, 'new', 'trending']
+              enum: [...sections, 'new', 'trending', 'favorite']
             }
           },
           required: [ 'section' ]
@@ -80,13 +101,37 @@ export default async function routes(instance) {
       const limit = request.query.perPage;
       const offset = request.query.page * limit;
 
-      const query = { limit, offset };
+      const userId = request.user?.id || null;
+
+      const include = [
+        {
+          model: instance.sequelize.models.User,
+          as: 'user',
+          attributes: ['id', 'name', 'avatarUrl']
+        }
+      ];
+
+      if (userId) {
+        include.push({
+          model: instance.sequelize.models.Like,
+          as: 'likes',
+          attributes: ['userId'],
+          where: {
+            userId
+          },
+          required: false
+        })
+      }
+
+      const query = { include, limit, offset };
 
       if (section == 'new') {
         query.order = [['createdAt', 'DESC']];
       } else if(section == 'trending') {
         // FIXME: do tranding
         query.order = [['createdAt', 'ASC']];
+      } else if(section == 'favorite') {
+        include[1].required = true;
       } else {
         query.where = { section };
       }
@@ -174,23 +219,27 @@ export default async function routes(instance) {
 
       const userId = request.user?.id || null;
 
-      const nft = await instance.sequelize.models.Nft.findByPk(id, {
-        include: [
-          {
-            model: instance.sequelize.models.User,
-            as: 'user'
+      const include = [
+        {
+          model: instance.sequelize.models.User,
+          as: 'user',
+          attributes: ['id', 'name', 'avatarUrl']
+        }
+      ];
+
+      if (userId) {
+        include.push({
+          model: instance.sequelize.models.Like,
+          as: 'likes',
+          attributes: ['userId'],
+          where: {
+            userId
           },
-          {
-            model: instance.sequelize.models.Like,
-            as: 'likes',
-            attributes: ['userId'],
-            where: {
-              userId
-            },
-            required: false
-          }
-        ]
-      });
+          required: false
+        })
+      }
+
+      const nft = await instance.sequelize.models.Nft.findByPk(id, { include });
 
       if (!nft) {
         return { success: false };
@@ -230,6 +279,28 @@ export default async function routes(instance) {
       const limit = perPage;
       const offset = page * limit;
 
+      const userId = request.user?.id || null;
+
+      const include = [
+        {
+          model: instance.sequelize.models.User,
+          as: 'user',
+          attributes: ['id', 'name', 'avatarUrl']
+        }
+      ];
+
+      if (userId) {
+        include.push({
+          model: instance.sequelize.models.Like,
+          as: 'likes',
+          attributes: ['userId'],
+          where: {
+            userId
+          },
+          required: false
+        })
+      }
+
       let where;
       if (search) {
         where = {
@@ -249,7 +320,7 @@ export default async function routes(instance) {
 
       const nfts = await instance.sequelize.models.Nft.findAll({
         where,
-        include: [{ model: instance.sequelize.models.User, as: 'user', attributes: [] }],
+        include,
         limit,
         offset,
         raw: true
@@ -276,4 +347,4 @@ export default async function routes(instance) {
       return { success: true, image };
     }
   );
-};
+}

@@ -1,5 +1,5 @@
 <template>
-  <div class="menu-vertical max-w-xs">
+  <div class="menu-vertical max-w-xs sticky top-24 border">
     <div class="relative flex flex-col items-center">
       <user-avatar class="h-28 w-28 border-4" :src="user.avatarUrl" />
       <div class="text-primary underline my-3">{{ user.name }}</div>
