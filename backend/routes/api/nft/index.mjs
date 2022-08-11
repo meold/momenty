@@ -130,7 +130,7 @@ export default async function routes(instance) {
       } else if(section == 'trending') {
         // FIXME: do tranding
         query.order = [['createdAt', 'ASC']];
-      } else if(section == 'favorite') {
+      } else if (section == 'favorite' && include[1]) {
         include[1].required = true;
       } else {
         query.where = { section };
