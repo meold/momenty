@@ -21,6 +21,7 @@ module.exports = {
       },
     },
   },
+  defaultNetwork: "mumbai",
   networks: {
     hardhat: {
       allowUnlimitedContractSize: true,
@@ -30,5 +31,10 @@ module.exports = {
       accounts:
         process.env.PRIVATE_KEY !== undefined ? [process.env.PRIVATE_KEY] : [],
     },
-  }
+    mumbai: {
+      url: "https://rpc-mumbai.maticvigil.com",
+      accounts: [`${process.env.PRIVATE_KEY}`],
+      saveDeployments: true,
+    },
+  },
 };
