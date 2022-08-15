@@ -4,7 +4,7 @@
       <nav class="relative flex items-center justify-between gap-x-5 md:gap-x-8">
         <div class="flex grow items-center md:gap-x-12">
           <router-link to="/" aria-label="Home" class="shrink-0 text-primary hover:opacity-80">
-            <the-logo class="h-5" />
+            <the-logo class="h-9" />
           </router-link>
           <div class="grow hidden md:flex justify-center">
             <the-search />
