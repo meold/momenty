@@ -1,5 +1,5 @@
 <template>
-  <header class="pt-7 pb-2 bg-white fixed inset-x-0 z-[1]">
+  <header class="py-7 bg-white/30 backdrop-blur-xl fixed inset-x-0 z-[1]">
     <div class="container">
       <nav class="relative flex items-center justify-between gap-x-5 md:gap-x-8">
         <div class="flex grow items-center md:gap-x-12">
@@ -161,7 +161,6 @@
       </nav>
     </div>
   </header>
-  <div class="fixed inset-x-0 top-[86px] h-5 bg-gradient-to-b from-white z-[1]"><!-- gradient --></div>
 </template>
 
 <script setup>
