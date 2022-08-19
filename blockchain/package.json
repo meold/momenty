@@ -10,12 +10,12 @@
   "license": "ISC",
   "dependencies": {
     "@nomiclabs/hardhat-waffle": "^2.0.3",
-    "@openzeppelin/contracts": "^4.7.1",
+    "@openzeppelin/contracts": "^4.7.3",
     "cids": "^1.1.9",
     "commander": "^9.4.0",
     "dotenv": "^16.0.1",
     "go-ipfs": "^0.14.0",
-    "hardhat": "^2.10.1",
+    "hardhat": "^2.10.2",
     "inquirer": "^9.1.0",
     "ipfs-http-client": "^57.0.3",
     "json-colorizer": "^2.2.2"
