@@ -1,0 +1,27 @@
+{
+  "network": "mumbai",
+  "contract": {
+    "name": "MomentMarketplace",
+    "address": "0x0C6962Fc67d513CA4B1A5a39230a5C765130c23E",
+    "signerAddress": "0xaeC0fd319Dd28947b0B1E2E332a8BdD94e8B5689",
+    "abi": [
+      "error AlreadyListed(address momentAddress, uint256 tokenId)",
+      "error NoProceeds()",
+      "error NotApprovedForMarketplace()",
+      "error NotListed(address momentAddress, uint256 tokenId)",
+      "error NotOwner()",
+      "error PriceMustBeAboveZero()",
+      "error PriceNotMet(address momentAddress, uint256 tokenId, uint256 price)",
+      "event MomentBought(address indexed buyer, address indexed momentAddress, uint256 indexed tokenId, uint256 price)",
+      "event MomentCanceled(address indexed seller, address indexed momentAddress, uint256 indexed tokenId)",
+      "event MomentListed(address indexed seller, address indexed momentAddress, uint256 indexed tokenId, uint256 price)",
+      "function buyMoment(address momentAddress, uint256 tokenId) payable",
+      "function cancelListing(address momentAddress, uint256 tokenId)",
+      "function getListing(address momentAddress, uint256 tokenId) view returns (tuple(uint256 price, address seller))",
+      "function getProceeds(address seller) view returns (uint256)",
+      "function listMoment(address momentAddress, uint256 tokenId, uint256 price)",
+      "function updateListing(address momentAddress, uint256 tokenId, uint256 newPrice)",
+      "function withdrawProceeds()"
+    ]
+  }
+}

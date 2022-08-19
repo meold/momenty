@@ -2,13 +2,12 @@
   "network": "mumbai",
   "contract": {
     "name": "MomentContract",
-    "address": "0xE76e598f4726F759d28dF07E32b324397A1079C4",
+    "address": "0x2dCE49EF20f99B0AC09D175C0B6ceD27e4a751e7",
     "signerAddress": "0xaeC0fd319Dd28947b0B1E2E332a8BdD94e8B5689",
     "abi": [
       "constructor()",
       "event Approval(address indexed owner, address indexed approved, uint256 indexed tokenId)",
       "event ApprovalForAll(address indexed owner, address indexed operator, bool approved)",
-      "event MomentSold(uint256 _momentId, address _buyer, uint256 _price)",
       "event Transfer(address indexed from, address indexed to, uint256 indexed tokenId)",
       "function approve(address to, uint256 tokenId)",
       "function balanceOf(address owner) view returns (uint256)",

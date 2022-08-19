@@ -6,8 +6,6 @@ import "./ERC721Full.sol";
 import "@openzeppelin/contracts/utils/Counters.sol";
 
 contract MomentContract is IERC721Metadata, ERC721Full {
-    event MomentSold(uint256 _momentId, address _buyer, uint256 _price);
-
     using Counters for Counters.Counter;
     Counters.Counter private _tokenIds;
 
