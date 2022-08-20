@@ -50,7 +50,7 @@ import ButtonPrimary from './ButtonPrimary.vue';
 import AlertError from './AlertError.vue';
 import NftMint from './NftMint.vue';
 import Spinner from './Spinner.vue';
-import { approveSellNft, sellNft, parseEther } from '@/useContracts';
+import { approveSellNft, sellNft, parseEther, isApproved } from '@/useContracts';
 import { error, success } from '@/notify';
 import { put } from '@/useApi.js';
 import { computed, ref, shallowRef } from 'vue';
@@ -73,27 +73,32 @@ const isButtonDisabled = computed(() => isSubmitting.value || !sellPrice.value |
 
 const buttonText = shallowRef('Sell');
 
-async function onClick() {
 
+async function onClick() {
   const price = parseEther(`${sellPrice.value}`);
 
   isSubmitting.value = true;
   buttonText.value = 'Approving';
 
-  try {
-    await approveSellNft(props.nft.tokenId);
-  } catch (err) {
-    isSubmitting.value = false;
-    if (err.code == 4001) {
+  const _isApproved = await isApproved(props.nft.tokenId);
+
+  if (!_isApproved) {
+    try {
+      await approveSellNft(props.nft.tokenId);
+    } catch (err) {
+      isSubmitting.value = false;
+      if (err.code == 4001) {
+        return;
+      }
+      error({ title: "Can't mint nft", text: err.message })
       return;
     }
-    error({ title: "Can't mint nft", text: err.message })
-    return;
   }
+
   buttonText.value = 'Approved';
   let transaction;
   try {
-    transaction = await sellNft( props.nft.tokenId, price);
+    transaction = await sellNft(props.nft.tokenId, price);
   } catch (err) {
     isSubmitting.value = false;
     if (err.code == 4001) {

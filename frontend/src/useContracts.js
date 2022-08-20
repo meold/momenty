@@ -30,6 +30,14 @@ export function mintNft(address, metadataUri) {
   return contract.mint(address, metadataUri);
 }
 
+export async function isApproved(tokenId) {
+  const contract = getMomentContract();
+  if (!contract) {
+    throw new Error("Can't get contract");
+  }
+  return (await contract.getApproved(tokenId)) == import.meta.env.VITE_MOMENT_MARKETPLACE;
+}
+
 export function approveSellNft(tokenId) {
   const contract = getMomentContract();
   if (!contract) {
