@@ -37,7 +37,7 @@
     </div>
 
     <div class="font-bold text-2xl mb-5">
-      <input value="nft.price" type="number" readonly>
+      <input :value="nft.price" type="number" readonly>
       MATIC
     </div>
   </template>
@@ -109,7 +109,7 @@ async function onClick() {
 
   isSubmitting.value = false;
   if (result.success) {
-    success({ text: 'Your moment is selling!' });
+    success({ text: 'Your moment is listed for sale!' });
     // eslint-disable-next-line vue/no-mutating-props
     props.nft.price = sellPrice.value;
   }
