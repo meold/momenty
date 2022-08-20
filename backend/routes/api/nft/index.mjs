@@ -362,16 +362,31 @@ export default async function routes(instance) {
             tokenId: {
               type: 'number',
               default: null
+            },
+            price: {
+              type: 'string',
+              default: null
             }
-          },
-          required: ['tokenId']
+          }
         }
       }
     },
 
     async (request) => {
       const { id } = request.params;
-      const { tokenId } = request.body;
+      const { tokenId, price } = request.body;
+
+      const data = {};
+      if (tokenId) {
+        data.tokenId = tokenId;
+      }
+      if (price) {
+        data.price = price;
+      }
+
+      if (!Object.keys(data).length) {
+        return { success: false };
+      }
 
       if (!request.user.id) {
         return { success: false };
@@ -380,7 +395,7 @@ export default async function routes(instance) {
       let result;
       try {
         result = await instance.sequelize.models.Nft.update(
-          { tokenId },
+          data,
           {
             where: { id, userId: request.user.id }
           }

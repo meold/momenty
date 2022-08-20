@@ -3,17 +3,13 @@
     Current price
   </div>
 
-
-  <button-primary @click="buy">Buy</button-primary>
-
   <div class="font-bold text-2xl mb-5">
-    999 MATIC
+    {{ nft.price || '0.0' }} MATIC
   </div>
 
   <div class="flex gap-x-3">
-    <!-- <a href="#" target="_blank" class="flex items-center justify-center px-8 bg-primary hover:opacity-90 hover:shadow-inner border-2 border-primary rounded-xl text-sm font-bold leading-none text-white py-3">
-      Buy NFT
-    </a> -->
+    <button-primary disabled @click="buy">Buy</button-primary>
+
     <button-like :nft="nft" class="!p-3 w-12 h-12" />
     <button-share :nft="nft" class="!p-3 w-12 h-12" />
   </div>

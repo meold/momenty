@@ -81,13 +81,11 @@ async function mint() {
     if (err.code == 4001) {
       return;
     }
-    error({ title: "Can't mint nft", text: err.message })
-
+    error({ title: "Can't mint nft", text: err.message });
+    return;
   }
 
   const receipt = await transaction.wait();
-
-  console.log(receipt, receipt.events);
 
   let tokenId = null;
   for (const event of receipt.events) {

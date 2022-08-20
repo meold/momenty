@@ -40,6 +40,10 @@ export default class Nft extends Model {
 
       tokenId: {
         type: Sequelize.DataTypes.BIGINT.UNSIGNED
+      },
+
+      price: {
+        type: Sequelize.DataTypes.STRING(255)
       }
     }
   }
