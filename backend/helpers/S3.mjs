@@ -256,4 +256,13 @@ export default class S3 {
     }
   }
 
+  createReadStream({ bucket, filename }) {
+    const getCommand = new GetObjectCommand({
+      Bucket: bucket,
+      Key: filename
+    });
+
+    return this.s3Client.send(getCommand);
+  }
+
 }

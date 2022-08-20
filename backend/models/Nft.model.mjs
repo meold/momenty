@@ -1,5 +1,6 @@
 import { Sequelize, Model } from 'sequelize';
 import sections from '../../common/sections.mjs';
+import { ipfsUpload } from '../helpers/Ipfs.mjs';
 export default class Nft extends Model {
   static modelAttributes() {
     return {
@@ -25,8 +26,38 @@ export default class Nft extends Model {
       video: {
         type: Sequelize.DataTypes.STRING(255),
         allowNull: false
+      },
+
+      metadataUri: {
+        type: Sequelize.DataTypes.STRING(255)
+      },
+
+      isIpfsUploadFailed: {
+        type: Sequelize.DataTypes.BOOLEAN,
+        allowNull: false,
+        defaultValue: false
+      },
+
+      tokenId: {
+        type: Sequelize.DataTypes.BIGINT.UNSIGNED
       }
     }
+  }
+
+  async uploadIpfs() {
+    const metadataUri = await ipfsUpload(
+      this.image.split('/').pop(),
+      this.video.split('/').pop(),
+      this.name,
+      this.description
+    );
+
+    if (!metadataUri) {
+      await this.update({ isIpfsUploadFailed: true })
+      return;
+    }
+
+    await this.update({ metadataUri });
   }
 
   static modelOptions(sequelize) {

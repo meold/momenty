@@ -184,15 +184,18 @@ export default async function routes(instance) {
       const nft = request.body;
       nft.userId = request.user.id;
 
-      let result;
+      let nftInstance;
       try {
-        result = await instance.sequelize.models.Nft.create(nft);
+        nftInstance = await instance.sequelize.models.Nft.create(nft);
       } catch (error) {
         // FIXME:
         console.log(error);
+        return { success: false }
       }
 
-      return { success: Boolean(result), id: result.id };
+      nftInstance.uploadIpfs();
+
+      return { success: true, id: nftInstance.id };
     }
   );
 
@@ -345,6 +348,49 @@ export default async function routes(instance) {
       }, { raw: true });
 
       return { success: true, image };
+    }
+  );
+
+  instance.put(
+    '/:id(^\\d+)/',
+
+    {
+      onRequest: instance.authenticate,
+      schema: {
+        body: {
+          properties: {
+            tokenId: {
+              type: 'number',
+              default: null
+            }
+          },
+          required: ['tokenId']
+        }
+      }
+    },
+
+    async (request) => {
+      const { id } = request.params;
+      const { tokenId } = request.body;
+
+      if (!request.user.id) {
+        return { success: false };
+      }
+
+      let result;
+      try {
+        result = await instance.sequelize.models.Nft.update(
+          { tokenId },
+          {
+            where: { id, userId: request.user.id }
+          }
+        );
+      } catch (error) {
+        // FIXME:
+        console.log(error);
+      }
+
+      return { success: Boolean(result) };
     }
   );
 }

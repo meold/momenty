@@ -2,6 +2,9 @@ import { ref, reactive, computed } from 'vue';
 import { error } from '@/notify.js';
 import { ethers } from 'ethers';
 
+const DEFAULT_CHAIN_ID = 80001;
+const DEFAULT_CHAIN_NAME = 'Mumbai';
+
 const metamaskState = ref(null);
 
 const shouldInstallWallet = computed(() => metamaskState.value == 'unsupported' || metamaskState.value == 'not_installed');
@@ -13,6 +16,8 @@ const web3 = reactive({
   address: null,
   chainId: null
 });
+
+const isChainIdValid = computed(() => web3.chainId == DEFAULT_CHAIN_ID)
 
 const shortAddress = computed(() => {
   if (!web3.address) {
@@ -129,35 +134,6 @@ function resetListeners() {
   window.ethereum.on('chainChanged', onChainChanged);
 }
 
-// switch chain
-// try {
-//   await ethereum.request({
-//     method: 'wallet_switchEthereumChain',
-//     params: [{ chainId: '0xf00' }],
-//   });
-// } catch (switchError) {
-//   // This error code indicates that the chain has not been added to MetaMask.
-//   if (switchError.code === 4902) {
-//     try {
-//       await ethereum.request({
-//         method: 'wallet_addEthereumChain',
-//         params: [
-//           {
-//             chainId: '0xf00',
-//             chainName: '...',
-//             rpcUrls: ['https://...'] /* ... */,
-//           },
-//         ],
-//       });
-//     } catch (addError) {
-//       // handle "add" error
-//     }
-//   }
-//   // handle other "switch" errors
-// }
-
-
-
 function onAccountsChanged(e) {
   console.log('ACCOUNTS CHANGED', e, web3.address);
   if (e[0] == web3.address) {
@@ -210,5 +186,7 @@ export {
   web3,
   shouldInstallWallet,
   shouldConnect,
-  isBrowserSupported
+  isBrowserSupported,
+  isChainIdValid,
+  DEFAULT_CHAIN_NAME
 };
