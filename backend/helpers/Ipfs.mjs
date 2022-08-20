@@ -3,6 +3,7 @@ import { create } from 'ipfs-core';
 import S3 from './S3.mjs';
 
 const s3 = new S3();
+const ipfs = await create();
 
 const ipfsAddOptions = {
   cidVersion: 1,
@@ -19,8 +20,6 @@ export async function ipfsUpload(filenameImage, filenameVideo, name, description
     bucket: process.env.S3_BUCKET_INCOMING_MEDIA,
     filename: filenameVideo
   });
-
-  const ipfs = await create();
 
   let res;
   try {
