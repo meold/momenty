@@ -54,7 +54,7 @@ if (!isMintReady.value) {
 
 async function reloadNft() {
   const { nft } = await get(`/nft/${props.nft.id}/`);
-  if (nft.isMintReady) {
+  if (nft.metadataUri) {
     // eslint-disable-next-line vue/no-mutating-props
     props.nft.metadataUri = nft.metadataUri;
     isMintReady.value = true;
