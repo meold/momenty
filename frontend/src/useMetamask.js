@@ -174,6 +174,38 @@ async function signMessage(nonce) {
   return null;
 }
 
+async function switchToDefaultChain() {
+  try {
+    await window.ethereum.request({
+      method: 'wallet_switchEthereumChain',
+      params: [{ chainId: '0x' + DEFAULT_CHAIN_ID.toString(16) }]
+    });
+  } catch (switchError) {
+    // This error code indicates that the chain has not been added to MetaMask.
+    if (switchError.code === 4902) {
+      // add network interface
+      try {
+        await window.ethereum.request({
+          method: 'wallet_addEthereumChain',
+          params: [{
+            chainId: '0x' + DEFAULT_CHAIN_ID.toString(16),
+            blockExplorerUrls: ['https://mumbai.polygonscan.com'],
+            chainName: DEFAULT_CHAIN_NAME,
+            nativeCurrency: {
+              name: 'MATIC',
+              symbol: 'MATIC',
+              decimals: 18
+            },
+            rpcUrls: ['https://matic-mumbai.chainstacklabs.com']
+          }]
+        });
+      } catch(addError) {
+        // ignore
+      }
+    }
+  }
+}
+
 export {
   useMetamask,
   installWallet,
@@ -188,5 +220,6 @@ export {
   shouldConnect,
   isBrowserSupported,
   isChainIdValid,
-  DEFAULT_CHAIN_NAME
+  DEFAULT_CHAIN_NAME,
+  switchToDefaultChain
 };

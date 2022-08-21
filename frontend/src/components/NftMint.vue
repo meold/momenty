@@ -1,36 +1,29 @@
 <template>
-  <div class="flex gap-x-3">
-    <div class="shrink-0">
-      <button-primary :disabled="isButtonDisabled" class="relative" @click="mint">
-        <spinner v-if="isSubmitting" class="absolute left-2 !fill-white !w-5 mr-1" />
-        Mint
-      </button-primary>
-    </div>
+  <div class="flex gap-x-3 mb-3">
+    <button-primary :disabled="isButtonDisabled" class="relative" @click="mint">
+      <spinner v-if="isSubmitting" class="absolute left-2 !fill-white !w-5 mr-1" />
+      Mint
+    </button-primary>
 
-    <alert-error v-if="!isChainIdValid" title="Wrong chain">
-      Please connect Metamask to {{ DEFAULT_CHAIN_NAME }} chain
-    </alert-error>
-
-    <alert-error v-else-if="!isMintReady" title="Mint is not ready yet">
-      It could take some time to prepare moment for minting.
-      You can wait here or come back later.
-    </alert-error>
-
-    <template v-else>
-      <button-like :nft="nft" class="!p-3 w-12 h-12" />
-      <button-share :nft="nft" class="!p-3 w-12 h-12" />
-    </template>
-
+    <button-like :nft="nft" class="!p-3 w-12 h-12" />
+    <button-share :nft="nft" class="!p-3 w-12 h-12" />
   </div>
+
+  <alert-wrong-chain v-if="!isChainIdValid" />
+
+  <alert-error v-else-if="!isMintReady" title="Mint is not ready yet">
+    It could take some time to prepare moment for minting.
+    You can wait here or come back later.
+  </alert-error>
 </template>
 
 <script setup>
 import ButtonPrimary from './ButtonPrimary.vue';
 import ButtonLike from '@/components/ButtonLike.vue';
 import ButtonShare from '@/components/ButtonShare.vue';
-import AlertError from './AlertError.vue';
+import AlertWrongChain from './AlertWrongChain.vue';
 import { mintNft } from '@/useContracts';
-import { web3, isChainIdValid, DEFAULT_CHAIN_NAME } from '@/useMetamask';
+import { web3, isChainIdValid } from '@/useMetamask';
 import { computed, shallowRef } from 'vue';
 import { get, put } from '@/useApi.js';
 import { error, success } from '@/notify';

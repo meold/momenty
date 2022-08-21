@@ -14,21 +14,17 @@
       MATIC
     </div>
 
-    <div class="flex gap-x-3">
-      <div class="shrink-0">
-        <button-primary :disabled="isButtonDisabled" class="relative" @click="onClick">
-          <spinner v-if="isSubmitting" class="absolute left-2 !fill-white !w-5 mr-1" />
-          {{ buttonText }}
-        </button-primary>
-      </div>
-
-      <alert-error v-if="!isChainIdValid" title="Wrong chain">
-        Please connect Metamask to {{ DEFAULT_CHAIN_NAME }} chain
-      </alert-error>
+    <div class="flex gap-x-3 mb-3">
+      <button-primary :disabled="isButtonDisabled" class="relative" @click="onClick">
+        <spinner v-if="isSubmitting" class="absolute left-2 !fill-white !w-5 mr-1" />
+        {{ buttonText }}
+      </button-primary>
 
       <button-like :nft="nft" class="!p-3 w-12 h-12" />
       <button-share :nft="nft" class="!p-3 w-12 h-12" />
     </div>
+
+    <alert-wrong-chain />
   </template>
 
   <template v-else>
@@ -47,14 +43,14 @@
 import ButtonLike from '@/components/ButtonLike.vue';
 import ButtonShare from '@/components/ButtonShare.vue';
 import ButtonPrimary from './ButtonPrimary.vue';
-import AlertError from './AlertError.vue';
+import AlertWrongChain from './AlertWrongChain.vue';
 import NftMint from './NftMint.vue';
 import Spinner from './Spinner.vue';
 import { approveSellNft, sellNft, parseEther, isApproved } from '@/useContracts';
 import { error, success } from '@/notify';
 import { put } from '@/useApi.js';
 import { computed, ref, shallowRef } from 'vue';
-import { isChainIdValid, DEFAULT_CHAIN_NAME } from '@/useMetamask';
+import { isChainIdValid } from '@/useMetamask';
 
 const props = defineProps({
   nft: {
@@ -65,14 +61,12 @@ const props = defineProps({
 
 const sellPrice = ref('0.0');
 const isSubmitting = shallowRef(false);
+const buttonText = shallowRef('Sell');
 
 const isMinted = computed(() => Boolean(props.nft.tokenId));
 const isSelling = computed(() => Boolean(props.nft.price));
 
-const isButtonDisabled = computed(() => isSubmitting.value || !sellPrice.value || sellPrice.value <= 0);
-
-const buttonText = shallowRef('Sell');
-
+const isButtonDisabled = computed(() => isSubmitting.value || !isChainIdValid.value || !sellPrice.value || sellPrice.value <= 0);
 
 async function onClick() {
   const price = parseEther(`${sellPrice.value}`);
