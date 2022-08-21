@@ -11,9 +11,6 @@ export default async function routes(instance) {
         query: {
           type: 'object',
           properties: {
-            authorId: {
-              type: 'number'
-            },
             page: {
               type: 'number'
             },
@@ -21,7 +18,7 @@ export default async function routes(instance) {
               type: 'number'
             }
           },
-          required: ['authorId', 'page', 'perPage']
+          required: ['page', 'perPage']
         }
       }
     },
@@ -37,6 +34,16 @@ export default async function routes(instance) {
         }
       ];
 
+      const where = {};
+
+      if (authorId) {
+        where.authorId = authorId;
+      }
+
+      if (request.query.userId) {
+        where.userId = request.query.userId;
+      }
+
       const userId = request.user?.id || null;
       if (userId) {
         include.push({
@@ -47,16 +54,14 @@ export default async function routes(instance) {
             userId
           },
           required: false
-        })
+        });
       }
 
       const limit = perPage;
       const offset = page * limit;
 
       const nfts = await instance.sequelize.models.Nft.findAll({
-        where: {
-          authorId
-        },
+        where,
         include,
         limit,
         offset
@@ -76,7 +81,7 @@ export default async function routes(instance) {
           properties: {
             section: {
               type: 'string',
-              enum: [...sections, 'new', 'trending', 'favorite']
+              enum: [...sections, 'new', 'trending', 'favorite', 'created']
             }
           },
           required: [ 'section' ]
@@ -131,7 +136,12 @@ export default async function routes(instance) {
       } else if(section == 'trending') {
         // FIXME: do tranding
         query.order = [['createdAt', 'ASC']];
-      } else if (section == 'favorite' && include[1]) {
+      } else if(section == 'created') {
+        if (!userId) {
+          return { success: false }
+        }
+        query.where = { authorId: userId };
+      } else if (section == 'favorite' && userId) {
         include[1].required = true;
       } else {
         query.where = { section };

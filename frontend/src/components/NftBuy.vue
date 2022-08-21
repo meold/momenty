@@ -4,7 +4,9 @@
   </div>
 
   <div class="font-bold text-2xl mb-5">
-    {{ nft.price || '0.0' }} MATIC
+    <component :is="nft.price ? 'span' : 's'">
+      {{ nft.price || '0.0' }} MATIC
+    </component>
   </div>
 
   <div class="flex gap-x-3 mb-3">

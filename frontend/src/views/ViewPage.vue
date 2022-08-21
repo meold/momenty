@@ -12,6 +12,10 @@
           <button-primary v-if="!isAuthor" class="!py-3">Follow</button-primary>
         </div>
 
+        <div class="mb-8 flex justify-between items-center">
+          <user-card :user="nft.userId" />
+        </div>
+
         <h1 class="font-display text-2xl leading-tight mb-4">
           {{ nft.title }}
         </h1>
@@ -62,11 +66,11 @@ const props = defineProps({
 watch(
   () => props.id,
   val => {
+    console.log('watch', val)
     getNft(val)
-  }
+  },
+  { immediate: true }
 );
-
-getNft();
 
 const isOwner = computed(() => nft.value?.userId == userState.data?.id);
 const isAuthor = computed(() => nft.value?.authorId == userState.data?.id);
@@ -75,6 +79,9 @@ const nft = ref({});
 const isNftLoaded = ref(false);
 
 async function getNft() {
+
+  console.log('get nft')
+
   const { nft: _nft } = await get(`/nft/${props.id}/`);
   nft.value = _nft;
   isNftLoaded.value = true;

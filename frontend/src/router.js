@@ -93,6 +93,12 @@ const routes = [
   },
 
   {
+    path: '/404',
+    name: 'ErrorPage',
+    component: ErrorPage
+  },
+
+  {
     path: '/:pathMatch(.*)*',
     name: 'ErrorPage',
     component: ErrorPage

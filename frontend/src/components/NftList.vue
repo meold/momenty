@@ -65,6 +65,9 @@ const nfts = ref([]);
 
 async function load({ loaded }) {
   const { nfts: _nfts } = await get(props.url, { page, perPage: PAGE_SIZE, ...props.urlOptions });
+  if (!_nfts) {
+    return;
+  }
   nfts.value.push(..._nfts);
   page += 1;
 

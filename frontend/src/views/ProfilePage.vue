@@ -7,9 +7,9 @@
       <nft-list
         v-if="id"
         :key="id"
-        title="User moments"
+        :title="title"
         :url="`/nft/`"
-        :url-options="{ authorId: id }"
+        :url-options="urlOptions"
       />
     </div>
   </div>
@@ -18,8 +18,9 @@
 <script setup>
 import MenuProfile from '@/components/MenuProfile.vue';
 import NftList from '@/components/NftList.vue';
-import { ref, watch } from 'vue';
+import { ref, watch, computed } from 'vue';
 import { get } from '@/useApi.js';
+import { userState } from '@/useLogin';
 
 const props = defineProps({
   id: {
@@ -27,6 +28,10 @@ const props = defineProps({
     default: null
   }
 });
+
+const isCurrentUser = computed(() => userState.data?.id == props.id);
+const title = computed(() => ( isCurrentUser.value ? 'Owned moments' : 'Created moments'));
+const urlOptions = computed(() => ( isCurrentUser.value ? { userId: props.id } : { authorId: props.id }));
 
 watch(
   () => props.id,
