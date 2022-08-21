@@ -11,7 +11,7 @@ export default async function routes(instance) {
         query: {
           type: 'object',
           properties: {
-            userId: {
+            authorId: {
               type: 'number'
             },
             page: {
@@ -21,22 +21,23 @@ export default async function routes(instance) {
               type: 'number'
             }
           },
-          required: ['userId', 'page', 'perPage']
+          required: ['authorId', 'page', 'perPage']
         }
       }
     },
 
     async (request) => {
-      const { userId, page, perPage } = request.query;
+      const { authorId, page, perPage } = request.query;
 
       const include = [
         {
           model: instance.sequelize.models.User,
-          as: 'user',
+          as: 'author',
           attributes: ['id', 'name', 'avatarUrl']
         }
       ];
 
+      const userId = request.user?.id || null;
       if (userId) {
         include.push({
           model: instance.sequelize.models.Like,
@@ -54,7 +55,7 @@ export default async function routes(instance) {
 
       const nfts = await instance.sequelize.models.Nft.findAll({
         where: {
-          userId
+          authorId
         },
         include,
         limit,
@@ -106,7 +107,7 @@ export default async function routes(instance) {
       const include = [
         {
           model: instance.sequelize.models.User,
-          as: 'user',
+          as: 'author',
           attributes: ['id', 'name', 'avatarUrl']
         }
       ];
@@ -183,6 +184,7 @@ export default async function routes(instance) {
 
       const nft = request.body;
       nft.userId = request.user.id;
+      nft.authorId = request.user.id;
 
       let nftInstance;
       try {
@@ -225,7 +227,7 @@ export default async function routes(instance) {
       const include = [
         {
           model: instance.sequelize.models.User,
-          as: 'user',
+          as: 'author',
           attributes: ['id', 'name', 'avatarUrl']
         }
       ];
@@ -287,8 +289,9 @@ export default async function routes(instance) {
       const include = [
         {
           model: instance.sequelize.models.User,
-          as: 'user',
-          attributes: ['id', 'name', 'avatarUrl']
+          as: 'author',
+          attributes: ['id', 'name', 'avatarUrl'],
+          required: true
         }
       ];
 
@@ -315,7 +318,7 @@ export default async function routes(instance) {
               instance.sequelize.fn('LOWER', instance.sequelize.col('description')), {[Sequelize.Op.like]: `%${query}%`}
             ),
             instance.sequelize.where(
-              instance.sequelize.fn('LOWER', instance.sequelize.col('user.name')), {[Sequelize.Op.like]: `%${query}%`}
+              instance.sequelize.fn('LOWER', instance.sequelize.col('author.name')), {[Sequelize.Op.like]: `%${query}%`}
             )
           ]
         };
@@ -325,8 +328,7 @@ export default async function routes(instance) {
         where,
         include,
         limit,
-        offset,
-        raw: true
+        offset
       });
 
       return { success: true, nfts };
@@ -367,7 +369,7 @@ export default async function routes(instance) {
               type: 'string',
               default: null
             },
-            ownerId: {
+            userId: {
               type: 'number',
               default: null
             }
@@ -391,9 +393,9 @@ export default async function routes(instance) {
       if (request.body.price) {
         data.price = request.body.price;
       }
-      if (request.body.ownerId == request.user.id) {
+      if (request.body.userId == request.user.id) {
         // FIXME: do onchain check for request.user.address
-        data.ownerId = request.body.ownerId;
+        data.userId = request.body.userId;
         data.price = null; // we must remove from sale
         delete where.userId;
       }

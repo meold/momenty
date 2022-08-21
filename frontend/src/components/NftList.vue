@@ -2,7 +2,7 @@
   <h2 v-if="title" class="text-xl font-bold mb-2">{{ title }}</h2>
   <div class="gallery grid grid-cols-1 gap-10 sm:grid-cols-2 md:grid-cols-3">
     <div v-for="nft in nfts" :key="nft.id" class="select-none">
-      <user-card :user="nft.user" is-short />
+      <user-card :user="nft.author" is-short />
       <div class="flex">
         <div class="shrink-0 mr-2">
           <button-like :nft="nft" class="h-10 w-10 rounded-full !p-2 mt-2" />

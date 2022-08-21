@@ -8,8 +8,8 @@
       <div v-if="isNftLoaded" class="grow">
 
         <div class="mb-8 flex justify-between items-center">
-          <user-card :user="nft.user" />
-          <button-primary v-if="!isCurrentUser" class="!py-3">Follow</button-primary>
+          <user-card :user="nft.author" />
+          <button-primary v-if="!isAuthor" class="!py-3">Follow</button-primary>
         </div>
 
         <h1 class="font-display text-2xl leading-tight mb-4">
@@ -20,7 +20,7 @@
           {{ nft.description }}
         </p>
 
-        <nft-sell v-if="isCurrentUser" :nft="nft" />
+        <nft-sell v-if="isOwner" :nft="nft" />
         <nft-buy v-else :nft="nft" />
       </div>
 
@@ -35,7 +35,7 @@
       v-if="isNftLoaded"
       title="Other author Moments"
       :url="`/nft/`"
-      :url-options="{ userId: nft.user.id }"
+      :url-options="{ authorId: nft.authorId }"
     />
   </div>
 </template>
@@ -68,7 +68,8 @@ watch(
 
 getNft();
 
-const isCurrentUser = computed(() => nft.value?.user?.id == userState.data?.id);
+const isOwner = computed(() => nft.value?.userId == userState.data?.id);
+const isAuthor = computed(() => nft.value?.authorId == userState.data?.id);
 
 const nft = ref({});
 const isNftLoaded = ref(false);

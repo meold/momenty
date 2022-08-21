@@ -73,9 +73,9 @@ export default class Nft extends Model {
 
   static associate(sequelize) {
     this.belongsTo(sequelize.models.User, { foreignKey: 'userId', as: 'user' });
-    this.belongsTo(sequelize.models.User, { foreignKey: 'ownerId', as: 'owner' });
+    this.belongsTo(sequelize.models.User, { foreignKey: 'authorId', as: 'author' });
     sequelize.models.User.hasMany(this, { foreignKey: 'userId', as: 'nfts' });
-    sequelize.models.User.hasMany(this, { foreignKey: 'ownerId', as: 'boughtNfts' });
+    sequelize.models.User.hasMany(this, { foreignKey: 'authorId', as: 'createdNfts' });
   }
 }
 

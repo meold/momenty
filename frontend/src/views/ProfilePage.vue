@@ -9,7 +9,7 @@
         :key="id"
         title="User moments"
         :url="`/nft/`"
-        :url-options="{ userId: id }"
+        :url-options="{ authorId: id }"
       />
     </div>
   </div>
