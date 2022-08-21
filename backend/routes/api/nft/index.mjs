@@ -81,7 +81,7 @@ export default async function routes(instance) {
           properties: {
             section: {
               type: 'string',
-              enum: [...sections, 'new', 'trending', 'favorite', 'created']
+              enum: [...sections, 'new', 'buy', 'favorite', 'created']
             }
           },
           required: [ 'section' ]
@@ -106,6 +106,7 @@ export default async function routes(instance) {
 
       const limit = request.query.perPage;
       const offset = request.query.page * limit;
+      const order = [['createdAt', 'DESC']];
 
       const userId = request.user?.id || null;
 
@@ -129,13 +130,12 @@ export default async function routes(instance) {
         })
       }
 
-      const query = { include, limit, offset };
+      const query = { include, limit, offset, order };
 
       if (section == 'new') {
-        query.order = [['createdAt', 'DESC']];
-      } else if(section == 'trending') {
-        // FIXME: do tranding
-        query.order = [['createdAt', 'ASC']];
+        // do nothing
+      } else if(section == 'buy') {
+        query.where = { tokenId: { [Sequelize.Op.not]: null }, price: { [Sequelize.Op.not]: null } };
       } else if(section == 'created') {
         if (!userId) {
           return { success: false }
