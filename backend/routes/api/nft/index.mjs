@@ -366,6 +366,10 @@ export default async function routes(instance) {
             price: {
               type: 'string',
               default: null
+            },
+            ownerId: {
+              type: 'number',
+              default: null
             }
           }
         }
@@ -373,22 +377,28 @@ export default async function routes(instance) {
     },
 
     async (request) => {
-      const { id } = request.params;
-      const { tokenId, price } = request.body;
-
-      const data = {};
-      if (tokenId) {
-        data.tokenId = tokenId;
-      }
-      if (price) {
-        data.price = price;
-      }
-
-      if (!Object.keys(data).length) {
+      if (!request.user.id) {
         return { success: false };
       }
 
-      if (!request.user.id) {
+      const { id } = request.params;
+      const where = { id, userId: request.user.id };
+
+      const data = {};
+      if (request.body.tokenId) {
+        data.tokenId = request.body.tokenId;
+      }
+      if (request.body.price) {
+        data.price = request.body.price;
+      }
+      if (request.body.ownerId == request.user.id) {
+        // FIXME: do onchain check for request.user.address
+        data.ownerId = request.body.ownerId;
+        data.price = null; // we must remove from sale
+        delete where.userId;
+      }
+
+      if (!Object.keys(data).length) {
         return { success: false };
       }
 
@@ -397,7 +407,7 @@ export default async function routes(instance) {
         result = await instance.sequelize.models.Nft.update(
           data,
           {
-            where: { id, userId: request.user.id }
+            where
           }
         );
       } catch (error) {

@@ -54,6 +54,14 @@ export function sellNft(tokenId, price) {
   return contract.listMoment(import.meta.env.VITE_MOMENT_CONTRACT, tokenId, price);
 }
 
+export function buyNft(tokenId, price) {
+  const contract = getMarketplaceContract();
+  if (!contract) {
+    throw new Error("Can't get contract");
+  }
+  return contract.buyMoment(import.meta.env.VITE_MOMENT_CONTRACT, tokenId, { value: price });
+}
+
 export function getNftListing(tokenId) {
   const contract = getMarketplaceContract();
   if (!contract) {
