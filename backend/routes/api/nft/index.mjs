@@ -239,6 +239,11 @@ export default async function routes(instance) {
           model: instance.sequelize.models.User,
           as: 'author',
           attributes: ['id', 'name', 'avatarUrl']
+        },
+        {
+          model: instance.sequelize.models.User,
+          as: 'user',
+          attributes: ['id', 'name', 'avatarUrl']
         }
       ];
 

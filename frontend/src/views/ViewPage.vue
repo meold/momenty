@@ -7,13 +7,13 @@
 
       <div v-if="isNftLoaded" class="grow">
 
-        <div class="mb-8 flex justify-between items-center">
+        <div class="flex justify-between items-center" :class="isSold ? 'mb-1' : 'mb-8'">
           <user-card :user="nft.author" />
           <button-primary v-if="!isAuthor" class="!py-3">Follow</button-primary>
         </div>
 
-        <div class="mb-8 flex justify-between items-center">
-          <user-card :user="nft.userId" />
+        <div v-if="isSold" class="mb-8 flex justify-between items-center">
+          <user-card :user="nft.user" prefix-text="owned by" />
         </div>
 
         <h1 class="font-display text-2xl leading-tight mb-4">
@@ -74,6 +74,7 @@ watch(
 
 const isOwner = computed(() => nft.value?.userId == userState.data?.id);
 const isAuthor = computed(() => nft.value?.authorId == userState.data?.id);
+const isSold = computed(() => nft.value?.authorId != nft.value?.userId);
 
 const nft = ref({});
 const isNftLoaded = ref(false);
