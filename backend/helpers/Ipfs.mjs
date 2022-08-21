@@ -3,7 +3,7 @@ import { create } from 'ipfs-core';
 import S3 from './S3.mjs';
 
 const s3 = new S3();
-// const ipfs = await create();
+const ipfs = await create();
 
 const ipfsAddOptions = {
   cidVersion: 1,
