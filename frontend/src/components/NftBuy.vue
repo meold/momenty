@@ -71,13 +71,13 @@ async function buy() {
 
   await transaction.wait();
 
-  const result = await put(`/nft/${props.nft.id}/`, { ownerId: userState.data.id });
+  const result = await put(`/nft/${props.nft.id}/`, { userId: userState.data.id });
 
   isSubmitting.value = false;
   if (result.success) {
     success({ text: 'You ary bought the moment!' });
     // eslint-disable-next-line vue/no-mutating-props
-    props.nft.ownerId = userState.data.id;
+    props.nft.userId = userState.data.id;
   }
 }
 </script>
