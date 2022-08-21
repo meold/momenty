@@ -1,5 +1,5 @@
 <template>
-  <div class="menu-vertical max-w-xs sticky top-24 border">
+  <div class="menu-vertical max-w-xs sticky top-28 border">
     <div class="relative flex flex-col items-center">
       <user-avatar class="h-28 w-28 border-4" :src="user.avatarUrl" />
       <div class="text-primary underline my-3">{{ user.name }}</div>
@@ -58,7 +58,7 @@
         My moments
       </router-link>
 
-      <router-link to="/soon" class="menu-link">
+      <router-link to="/section/favorite" class="menu-link">
         <svg width="16" height="14" viewBox="0 0 16 14" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M13.8931 1.99728C13.5526 1.65662 13.1483 1.38638 12.7033 1.202C12.2583 1.01763 11.7814 0.922729 11.2998 0.922729C10.8181 0.922729 10.3412 1.01763 9.89618 1.202C9.45121 1.38638 9.04692 1.65662 8.70642 1.99728L7.99975 2.70395L7.29309 1.99728C6.60529 1.30949 5.67244 0.923086 4.69975 0.923086C3.72706 0.923086 2.79421 1.30949 2.10642 1.99728C1.41863 2.68507 1.03223 3.61792 1.03223 4.59061C1.03223 5.5633 1.41863 6.49615 2.10642 7.18395L2.81309 7.89061L7.99975 13.0773L13.1864 7.89061L13.8931 7.18395C14.2337 6.84344 14.504 6.43916 14.6884 5.99418C14.8727 5.54921 14.9676 5.07227 14.9676 4.59061C14.9676 4.10895 14.8727 3.63202 14.6884 3.18704C14.504 2.74207 14.2337 2.33778 13.8931 1.99728V1.99728Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
         </svg>
