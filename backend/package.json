@@ -11,7 +11,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@aws-sdk/s3-request-presigner": "^3.150.0",
+    "@aws-sdk/s3-request-presigner": "^3.154.0",
     "@fastify/autoload": "^5.2.0",
     "@fastify/cors": "^8.1.0",
     "@fastify/http-proxy": "^8.2.2",
@@ -19,7 +19,7 @@
     "@fastify/static": "^6.5.0",
     "dotenv": "^16.0.1",
     "eslint": "^8.22.0",
-    "ethers": "^5.6.9",
+    "ethers": "^5.7.0",
     "fastify": "^4.5.2",
     "ipfs-core": "^0.15.4",
     "mime-types": "^2.1.35",
@@ -29,7 +29,7 @@
     "uuid": "^8.3.2"
   },
   "devDependencies": {
-    "@aws-sdk/client-s3": "^3.150.0",
+    "@aws-sdk/client-s3": "^3.154.0",
     "@babel/eslint-parser": "^7.18.9",
     "@babel/plugin-syntax-class-properties": "^7.12.13",
     "@babel/plugin-syntax-top-level-await": "^7.14.5",
