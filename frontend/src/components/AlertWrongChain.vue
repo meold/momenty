@@ -6,7 +6,7 @@
         Please connect Metamask to {{ DEFAULT_CHAIN_NAME }} chain
       </div>
       <div class="shrink-0">
-        <button-secondary class="border-red-800 hover:bg-red-100" @click="switchToDefaultChain">Connect</button-secondary>
+        <button-secondary class="border-red-800 !hover:bg-red-100" @click="switchToDefaultChain">Connect</button-secondary>
       </div>
     </div>
   </alert-error>

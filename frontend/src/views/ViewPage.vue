@@ -16,6 +16,14 @@
           <user-card :user="nft.user" prefix-text="owned by" />
         </div>
 
+        <div v-if="nft.tokenId" class="float-right">
+          <a
+            :href="`https://mumbai.polygonscan.com/token/${contractAddress}?a=${nft.tokenId}`"
+            class="text-primary text-sm font-light hover:underline"
+            target="_blank"
+          >View on chain explorer</a>
+        </div>
+
         <h1 class="font-display text-2xl leading-tight mb-4">
           {{ nft.title }}
         </h1>
@@ -55,6 +63,8 @@ import { ref, watch, computed } from 'vue';
 import { get } from '@/useApi.js';
 import { userState } from '@/useLogin.js';
 import NftList from '@/components/NftList.vue';
+
+const contractAddress = import.meta.env.VITE_MOMENT_CONTRACT;
 
 const props = defineProps({
   id: {
