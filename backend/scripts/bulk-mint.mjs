@@ -10,13 +10,13 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ABI = JSON.parse(fs.readFileSync(path.resolve(path.join(__dirname, '../../frontend/src/artifacts/MomentContract.json'))).toString());
 
 const contractAddress = '0x2dCE49EF20f99B0AC09D175C0B6ceD27e4a751e7';
-const ETH_PRIVATE_KEY = 'XXX'; // FIXME
+const ETH_PRIVATE_KEY = 'xxx'; // FIXME
 
 const sqz = await sequelize({
   connection: process.env.SQL_CONNECTION
 });
 
-const ethProvider = new ethers.providers.StaticJsonRpcProvider('https://matic-mumbai.chainstacklabs.com');
+const ethProvider = new ethers.providers.StaticJsonRpcProvider('https://rpc-mumbai.maticvigil.com');
 const signer = new ethers.Wallet(ETH_PRIVATE_KEY, ethProvider);
 
 const contract = new ethers.Contract(contractAddress, ABI, signer);
@@ -38,7 +38,7 @@ async function doo() {
 
   if (nft) {
     console.log('nft', nft.id)
-    const transaction = await contract.mint(nft.author.address, nft.metadataUri);
+    const transaction = await contract.mint(nft.author.address, nft.metadataUri, { gasLimit: 300000, gasPrice: ethers.utils.parseUnits('40', 'gwei')});
     console.log(transaction);
     const receipt = await transaction.wait();
     console.log(receipt);
@@ -51,9 +51,12 @@ async function doo() {
     if (tokenId) {
       console.log('tokenId', tokenId)
       await nft.update({ tokenId });
+
+      await doo();
     }
   }
 }
+
 
 doo();
 
