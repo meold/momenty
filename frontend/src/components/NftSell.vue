@@ -80,7 +80,8 @@ async function onClick() {
 
   if (!_isApproved) {
     try {
-      await approveSellNft(props.nft.tokenId);
+      const approveTransaction = await approveSellNft(props.nft.tokenId);
+      await approveTransaction.wait(2);
     } catch (err) {
       isSubmitting.value = false;
       if (err.code == 4001) {
