@@ -1,16 +1,21 @@
 <template>
-  <div class="mb-3">
-    Current price
-  </div>
+  <template v-if="nft.price">
+    <div class="mb-3">
+      Current price
+    </div>
 
-  <div class="font-bold text-2xl mb-5">
-    <component :is="nft.price ? 'span' : 's'">
+    <div class="font-bold text-2xl mb-5">
       {{ nft.price || '0.0' }} MATIC
-    </component>
-  </div>
+    </div>
+  </template>
 
   <div class="flex gap-x-3 mb-3">
-    <button-primary :disabled="isButtonDisabled" class="relative" @click="buy">
+
+    <button-primary v-if="!nft.price" @click="offer">
+      Offer
+    </button-primary>
+
+    <button-primary v-else :disabled="isButtonDisabled" class="relative" @click="buy">
       <spinner v-if="isSubmitting" class="absolute left-2 !fill-white !w-5 mr-1" />
       {{ buttonText }}
     </button-primary>
@@ -81,5 +86,9 @@ async function buy() {
     // eslint-disable-next-line vue/no-mutating-props
     props.nft.userId = userState.data.id;
   }
+}
+
+function offer() {
+  success({ text: 'Coming soon!' });
 }
 </script>
