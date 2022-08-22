@@ -36,6 +36,8 @@ const props = defineProps({
   }
 });
 
+const emit = defineEmits(['update']);
+
 const isMintReady = shallowRef(Boolean(props.nft.metadataUri));
 const isSubmitting = shallowRef(false);
 
@@ -48,8 +50,7 @@ if (!isMintReady.value) {
 async function reloadNft() {
   const { nft } = await get(`/nft/${props.nft.id}/`);
   if (nft.metadataUri) {
-    // eslint-disable-next-line vue/no-mutating-props
-    props.nft.metadataUri = nft.metadataUri;
+    emit('update');
     isMintReady.value = true;
     return;
   }
@@ -92,8 +93,7 @@ async function mint() {
   isSubmitting.value = false;
   if (result.success) {
     success({ text: 'Your moment was minted!' });
-    // eslint-disable-next-line vue/no-mutating-props
-    props.nft.tokenId = tokenId;
+    emit('update');
   }
 }
 </script>

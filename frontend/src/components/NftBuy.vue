@@ -47,6 +47,8 @@ const props = defineProps({
   }
 });
 
+const emit = defineEmits(['update']);
+
 const isSubmitting = shallowRef(false);
 const buttonText = shallowRef('Buy');
 
@@ -83,8 +85,7 @@ async function buy() {
   isSubmitting.value = false;
   if (result.success) {
     success({ text: 'You ary bought the moment!' });
-    // eslint-disable-next-line vue/no-mutating-props
-    props.nft.userId = userState.data.id;
+    emit('update');
   }
 }
 

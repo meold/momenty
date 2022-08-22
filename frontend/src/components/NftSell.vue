@@ -1,7 +1,7 @@
 <template>
   <hr class="mb-10">
 
-  <nft-mint v-if="!isMinted" :nft="nft" />
+  <nft-mint v-if="!isMinted" :nft="nft" @update="emit('update')" />
 
   <template v-else-if="!isSelling">
 
@@ -59,6 +59,8 @@ const props = defineProps({
   }
 });
 
+const emit = defineEmits(['update']);
+
 const sellPrice = ref('0.0');
 const isSubmitting = shallowRef(false);
 const buttonText = shallowRef('Sell');
@@ -109,8 +111,7 @@ async function onClick() {
   isSubmitting.value = false;
   if (result.success) {
     success({ text: 'Your moment is listed for sale!' });
-    // eslint-disable-next-line vue/no-mutating-props
-    props.nft.price = sellPrice.value;
+    emit('update');
   }
 }
 </script>

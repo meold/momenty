@@ -24,8 +24,8 @@
           {{ nft.description }}
         </p>
 
-        <nft-sell v-if="isOwner" :nft="nft" />
-        <nft-buy v-else :nft="nft" />
+        <nft-sell v-if="isOwner" :nft="nft" @update="getNft" />
+        <nft-buy v-else :nft="nft" @update="getNft" />
       </div>
 
       <div v-else class="grow flex justify-center items-center h-40">
