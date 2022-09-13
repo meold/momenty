@@ -11,32 +11,32 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@aws-sdk/s3-request-presigner": "^3.154.0",
-    "@fastify/autoload": "^5.2.0",
+    "@aws-sdk/s3-request-presigner": "^3.169.0",
+    "@fastify/autoload": "^5.4.0",
     "@fastify/cors": "^8.1.0",
     "@fastify/http-proxy": "^8.2.2",
     "@fastify/jwt": "^6.3.2",
     "@fastify/static": "^6.5.0",
-    "dotenv": "^16.0.1",
-    "eslint": "^8.22.0",
+    "dotenv": "^16.0.2",
+    "eslint": "^8.23.1",
     "ethers": "^5.7.0",
-    "fastify": "^4.5.2",
-    "ipfs-core": "^0.15.4",
+    "fastify": "^4.5.3",
+    "ipfs-core": "^0.16.0",
     "mime-types": "^2.1.35",
     "mysql2": "^2.3.3",
     "package-lock": "^1.0.5",
-    "sequelize": "^6.21.4",
-    "uuid": "^8.3.2"
+    "sequelize": "^6.21.6",
+    "uuid": "^9.0.0"
   },
   "devDependencies": {
-    "@aws-sdk/client-s3": "^3.154.0",
+    "@aws-sdk/client-s3": "^3.169.0",
     "@babel/eslint-parser": "^7.18.9",
     "@babel/plugin-syntax-class-properties": "^7.12.13",
     "@babel/plugin-syntax-top-level-await": "^7.14.5",
-    "@babel/preset-env": "^7.18.10",
-    "@faker-js/faker": "^7.4.0",
+    "@babel/preset-env": "^7.19.0",
+    "@faker-js/faker": "^7.5.0",
     "fastify-static": "^4.7.0",
     "pino-multi-stream": "^6.0.0",
-    "pino-pretty": "^9.0.1"
+    "pino-pretty": "^9.1.0"
   }
 }
