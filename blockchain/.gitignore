@@ -3,3 +3,15 @@ artifacts/*
 cache/*
 node_modules/*
 .env
+
+target
+**/target/
+
+**/*.rs.bk
+
+**/neardev
+**/.near-credentials
+
+.idea
+.vscode
+**/.DS_Store
