@@ -5,7 +5,7 @@
       <div class="flex items-center justify-between flex-wrap">
         <div class="w-0 flex-1 flex items-center">
           <p class="ml-3 font-medium truncate">
-            <span>Congrats: New Platform for Photo+Video Moments as NFT Without Code</span>
+            <span>Social NFT Platform for Pics+Video w/Feed, Follows, Likes, Shares</span>
           </p>
         </div>
         <div class="flex-shrink-0 mx-2">
