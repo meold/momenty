@@ -133,7 +133,7 @@ export default async function routes(instance) {
       const query = { include, limit, offset, order };
 
       if (section == 'new') {
-        query.where = { id: { [Sequelize.Op.ne]: 71 }};
+        query.where = { id: { [Sequelize.Op.ne]: 77 }};
       } else if(section == 'buy') {
         query.where = { tokenId: { [Sequelize.Op.not]: null }, price: { [Sequelize.Op.not]: null } };
       } else if(section == 'created') {
